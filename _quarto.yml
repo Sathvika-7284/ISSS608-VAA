@@ -16,9 +16,13 @@ website:
 
 format:
   html:
-    theme: morph
+    theme: sandstone
     css: styles.css
     toc: true
+    smooth-scroll: true
+    code-block-bg: true
+    code-line-numbers: true
+    highlight-style: espresso
 
 editor: visual
 

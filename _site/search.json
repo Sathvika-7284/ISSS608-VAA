@@ -18,7 +18,7 @@
     "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
     "title": "Hands-on Exercise 1",
     "section": "",
-    "text": "The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will launched into R.\n\npacman::p_load(tidyverse)\n\n\n\n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
+    "text": "The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will launched into R.\n\npacman::p_load(tidyverse)\n\n\n\n\n\nexam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nYear end examination grades of a cohort of primary 3 students from a local school.\nThere are a total of seven attributes. Four of them are categorical data type and the other three are in continuous data type.\nThe categorical attributes are: ID, CLASS, GENDER and RACE. The continuous attributes are: MATHS, ENGLISH and SCIENCE."
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#install-and-launching-r-packages",
@@ -32,6 +32,55 @@
     "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#importing-the-data",
     "title": "Hands-on Exercise 1",
     "section": "",
-    "text": "exam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
+    "text": "exam_data &lt;- read_csv(\"data/Exam_data.csv\")\n\nRows: 322 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (4): ID, CLASS, GENDER, RACE\ndbl (3): ENGLISH, MATHS, SCIENCE\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nYear end examination grades of a cohort of primary 3 students from a local school.\nThere are a total of seven attributes. Four of them are categorical data type and the other three are in continuous data type.\nThe categorical attributes are: ID, CLASS, GENDER and RACE. The continuous attributes are: MATHS, ENGLISH and SCIENCE."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#data",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#data",
+    "title": "Hands-on Exercise 1",
+    "section": "3.1 Data",
+    "text": "3.1 Data\n\nggplot(data=exam_data)\n\n\n\n\n\n\n\n\nA blank canvas appears. ggplot() initializes a ggplot object."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#aesthetic-mappings",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#aesthetic-mappings",
+    "title": "Hands-on Exercise 1",
+    "section": "3.2 Aesthetic mappings",
+    "text": "3.2 Aesthetic mappings\nggplot includes the x-axis and the axis’s label.\n\nggplot(data=exam_data, \n       aes(x= MATHS))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#geom",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#geom",
+    "title": "Hands-on Exercise 1",
+    "section": "3.3 Geom",
+    "text": "3.3 Geom\n\n3.3.1 Geometric Objects: geom_bar\nPlots a bar chart of RACE by using geom_bar()\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nPlots a bar chart of GENDER by using geom_bar()\n\nggplot(data=exam_data, \n       aes(x=GENDER)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n3.3.2 Geometric Objects: geom_dotplot\nDot plot of MATHS from exam_data\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot(dotsize = 0.5)\n\nBin width defaults to 1/30 of the range of the data. Pick better value with\n`binwidth`.\n\n\n\n\n\n\n\n\n\nFor the above graph y is very misleading, thus scale_y_continuous() is used to turn off the y-axis, and binwidth argument is used to change the binwidth to 2.5.\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_dotplot(binwidth=2.5,         \n               dotsize = 0.5) +      \n  scale_y_continuous(NULL,           \n                     breaks = NULL)  \n\n\n\n\n\n\n\n\n\n\n3.3.3 Geometric Objects: geom_histogram()\nCreates a simple histogram by using values in MATHS field of exam_data.\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_histogram()       \n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nCreates a simple histogram by using values in SCIENCE field of exam_data.\n\nggplot(data=exam_data, \n       aes(x = SCIENCE)) +\n  geom_histogram()       \n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n3.3.4 Modifying a geometric object by changing geom()\n\nggplot(data=exam_data, \n       aes(x= MATHS)) +\n  geom_histogram(bins=20,            \n                 color=\"black\",      \n                 fill=\"light green\")  \n\n\n\n\n\n\n\n\n\n\n3.3.5 Modifying a geometric object by changing aes()\nChanges the interior colour of the histogram (i.e. fill) by using sub-group of aesthetic()\n\n ggplot(data=exam_data, \n       aes(x= MATHS, \n           fill = GENDER)) +\n  geom_histogram(bins=20, \n                 color=\"black\")\n\n\n\n\n\n\n\n\n\n\n3.3.6 Geometric Objects: geom-density()\nPlots the distribution of Maths scores in a kernel density estimate plot.\n\nggplot(data=exam_data, \n       aes(x = MATHS)) +\n  geom_density()           \n\n\n\n\n\n\n\n\nPlots two kernel density lines by using colour or fill arguments of aes()\n\nggplot(data=exam_data, \n       aes(x = MATHS, \n           colour = GENDER)) +\n  geom_density()\n\n\n\n\n\n\n\n\n\n\n3.3.7 Geometric Objects: geom_boxplot\n\nggplot(data=exam_data, \n       aes(y = MATHS,       \n           x= GENDER)) +    \n  geom_boxplot()            \n\n\n\n\n\n\n\n\nNotch plot\n\nggplot(data=exam_data, \n       aes(y = MATHS, \n           x= GENDER)) +\n  geom_boxplot(notch=TRUE)\n\n\n\n\n\n\n\n\n\n\n3.3.8 Geometric Objects: geom_violin\nPlots the distribution of Maths score by gender in violin plot\n\nggplot(data=exam_data, \n       aes(y = MATHS, \n           x= GENDER)) +\n  geom_violin()\n\n\n\n\n\n\n\n\n\n\n3.3.9 Geometric Objects: geom_point()\nPlots a scatterplot showing the Maths and English grades of pupils by using geom_point()\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point()            \n\n\n\n\n\n\n\n\nPlots the data points on the boxplots by using both geom_boxplot() and geom_point().\n\nggplot(data=exam_data, \n       aes(y = MATHS, \n           x= GENDER)) +\n  geom_boxplot() +                    \n  geom_point(position=\"jitter\", \n             size = 0.5)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#stat",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#stat",
+    "title": "Hands-on Exercise 1",
+    "section": "3.4 Stat",
+    "text": "3.4 Stat\n\n3.4.1 Working with stat()\nThe boxplots below are incomplete because the positions of the means were not shown.\n\nggplot(data=exam_data, \n       aes(y = MATHS, x= GENDER)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n3.4.2 Working with stat - the stat_summary() method\nAdds mean values by using stat_summary() function and overriding the default geom.\n\nggplot(data=exam_data, \n       aes(y = MATHS, x= GENDER)) +\n  geom_boxplot() +\n  stat_summary(geom = \"point\",       \n               fun = \"mean\",         \n               colour =\"orange\",        \n               size=4)               \n\n\n\n\n\n\n\n\n\n\n3.4.3 Working with stat - the geom() method\nAdds mean values by using geom_() function and overriding the default stat.\n\nggplot(data=exam_data, \n       aes(y = MATHS, x= GENDER)) +\n  geom_boxplot() +\n  geom_point(stat=\"summary\",        \n             fun=\"mean\",           \n             colour=\"orange\",          \n             size=4)          \n\n\n\n\n\n\n\n\n\n\n3.4.4 Adding a best fit curve on a scatterplot?\ngeom_smooth() is used to plot a best fit curve on the scatterplot.\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(size=0.5)\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\nThe default smoothing method is overridden\n\nggplot(data=exam_data, \n       aes(x= MATHS, \n           y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              linewidth=0.5)\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#facets",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#facets",
+    "title": "Hands-on Exercise 1",
+    "section": "3.5 Facets",
+    "text": "3.5 Facets\n\n3.5.1 Working with facet_wrap()\nThe code chunk below plots a trellis plot using facet-wrap()\n\nggplot(data=exam_data, \n       aes(x= MATHS)) +\n  geom_histogram(bins=20) +\n    facet_wrap(~ CLASS)\n\n\n\n\n\n\n\n\n\n\n3.5.2 facet_grid() function\nPlots a trellis plot using facet_grid().\n\nggplot(data=exam_data, \n       aes(x= MATHS)) +\n  geom_histogram(bins=20) +\n    facet_grid(~ CLASS)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#coordinates",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#coordinates",
+    "title": "Hands-on Exercise 1",
+    "section": "3.6 Coordinates",
+    "text": "3.6 Coordinates\n\n3.6.1 Working with Coordinate\nBy the default, the bar chart of ggplot2 is in vertical form.\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nFlips it into vertical bar chart\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip()\n\n\n\n\n\n\n\n\n\n\n3.6.2 Changing the y- and x-axis range\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, size=0.5)\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\nSetting fixed range for x and y-axis as the ranges are misleading in the above chart\n\nggplot(data=exam_data, \n       aes(x= MATHS, y=ENGLISH)) +\n  geom_point() +\n  geom_smooth(method=lm, \n              size=0.5) +  \n  coord_cartesian(xlim=c(0,100),\n                  ylim=c(0,100))\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#themes",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#themes",
+    "title": "Hands-on Exercise 1",
+    "section": "3.7 Themes",
+    "text": "3.7 Themes\n\n3.7.1 Working with theme\nTheme gray\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_gray()\n\n\n\n\n\n\n\n\nTheme classic\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_classic()\n\n\n\n\n\n\n\n\nTheme minimal\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_minimal()\n\n\n\n\n\n\n\n\nTheme light\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_light()\n\n\n\n\n\n\n\n\nTheme bw\n\nggplot(data=exam_data, \n       aes(x=RACE)) +\n  geom_bar() +\n  coord_flip() +\n  theme_bw()"
   }
 ]

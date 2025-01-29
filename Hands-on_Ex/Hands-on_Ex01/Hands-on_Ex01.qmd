@@ -3,9 +3,9 @@ title: "Hands-on Exercise 1"
 author: "Sathvika Subramanian"
 ---
 
-# Getting Started
+# 1. Getting Started
 
-## Install and launching R packages
+## 1.1 Install and launching R packages
 
 The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will launched into R.
 
@@ -13,16 +13,381 @@ The code chunk below uses p_load() of pacman package to check if tidyverse packa
 pacman::p_load(tidyverse)
 ```
 
-## Importing the data
+## 1.2 Importing the data
 
 ```{r}
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-# Plotting a simple bar chart
+1.  Year end examination grades of a cohort of primary 3 students from a local school.
+
+2.  There are a total of seven attributes. Four of them are categorical data type and the other three are in continuous data type.
+
+3.  The categorical attributes are: ID, CLASS, GENDER and RACE. The continuous attributes are: MATHS, ENGLISH and SCIENCE.
+
+# 2. R graphics vs ggplot
 
 ```{r}
-ggplot(data = exam_data,
-       aes(x = RACE)) +
+hist(exam_data$MATHS)
+```
+
+```{r}
+ggplot(data=exam_data, aes(x = MATHS)) +
+  geom_histogram(bins=10, 
+                 boundary = 100,
+                 color="black", 
+                 fill="light blue") +
+  ggtitle("Distribution of Maths scores")
+```
+
+# 3. Essential Grammatical Elements in ggplot2
+
+## 3.1 Data
+
+```{r}
+ggplot(data=exam_data)
+```
+
+A blank canvas appears. ggplot() initializes a ggplot object.
+
+## 3.2 Aesthetic mappings
+
+ggplot includes the x-axis and the axis’s label.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS))
+```
+
+## 3.3 Geom
+
+### 3.3.1 Geometric Objects: geom_bar
+
+Plots a bar chart of RACE by using geom_bar()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
   geom_bar()
+```
+
+Plots a bar chart of GENDER by using geom_bar()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=GENDER)) +
+  geom_bar()
+```
+
+### 3.3.2 Geometric Objects: geom_dotplot
+
+Dot plot of MATHS from exam_data
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot(dotsize = 0.5)
+```
+
+For the above graph y is very misleading, thus scale_y_continuous() is used to turn off the y-axis, and binwidth argument is used to change the binwidth to 2.5.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot(binwidth=2.5,         
+               dotsize = 0.5) +      
+  scale_y_continuous(NULL,           
+                     breaks = NULL)  
+```
+
+### 3.3.3 Geometric Objects: geom_histogram()
+
+Creates a simple histogram by using values in MATHS field of exam_data.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_histogram()       
+```
+
+Creates a simple histogram by using values in SCIENCE field of exam_data.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = SCIENCE)) +
+  geom_histogram()       
+```
+
+### 3.3.4 Modifying a geometric object by changing geom()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20,            
+                 color="black",      
+                 fill="light green")  
+```
+
+### 3.3.5 Modifying a geometric object by changing aes()
+
+Changes the interior colour of the histogram (i.e. fill) by using sub-group of aesthetic()
+
+```{r}
+ ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           fill = GENDER)) +
+  geom_histogram(bins=20, 
+                 color="black")
+```
+
+### 3.3.6 Geometric Objects: geom-density()
+
+Plots the distribution of Maths scores in a kernel density estimate plot.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_density()           
+```
+
+Plots two kernel density lines by using colour or fill arguments of aes()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS, 
+           colour = GENDER)) +
+  geom_density()
+```
+
+### 3.3.7 Geometric Objects: geom_boxplot
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS,       
+           x= GENDER)) +    
+  geom_boxplot()            
+```
+
+Notch plot
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot(notch=TRUE)
+```
+
+### 3.3.8 Geometric Objects: geom_violin
+
+Plots the distribution of Maths score by gender in violin plot
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_violin()
+```
+
+### 3.3.9 Geometric Objects: geom_point()
+
+Plots a scatterplot showing the Maths and English grades of pupils by using geom_point()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point()            
+```
+
+Plots the data points on the boxplots by using both geom_boxplot() and geom_point().
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot() +                    
+  geom_point(position="jitter", 
+             size = 0.5)        
+```
+
+## 3.4 Stat
+
+### 3.4.1 Working with stat()
+
+The boxplots below are incomplete because the positions of the means were not shown.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot()
+```
+
+### 3.4.2 Working with stat - the stat_summary() method
+
+Adds mean values by using stat_summary() function and overriding the default geom.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  stat_summary(geom = "point",       
+               fun = "mean",         
+               colour ="orange",        
+               size=4)               
+```
+
+### 3.4.3 Working with stat - the geom() method
+
+Adds mean values by using geom\_() function and overriding the default stat.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  geom_point(stat="summary",        
+             fun="mean",           
+             colour="orange",          
+             size=4)          
+```
+
+### 3.4.4 Adding a best fit curve on a scatterplot?
+
+geom_smooth() is used to plot a best fit curve on the scatterplot.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(size=0.5)
+```
+
+The default smoothing method is overridden
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              linewidth=0.5)
+```
+
+## 3.5 Facets
+
+### 3.5.1 Working with facet_wrap()
+
+The code chunk below plots a trellis plot using facet-wrap()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_wrap(~ CLASS)
+```
+
+### 3.5.2 facet_grid() function
+
+Plots a trellis plot using facet_grid().
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_grid(~ CLASS)
+```
+
+## 3.6 Coordinates
+
+### 3.6.1 Working with Coordinate
+
+By the default, the bar chart of ggplot2 is in vertical form.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar()
+```
+
+Flips it into vertical bar chart
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip()
+```
+
+### 3.6.2 Changing the y- and x-axis range
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, size=0.5)
+```
+
+Setting fixed range for x and y-axis as the ranges are misleading in the above chart
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) +  
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100))
+```
+
+## 3.7 Themes
+
+### 3.7.1 Working with theme
+
+Theme gray
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_gray()
+```
+
+Theme classic
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_classic()
+```
+
+Theme minimal
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal()
+```
+
+Theme light
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_light()
+```
+
+Theme bw
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_bw()
 ```
