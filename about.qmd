@@ -2,8 +2,14 @@
 title: "About"
 ---
 
-About this site
+About this Site
 
-```{r}
-1 + 1
-```
+Sathvika's website for **ISSS608 Visual Analytics and Applications** course. Core objectives of this site is to:
+
+-   Understand the basic concepts, theories and methodologies of visual analytics.
+
+-   Analyse data using appropriate visual thinking and visual analytics techniques.
+
+-   Present data using appropriate visual communication and graphical methods.
+
+-   Design and implement cutting-edge visual analytics system for supporting decision making.

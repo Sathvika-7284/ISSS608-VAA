@@ -32,7 +32,7 @@ exam_data <- read_csv("data/Exam_data.csv")
 One of the challenge in plotting statistical graph is annotation, especially with large number of data points.
 ```{r setup, warning=FALSE, message=FALSE}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(x= MATHS, 
            y=ENGLISH)) +
@@ -50,7 +50,7 @@ ggplot(data=exam_data,
 We simply replace geom_label() by geom_label_repel to repel overlapping text.
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(x= MATHS, 
            y=ENGLISH)) +
@@ -69,7 +69,7 @@ ggplot(data=exam_data,
 Theme gray
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 
@@ -85,7 +85,7 @@ ggplot(data=exam_data,
 The Economist theme
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 
@@ -99,7 +99,7 @@ ggplot(data=exam_data,
 Wall Street Journal theme
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 
@@ -115,7 +115,7 @@ ggplot(data=exam_data,
 hrbrthemes package provides a base theme that focuses on typographic elements, including where various labels are placed as well as the fonts that are used.
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 
@@ -129,7 +129,7 @@ ggplot(data=exam_data,
 This code works on changing the font sizes of x and y-axis. 
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 
@@ -150,7 +150,7 @@ ggplot(data=exam_data,
 p1 - graph of distribution of maths scores
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 p1 <- ggplot(data=exam_data, 
              aes(x = MATHS)) +
   geom_histogram(bins=20, 
@@ -166,7 +166,7 @@ p1
 p2 - graph of distribution of english scores
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 p2 <- ggplot(data=exam_data, 
              aes(x = ENGLISH)) +
   geom_histogram(bins=20, 
@@ -182,7 +182,7 @@ p2
 Given the above two graphs a third graph p3 is constructed which is a scatterplot for English score versus Maths score as shown below
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 p3 <- ggplot(data=exam_data, 
              aes(x= MATHS, 
                  y=ENGLISH)) +

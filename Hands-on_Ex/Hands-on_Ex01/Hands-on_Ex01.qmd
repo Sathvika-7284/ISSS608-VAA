@@ -33,7 +33,7 @@ hist(exam_data$MATHS)
 
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, aes(x = MATHS)) +
   geom_histogram(bins=10, 
                  boundary = 100,
@@ -95,7 +95,7 @@ For the above graph y is very misleading, thus scale_y_continuous() is used to t
 
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(x = MATHS)) +
   geom_dotplot(binwidth=2.5,         
@@ -108,7 +108,7 @@ ggplot(data=exam_data,
 
 Creates a simple histogram by using values in MATHS field of exam_data.
 
-```{r}
+```{r setup, warning=FALSE, message=FALSE}
 ggplot(data=exam_data, 
        aes(x = MATHS)) +
   geom_histogram()       
@@ -116,7 +116,7 @@ ggplot(data=exam_data,
 
 Creates a simple histogram by using values in SCIENCE field of exam_data.
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 ggplot(data=exam_data, 
        aes(x = SCIENCE)) +
   geom_histogram()       
@@ -126,7 +126,7 @@ ggplot(data=exam_data,
 
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(x= MATHS)) +
   geom_histogram(bins=20,            
@@ -140,7 +140,7 @@ Changes the interior colour of the histogram (i.e. fill) by using sub-group of a
 
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
  ggplot(data=exam_data, 
        aes(x= MATHS, 
            fill = GENDER)) +
@@ -211,7 +211,7 @@ Plots the data points on the boxplots by using both geom_boxplot() and geom_poin
 
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(y = MATHS, 
            x= GENDER)) +
@@ -238,7 +238,7 @@ Adds mean values by using stat_summary() function and overriding the default geo
 
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(y = MATHS, x= GENDER)) +
   geom_boxplot() +
@@ -254,7 +254,7 @@ Adds mean values by using geom\_() function and overriding the default stat.
 
 ```{r}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(y = MATHS, x= GENDER)) +
   geom_boxplot() +
@@ -268,7 +268,7 @@ ggplot(data=exam_data,
 
 geom_smooth() is used to plot a best fit curve on the scatterplot.
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 ggplot(data=exam_data, 
        aes(x= MATHS, y=ENGLISH)) +
   geom_point() +
@@ -277,9 +277,9 @@ ggplot(data=exam_data,
 
 The default smoothing method is overridden
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(x= MATHS, 
            y=ENGLISH)) +
@@ -335,7 +335,7 @@ ggplot(data=exam_data,
 
 ### 3.6.2 Changing the y- and x-axis range
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 ggplot(data=exam_data, 
        aes(x= MATHS, y=ENGLISH)) +
   geom_point() +
@@ -344,9 +344,9 @@ ggplot(data=exam_data,
 
 Setting fixed range for x and y-axis as the ranges are misleading in the above chart
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 #| code-fold: show
-#| code-summary: "Hide the code"
+
 ggplot(data=exam_data, 
        aes(x= MATHS, y=ENGLISH)) +
   geom_point() +

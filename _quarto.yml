@@ -19,14 +19,14 @@ website:
 format:
   html:
     theme: sandstone
-    backgroundcolor: '#f7d9bc'
+    backgroundcolor: '#ADD8E6'
     light: cosmo
     toc: true
     smooth-scroll: true
+    code-line-numbers: true
     code-block-bg: true
     code-block-border-left: "#FFA500"
-    code-line-numbers: true
-    highlight-style: espresso
+    highlight-style: gruvbox
     code-links:
       - text: GitHub Repo
         icon: file-code

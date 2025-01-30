@@ -253,7 +253,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>One of the challenge in plotting statistical graph is annotation, especially with large number of data points.</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb4-2"><a href="#cb4-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span> MATHS, </span>
 <span id="cb4-3"><a href="#cb4-3"></a>           <span class="at">y=</span>ENGLISH)) <span class="sc">+</span></span>
@@ -278,7 +278,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>We simply replace geom_label() by geom_label_repel to repel overlapping text.</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb5-2"><a href="#cb5-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span> MATHS, </span>
 <span id="cb5-3"><a href="#cb5-3"></a>           <span class="at">y=</span>ENGLISH)) <span class="sc">+</span></span>
@@ -305,7 +305,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>Theme gray</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb6-2"><a href="#cb6-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
@@ -328,7 +328,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>The Economist theme</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb7-2"><a href="#cb7-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
@@ -349,7 +349,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>Wall Street Journal theme</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb8-2"><a href="#cb8-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
@@ -373,7 +373,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>hrbrthemes package provides a base theme that focuses on typographic elements, including where various labels are placed as well as the fonts that are used.</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb9-2"><a href="#cb9-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
@@ -394,7 +394,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>This code works on changing the font sizes of x and y-axis.</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb10-2"><a href="#cb10-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
@@ -426,7 +426,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>p1 - graph of distribution of maths scores</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb11-2"><a href="#cb11-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
@@ -449,7 +449,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>p2 - graph of distribution of english scores</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb12-2"><a href="#cb12-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> ENGLISH)) <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
@@ -472,7 +472,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <p>Given the above two graphs a third graph p3 is constructed which is a scatterplot for English score versus Maths score as shown below</p>
 <div class="cell">
 <details open="" class="code-fold">
-<summary>Hide the code</summary>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb13-2"><a href="#cb13-2"></a>             <span class="fu">aes</span>(<span class="at">x=</span> MATHS, </span>
 <span id="cb13-3"><a href="#cb13-3"></a>                 <span class="at">y=</span>ENGLISH)) <span class="sc">+</span></span>
