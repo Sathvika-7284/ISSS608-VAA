@@ -104,7 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -132,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
  <span class="dropdown-text">Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+ <span class="dropdown-text">Hands-on Exercise 2</span></a>
   </li>  
     </ul>
   </li>
@@ -206,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/Sathvika-7284/ISSS608-VAA"><i class="bi bi-file-code"></i>GitHub Repo</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -280,12 +283,15 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 </div>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>, </span>
 <span id="cb5-3"><a href="#cb5-3"></a>                 <span class="at">boundary =</span> <span class="dv">100</span>,</span>
 <span id="cb5-4"><a href="#cb5-4"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
 <span id="cb5-5"><a href="#cb5-5"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>) <span class="sc">+</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Maths scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -378,12 +384,15 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 <p>For the above graph y is very misleading, thus scale_y_continuous() is used to turn off the y-axis, and binwidth argument is used to change the binwidth to 2.5.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb12-2"><a href="#cb12-2"></a>       <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binwidth=</span><span class="fl">2.5</span>,         </span>
 <span id="cb12-4"><a href="#cb12-4"></a>               <span class="at">dotsize =</span> <span class="fl">0.5</span>) <span class="sc">+</span>      </span>
 <span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>,           </span>
 <span id="cb12-6"><a href="#cb12-6"></a>                     <span class="at">breaks =</span> <span class="cn">NULL</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -431,11 +440,14 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <section id="modifying-a-geometric-object-by-changing-geom" class="level3">
 <h3 class="anchored" data-anchor-id="modifying-a-geometric-object-by-changing-geom">3.3.4 Modifying a geometric object by changing geom()</h3>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb17-2"><a href="#cb17-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>,            </span>
 <span id="cb17-4"><a href="#cb17-4"></a>                 <span class="at">color=</span><span class="st">"black"</span>,      </span>
 <span id="cb17-5"><a href="#cb17-5"></a>                 <span class="at">fill=</span><span class="st">"light green"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -449,11 +461,14 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <h3 class="anchored" data-anchor-id="modifying-a-geometric-object-by-changing-aes">3.3.5 Modifying a geometric object by changing aes()</h3>
 <p>Changes the interior colour of the histogram (i.e.&nbsp;fill) by using sub-group of aesthetic()</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a> <span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb18-2"><a href="#cb18-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span> MATHS, </span>
 <span id="cb18-3"><a href="#cb18-3"></a>           <span class="at">fill =</span> GENDER)) <span class="sc">+</span></span>
 <span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
 <span id="cb18-5"><a href="#cb18-5"></a>                 <span class="at">color=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -558,12 +573,15 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 <p>Plots the data points on the boxplots by using both geom_boxplot() and geom_point().</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb25-2"><a href="#cb25-2"></a>       <span class="fu">aes</span>(<span class="at">y =</span> MATHS, </span>
 <span id="cb25-3"><a href="#cb25-3"></a>           <span class="at">x=</span> GENDER)) <span class="sc">+</span></span>
 <span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>                    </span>
 <span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">"jitter"</span>, </span>
 <span id="cb25-6"><a href="#cb25-6"></a>             <span class="at">size =</span> <span class="fl">0.5</span>)        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -596,6 +614,8 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <h3 class="anchored" data-anchor-id="working-with-stat---the-stat_summary-method">3.4.2 Working with stat - the stat_summary() method</h3>
 <p>Adds mean values by using stat_summary() function and overriding the default geom.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb27-2"><a href="#cb27-2"></a>       <span class="fu">aes</span>(<span class="at">y =</span> MATHS, <span class="at">x=</span> GENDER)) <span class="sc">+</span></span>
 <span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -603,6 +623,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <span id="cb27-5"><a href="#cb27-5"></a>               <span class="at">fun =</span> <span class="st">"mean"</span>,         </span>
 <span id="cb27-6"><a href="#cb27-6"></a>               <span class="at">colour =</span><span class="st">"orange"</span>,        </span>
 <span id="cb27-7"><a href="#cb27-7"></a>               <span class="at">size=</span><span class="dv">4</span>)               </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -616,6 +637,8 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <h3 class="anchored" data-anchor-id="working-with-stat---the-geom-method">3.4.3 Working with stat - the geom() method</h3>
 <p>Adds mean values by using geom_() function and overriding the default stat.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb28-2"><a href="#cb28-2"></a>       <span class="fu">aes</span>(<span class="at">y =</span> MATHS, <span class="at">x=</span> GENDER)) <span class="sc">+</span></span>
 <span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -623,6 +646,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <span id="cb28-5"><a href="#cb28-5"></a>             <span class="at">fun=</span><span class="st">"mean"</span>,           </span>
 <span id="cb28-6"><a href="#cb28-6"></a>             <span class="at">colour=</span><span class="st">"orange"</span>,          </span>
 <span id="cb28-7"><a href="#cb28-7"></a>             <span class="at">size=</span><span class="dv">4</span>)          </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -657,12 +681,15 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 <p>The default smoothing method is overridden</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb32-2"><a href="#cb32-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span> MATHS, </span>
 <span id="cb32-3"><a href="#cb32-3"></a>           <span class="at">y=</span>ENGLISH)) <span class="sc">+</span></span>
 <span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb32-5"><a href="#cb32-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, </span>
 <span id="cb32-6"><a href="#cb32-6"></a>              <span class="at">linewidth=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -765,6 +792,8 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 <p>Setting fixed range for x and y-axis as the ranges are misleading in the above chart</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb40-2"><a href="#cb40-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span> MATHS, <span class="at">y=</span>ENGLISH)) <span class="sc">+</span></span>
 <span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -772,6 +801,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <span id="cb40-5"><a href="#cb40-5"></a>              <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span>  </span>
 <span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>),</span>
 <span id="cb40-7"><a href="#cb40-7"></a>                  <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>

@@ -32,6 +32,8 @@ hist(exam_data$MATHS)
 ```
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, aes(x = MATHS)) +
   geom_histogram(bins=10, 
                  boundary = 100,
@@ -92,6 +94,8 @@ ggplot(data=exam_data,
 For the above graph y is very misleading, thus scale_y_continuous() is used to turn off the y-axis, and binwidth argument is used to change the binwidth to 2.5.
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, 
        aes(x = MATHS)) +
   geom_dotplot(binwidth=2.5,         
@@ -121,6 +125,8 @@ ggplot(data=exam_data,
 ### 3.3.4 Modifying a geometric object by changing geom()
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, 
        aes(x= MATHS)) +
   geom_histogram(bins=20,            
@@ -133,6 +139,8 @@ ggplot(data=exam_data,
 Changes the interior colour of the histogram (i.e. fill) by using sub-group of aesthetic()
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
  ggplot(data=exam_data, 
        aes(x= MATHS, 
            fill = GENDER)) +
@@ -202,6 +210,8 @@ ggplot(data=exam_data,
 Plots the data points on the boxplots by using both geom_boxplot() and geom_point().
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, 
        aes(y = MATHS, 
            x= GENDER)) +
@@ -227,6 +237,8 @@ ggplot(data=exam_data,
 Adds mean values by using stat_summary() function and overriding the default geom.
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, 
        aes(y = MATHS, x= GENDER)) +
   geom_boxplot() +
@@ -241,6 +253,8 @@ ggplot(data=exam_data,
 Adds mean values by using geom\_() function and overriding the default stat.
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, 
        aes(y = MATHS, x= GENDER)) +
   geom_boxplot() +
@@ -264,6 +278,8 @@ ggplot(data=exam_data,
 The default smoothing method is overridden
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, 
        aes(x= MATHS, 
            y=ENGLISH)) +
@@ -329,6 +345,8 @@ ggplot(data=exam_data,
 Setting fixed range for x and y-axis as the ranges are misleading in the above chart
 
 ```{r}
+#| code-fold: show
+#| code-summary: "Hide the code"
 ggplot(data=exam_data, 
        aes(x= MATHS, y=ENGLISH)) +
   geom_point() +
