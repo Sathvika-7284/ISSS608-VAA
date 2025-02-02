@@ -83,8 +83,8 @@ Code chunk below uses opts_tooltip() of ggiraph to customize tooltip rendering b
 ```{r}
 #| code-fold: show
 
-tooltip_css <- "background-color:white; #<<
-font-style:bold; color:black;" #<<
+tooltip_css <- "background-color:white; 
+font-style:bold; color:black;" 
 
 p <- ggplot(data=exam_data, 
        aes(x = MATHS)) +
@@ -99,9 +99,9 @@ girafe(
   ggobj = p,                             
   width_svg = 6,                         
   height_svg = 6*0.618,
-  options = list(    #<<
-    opts_tooltip(    #<<
-      css = tooltip_css)) #<<
+  options = list(    
+    opts_tooltip(    
+      css = tooltip_css)) 
 )                                        
 ```
 
