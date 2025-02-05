@@ -1,0 +1,251 @@
+---
+title: "Hands on Exercise 4-3"
+author: "Sathvika Subramanian"
+date: "February 5, 2025"
+date-modified: "last-modified"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# Visualising Uncertainty
+
+# 1. Getting Started
+
+## 1.1 Installing and launching R packages
+
+```{r}
+pacman::p_load(plotly, crosstalk, DT,
+               ggdist, ggridges, colorspace,
+               gganimate, tidyverse)
+```
+
+## 1.2 Import data
+
+```{r}
+exam <- read_csv("data/Exam_data.csv")
+```
+
+## 1.3 Visualizing the uncertainty of point estimates: ggplot2 methods
+
+```{r}
+my_sum <- exam %>%
+  group_by(RACE) %>%
+  summarise(
+    n = n(),
+    mean = mean(MATHS),
+    sd = sd(MATHS)
+  ) %>%
+ mutate(se=sd/sqrt(n-1))
+```
+
+```{r}
+knitr::kable(head(my_sum), format = "html")
+```
+
+### 1.3.1 Plotting standard error bars of point estimates
+
+```{r}
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=RACE,
+        ymin=mean-se,
+        ymax=mean+se),
+    width = 0.2,
+    colour = "black",
+    alpha = 0.9,
+    linewidth = 0.5) +
+  geom_point(aes
+             (x=RACE,
+              y=mean),
+             stat="identity",
+             color="red",
+             size = 1.5,
+             alpha=1) +
+  ggtitle("Standard error of mean maths score by rac")
+```
+
+### 1.3.2 Plotting confidence interval of point estimates
+
+```{r}
+ggplot(my_sum) + geom_errorbar(
+  aes(x= reorder(RACE, -mean),
+      ymin = mean - 1.96*se,
+      ymax=mean+1.96*se),
+  width=0.2,
+  colour="black",
+  alpha=0.9,
+  linewidth=0.5) +
+  geom_point(aes(x=RACE,
+                 y=mean),
+             stat="identity",
+             color="red",
+             size = 1.5,
+             aplha = 1) +
+  labs(x = "Maths Score",
+       title = "95% confidence inetrval of mean maths score by race")
+```
+
+### 1.3.3 Visualizing the uncertainty of point estimates with interactive error bars
+
+```{r}
+shared_df = SharedData$new(my_sum)
+
+bscols(widths = c(4,8),
+       ggplotly((ggplot(shared_df) +
+                   geom_errorbar(aes(
+                     x = reorder(RACE, -mean),
+                     ymin = mean-2.58*se,
+                     ymax = mean+2.58*se),
+                     width=0.2,
+                     colour="black",
+                     alpha=0.9,
+                     size=0.5) +
+                   geom_point(aes(
+                     x=RACE,
+                     y=mean,
+                     text = paste("Race:", 'RACE',
+                                  "<br>N:", 'n',
+                                  "<br>Avg. Scores:", round(mean,digits = 2),
+                                  "<br>95% CI:[",
+                                  round((mean-2.58*se), digits = 2), ",",
+                                  round((mean+2.58*se), digits = 2), "]")),
+                     stat="identity",
+                     color="red",
+                     size=1.5,
+                     alpha=1) +
+                   xlab("Race") +
+                   ylab("Average Scores") +
+                   theme_minimal() +
+                   theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1)) +
+                   ggtitle("99% Confident interval of average /<br>maths scores by race")),
+                tooltip = "text"),
+       DT::datatable(shared_df,
+                     rownames = FALSE,
+                     class= "compact",
+                     width="100%",
+                     options = list(pageLength = 10, scrollX=T),
+                     colnames = c("No. of pupils", "Avg Scores", "Std Dev", "Std Error")) %>%
+         formatRound(columns=c('mean', 'sd', 'se'), digits=2))
+```
+
+
+# 2. Visualising Uncertainty: ggdist package
+
+## 2.1 Visualizing the uncertainty of point estimates: ggdist methods
+
+```{r}
+exam %>%
+  ggplot(aes(x= RACE,
+             y = MATHS)) +
+  stat_pointinterval() +
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot")
+```
+
+```{r}
+exam %>%
+  ggplot(aes(x= RACE,
+             y = MATHS)) +
+  stat_pointinterval(.width = 0.95,
+                     .point = median,
+                     .interval = qi) +
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot")
+```
+
+## 2.2 Visualizing the uncertainty of point estimates: ggdist methods
+```{r}
+exam %>%
+  ggplot(aes(x= RACE,
+             y = MATHS)) +
+  stat_pointinterval(.width = c(0.95, 0.99),
+                     .point = median,
+                     .interval = qi) +
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot  (95% and 99%)")
+```
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, 
+             y = MATHS)) +
+  stat_pointinterval(
+    show.legend = FALSE) +   
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot")
+```
+
+## 2.3 Visualizing the uncertainty of point estimates: ggdist methods
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE,
+             y = MATHS)) +
+  stat_gradientinterval(
+    fill = "skyblue",
+    show.legend = TRUE
+  ) +
+  labs(
+    title = "Visualing CI of mean math score",
+    subtitle = "Gradient + interval plot")
+```
+
+
+# 3. Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)
+
+## 3.1 Installing ungeviz package
+
+```{r}
+devtools::install_github("wilkelab/ungeviz")
+```
+
+## 3.2 Launch the application in R
+
+```{r}
+library(ungeviz)
+```
+
+## 3.3 Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)
+
+```{r}
+ggplot(data = exam,
+       (aes(x= factor(RACE),
+           y = MATHS))) +
+  geom_point(position = position_jitter(
+    height = 0.3,
+    width = 0.05),
+    size = 0.4,
+    color = "#0072B2",
+    alpha = 1/2) +
+  geom_hpline(data = sampler(25,
+                             group = RACE),
+              height = 0.6,
+              color = "#D55E00")+
+    theme_bw()+
+    transition_states(.draw, 1, 3)
+```
+
+```{r}
+ggplot(data = exam,
+       (aes(x= factor(RACE),
+           y = ENGLISH))) +
+  geom_point(position = position_jitter(
+    height = 0.3,
+    width = 0.05),
+    size = 0.4,
+    color = "#0072B2",
+    alpha = 1/2) +
+  geom_hpline(data = sampler(25,
+                             group = RACE),
+              height = 0.6,
+              color = "#D55E00")+
+    theme_bw()+
+    transition_states(.draw, 1, 3)
+```
