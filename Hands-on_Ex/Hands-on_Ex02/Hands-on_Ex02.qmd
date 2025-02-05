@@ -1,6 +1,13 @@
 ---
 title: "Hands-on Exercise 2"
 author: "Sathvika Subramanian"
+date: "January 23, 2025"
+date-modified: "last-modified"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
 ---
 
 # 1. Getting Started
@@ -30,6 +37,7 @@ exam_data <- read_csv("data/Exam_data.csv")
 # 2. Beyond ggplot2 Annotation: ggrepel
 
 One of the challenge in plotting statistical graph is annotation, especially with large number of data points.
+
 ```{r setup, warning=FALSE, message=FALSE}
 #| code-fold: show
 
@@ -48,6 +56,7 @@ ggplot(data=exam_data,
 ```
 
 We simply replace geom_label() by geom_label_repel to repel overlapping text.
+
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
 
@@ -67,6 +76,7 @@ ggplot(data=exam_data,
 # 3. Beyond ggplot2 Themes
 
 Theme gray
+
 ```{r}
 #| code-fold: show
 
@@ -83,6 +93,7 @@ ggplot(data=exam_data,
 ## 3.1 Working with ggtheme package
 
 The Economist theme
+
 ```{r}
 #| code-fold: show
 
@@ -97,6 +108,7 @@ ggplot(data=exam_data,
 ```
 
 Wall Street Journal theme
+
 ```{r}
 #| code-fold: show
 
@@ -113,6 +125,7 @@ ggplot(data=exam_data,
 ## 3.2 Working with hrbthems package
 
 hrbrthemes package provides a base theme that focuses on typographic elements, including where various labels are placed as well as the fonts that are used.
+
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
 
@@ -126,7 +139,8 @@ ggplot(data=exam_data,
   theme_ipsum()
 ```
 
-This code works on changing the font sizes of x and y-axis. 
+This code works on changing the font sizes of x and y-axis.
+
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
 
@@ -141,13 +155,15 @@ ggplot(data=exam_data,
               base_size = 15,
               grid = "Y")
 ```
-1) axis_title_size argument is used to increase the font size of the axis title to 18,
-2) base_size argument is used to increase the default axis label to 15, and
-3) grid argument is used to remove the x-axis grid lines.
+
+1)  axis_title_size argument is used to increase the font size of the axis title to 18,
+2)  base_size argument is used to increase the default axis label to 15, and
+3)  grid argument is used to remove the x-axis grid lines.
 
 # 4. Beyond Single Graph
 
 p1 - graph of distribution of maths scores
+
 ```{r}
 #| code-fold: show
 
@@ -164,6 +180,7 @@ p1
 ```
 
 p2 - graph of distribution of english scores
+
 ```{r}
 #| code-fold: show
 
@@ -180,6 +197,7 @@ p2
 ```
 
 Given the above two graphs a third graph p3 is constructed which is a scatterplot for English score versus Maths score as shown below
+
 ```{r warning=FALSE, message=FALSE}
 #| code-fold: show
 
@@ -197,36 +215,36 @@ p3
 ```
 
 ## 4.1 Creating Composite Graphics: pathwork methods
+
 ggplot2 extension called patchwork which is specially designed for combining separate ggplot2 graphs into a single figure.
 
-Patchwork package has a very simple syntax where we can create layouts super easily. Here’s the general syntax that combines:
-Two-Column Layout using the Plus Sign +.
-Parenthesis () to create a subplot group.
-Two-Row Layout using the Division Sign /
+Patchwork package has a very simple syntax where we can create layouts super easily. Here’s the general syntax that combines: Two-Column Layout using the Plus Sign +. Parenthesis () to create a subplot group. Two-Row Layout using the Division Sign /
 
 The above graph p1, p2 and p3 is used
 
 ## 4.2 Combining two ggplot2 graphs
+
 ```{r}
 p1 + p2
 ```
 
 ## 4.3 Combining three ggplot2 graphs
+
 ```{r warning=FALSE, message=FALSE}
 (p1 / p2) | p3
 ```
-The composite figure above is plotted by using:
-“/” operator to stack two ggplot2 graphs,
-“|” operator to place the plots beside each other,
-“()” operator the define the sequence of the plotting.
+
+The composite figure above is plotted by using: “/” operator to stack two ggplot2 graphs, “\|” operator to place the plots beside each other, “()” operator the define the sequence of the plotting.
 
 To modify everything at once patchwork provides two additional operators that facilitates this. & will add the element to all subplots in the patchwork.
+
 ```{r warning=FALSE, message=FALSE}
 patchwork <- p3 / (p1 | p2)
 patchwork & theme_minimal()
 ```
 
-* will add the element to all the subplots in the current nesting level.
+-   will add the element to all the subplots in the current nesting level.
+
 ```{r warning=FALSE, message=FALSE}
 patchwork * theme_minimal()
 ```
@@ -234,6 +252,7 @@ patchwork * theme_minimal()
 ## 4.4 Creating a composite figure with tag
 
 In order to identify subplots in text, patchwork also provides auto-tagging capabilities as shown in the figures below.
+
 ```{r warning=FALSE, message=FALSE}
 ((p1 / p2) | p3) + 
   plot_annotation(tag_levels = 'A')
@@ -247,6 +266,7 @@ In order to identify subplots in text, patchwork also provides auto-tagging capa
 ## 4.5 Creating figure with insert
 
 With inset_element() of patchwork, we can place one or several plots or graphic elements freely on top or below another plot.
+
 ```{r warning=FALSE, message=FALSE}
 p3 + inset_element(p2, 
                    left = 0.02, 
@@ -258,12 +278,14 @@ p3 + inset_element(p2,
 ## 4.6 Creating a composite figure by using patchwork and ggtheme
 
 Created by combining patchwork and theme_economist() of ggthemes package.
+
 ```{r warning=FALSE, message=FALSE}
 patchwork <- (p1 / p2) | p3
 patchwork & theme_economist()
 ```
 
 Created by combining patchwork and theme_classic() of ggthemes package.
+
 ```{r warning=FALSE, message=FALSE}
 patchwork <- (p1 / p2) | p3
 patchwork & theme_classic(base_size = 8)

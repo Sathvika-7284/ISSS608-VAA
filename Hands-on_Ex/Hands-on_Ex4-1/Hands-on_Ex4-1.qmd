@@ -14,9 +14,192 @@ execute:
 
 # 1. Getting Started
 
-## 1.1  Installing and loading the packages
+## 1.1 Installing and loading the packages
 
 ```{r}
 pacman::p_load(ggdist, ggridges, ggthemes,
                colorspace, tidyverse)
+```
+
+## 1.2 Data Import
+
+```{r}
+exam <- read_csv("data/Exam_data.csv")
+```
+
+
+# 2. Visualising Distribution with Ridgeline Plot
+
+## 2.1 Plotting ridgeline graph: ggridges method
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = ENGLISH,
+           y = CLASS)) +
+  geom_density_ridges(
+    scale = 3,
+    rel_min_height = 0.01,
+    bandwidth = 3.4,
+    fill = lighten("#7097BB",.3),
+    color = "white"
+  ) +
+  scale_x_continuous(
+    name = "English grades",
+    expand = c(0,0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion(add = c(0.2, 2.6))) +
+  theme_ridges()
+```
+
+## 2.2 Varying fill colors along the x-axis
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = ENGLISH,
+           y = CLASS,
+           fill = stat(x))) +
+  geom_density_ridges_gradient(
+    scale = 3,
+    rel_min_height = 0.01) +
+  scale_fill_viridis_c(name = "Temp. [F]",
+                       option = "C") +
+  scale_x_continuous(
+    name = "English grades",
+    expand = c(0,0)
+  ) +
+  scale_y_discrete(name = NULL, expand = expansion (add = c(0.2, 2.6))) + 
+  theme_ridges()
+```
+
+## 2.3 Mapping the probabilities directly onto colour
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = ENGLISH,
+           y = CLASS,
+           fill = 0.5 - abs(0.5-stat(ecdf)))) +
+  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE) +
+  scale_fill_viridis_c(name = "Tail probability",
+                       direction = -1) +
+  theme_ridges()
+```
+
+## 2.4 Ridgeline plots with quantile lines
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = ENGLISH,
+           y = CLASS,
+           fill = factor(stat(quantile)))) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = 4,
+    quantile_lines = TRUE) +
+  scale_fill_viridis_d(name = "Quartiles") +
+  theme_ridges()
+```
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = ENGLISH,
+           y = CLASS,
+           fill = factor(stat(quantile)))) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE,
+    quantiles = c(0.025, 0.975)
+    )+
+  scale_fill_manual(
+    name = "Probability",
+    values = c("#FF0000A0", "#A0A0A0A0", "#0000FFA0"),
+    labels = c("(0, 0.025]", "(0.025, 0.975]", "(0.975, 1]")) +
+  theme_ridges()
+```
+
+
+# 3. Visualising Distribution with Raincloud Plot
+
+## 3.1 Plotting a Half Eye graph
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = RACE,
+           y = ENGLISH)) +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.2,
+               .width = 0,
+               point_colour = NA)
+```
+
+## 3.2 Adding the boxplot with geom_boxplot()
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = RACE,
+           y = ENGLISH)) +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.2,
+               .width = 0,
+               point_colour = NA) +
+  geom_boxplot(width = .20,
+               outlier.shape = NA)
+```
+
+## 3.3 Adding the Dot Plots with stat_dots()
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = RACE,
+           y = ENGLISH)) +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.2,
+               .width = 0,
+               point_colour = NA) +
+  geom_boxplot(width = .20,
+               outlier.shape = NA) +
+  stat_dots(side = "left",
+            justification = 1.2,
+            binwidth = .5,
+            dotsize = 2)
+
+```
+
+## 3.4 Finishing touch
+
+```{r}
+#| code-fold: show
+
+ggplot(exam,
+       aes(x = RACE,
+           y = ENGLISH)) +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.2,
+               .width = 0,
+               point_colour = NA) +
+  geom_boxplot(width = .20,
+               outlier.shape = NA) +
+  stat_dots(side = "left",
+            justification = 1.2,
+            binwidth = .5,
+            dotsize = 1.5
+            ) +
+  coord_flip() +
+  theme_classic()
 ```
