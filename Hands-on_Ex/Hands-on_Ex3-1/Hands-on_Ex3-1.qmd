@@ -1,13 +1,8 @@
 ---
 title: "Hands-on Exercise 3-1"
-Author: "Sathvika Subramanian"
+author: "Sathvika Subramanian"
 date: "January 30, 2025"
 date-modified: "last-modified"
-execute: 
-  echo: true
-  eval: true
-  warning: false
-  freeze: true
 ---
 
 # Programming Interactive Data Visualisation with R

@@ -3,11 +3,6 @@ title: "Hands-on Exercise 2"
 author: "Sathvika Subramanian"
 date: "January 23, 2025"
 date-modified: "last-modified"
-execute: 
-  echo: true
-  eval: true
-  warning: false
-  freeze: true
 ---
 
 # 1. Getting Started
