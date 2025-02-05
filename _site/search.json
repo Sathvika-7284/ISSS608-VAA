@@ -320,5 +320,12 @@
     "title": "Hands-on Exercise 3-2",
     "section": "3.2 Building an animated bubble plot: plot_ly() method",
     "text": "3.2 Building an animated bubble plot: plot_ly() method\n\n\nCode\nbp &lt;- globalPop %&gt;%\n  plot_ly(x = ~Old, \n          y = ~Young, \n          size = ~Population, \n          color = ~Continent,\n          sizes = c(2, 100),\n          frame = ~Year, \n          text = ~Country, \n          hoverinfo = \"text\",\n          type = 'scatter',\n          mode = 'markers'\n          ) %&gt;%\n  layout(showlegend = FALSE)\nbp"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex4-1/Hands-on_Ex4-1.html#installing-and-loading-the-packages",
+    "href": "Hands-on_Ex/Hands-on_Ex4-1/Hands-on_Ex4-1.html#installing-and-loading-the-packages",
+    "title": "Hands-on_Ex4-1",
+    "section": "1.1 Installing and loading the packages",
+    "text": "1.1 Installing and loading the packages\n\npacman::p_load(ggdist, ggridges, ggthemes,\n               colorspace, tidyverse)\n\npackage 'distributional' successfully unpacked and MD5 sums checked\npackage 'numDeriv' successfully unpacked and MD5 sums checked\npackage 'quadprog' successfully unpacked and MD5 sums checked\npackage 'ggdist' successfully unpacked and MD5 sums checked\n\nThe downloaded binary packages are in\n    C:\\Users\\R\\AppData\\Local\\Temp\\RtmpElU0af\\downloaded_packages\n\n\npackage 'ggridges' successfully unpacked and MD5 sums checked\n\nThe downloaded binary packages are in\n    C:\\Users\\R\\AppData\\Local\\Temp\\RtmpElU0af\\downloaded_packages"
   }
 ]

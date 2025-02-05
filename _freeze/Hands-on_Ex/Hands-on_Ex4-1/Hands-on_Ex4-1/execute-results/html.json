@@ -1,0 +1,15 @@
+{
+  "hash": "7b947b2e0f1d74cd1cd8da38dd238371",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Hands-on_Ex4-1\"\nauthor: \"Sathvika Subramanian\"\ndate: \"February 5, 2025\"\ndate-modified: \"last-modified\"\nexecute: \n  echo: true\n  eval: true\n  warning: false\n  freeze: true\n---\n\n\n\n# Visualising Distribution\n\n# 1. Getting Started\n\n## 1.1  Installing and loading the packages\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(ggdist, ggridges, ggthemes,\n               colorspace, tidyverse)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\npackage 'distributional' successfully unpacked and MD5 sums checked\npackage 'numDeriv' successfully unpacked and MD5 sums checked\npackage 'quadprog' successfully unpacked and MD5 sums checked\npackage 'ggdist' successfully unpacked and MD5 sums checked\n\nThe downloaded binary packages are in\n\tC:\\Users\\R\\AppData\\Local\\Temp\\RtmpElU0af\\downloaded_packages\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stdout}\n\n```\npackage 'ggridges' successfully unpacked and MD5 sums checked\n\nThe downloaded binary packages are in\n\tC:\\Users\\R\\AppData\\Local\\Temp\\RtmpElU0af\\downloaded_packages\n```\n\n\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

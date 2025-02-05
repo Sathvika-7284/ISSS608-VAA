@@ -1,0 +1,22 @@
+---
+title: "Hands-on_Ex4-1"
+author: "Sathvika Subramanian"
+date: "February 5, 2025"
+date-modified: "last-modified"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# Visualising Distribution
+
+# 1. Getting Started
+
+## 1.1  Installing and loading the packages
+
+```{r}
+pacman::p_load(ggdist, ggridges, ggthemes,
+               colorspace, tidyverse)
+```
