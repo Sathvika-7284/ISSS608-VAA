@@ -1,0 +1,172 @@
+---
+title: "Hands on Exercise 5-3"
+author: "Sathvika Subramanian"
+date: "February 8, 2025"
+date-modified: "last-modified"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# 1. Heatmap for Visualising and Analysing Multivariate Data
+
+
+# 2. Installing and Launching R Packages
+
+```{r}
+pacman::p_load(seriation, dendextend, heatmaply, tidyverse)
+```
+
+
+# 3. Importing and Preparing The Data Set
+
+## 3.1 Importing the data set
+
+```{r}
+wh <- read_csv("data/WHData-2018.csv")
+```
+
+## 3.2 Preparing the data
+
+```{r}
+row.names(wh) <- wh$Country
+```
+
+## 3.3 Transforming the data frame into a matrix
+
+```{r}
+wh1 <- dplyr::select(wh, c(3,7:12))
+wh_matrix <- data.matrix(wh)
+```
+
+## 3.4 Static Heatmap
+
+### 3.4.1 heatmap() of R Stats
+
+```{r}
+wh_heatmap <- heatmap(wh_matrix,
+                      Rowv=NA, Colv=NA)
+```
+
+```{r}
+wh_heatmap <- heatmap(wh_matrix)
+```
+
+```{r}
+wh_heatmap <- heatmap(wh_matrix,
+                      scale = "column",
+                      cexrow = 0.6,
+                      cexCol = 0.8,
+                      margins = c(10,4))
+```
+
+
+# 4. Creating Interactive Heatmap
+
+## 4.1 Working with heatmaply
+
+```{r}
+heatmaply(mtcars)
+```
+
+```{r}
+heatmaply(wh_matrix[, -c(1, 2, 4, 5)])
+```
+
+## 4.2 Data Transformation
+
+### 4.2.1 Scaling Method
+
+```{r}
+heatmaply(wh_matrix[, -c(1, 2, 4, 5)],
+          scale = "column")
+```
+
+### 4.2.2 Normalising method
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1,2,4,5)]))
+```
+
+### 4.3 Percentising method
+
+```{r}
+heatmaply(percentize(wh_matrix[, -c(1, 2, 4, 5)]))
+```
+
+## 4.3 Clustering algoritm -Manual approach
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          dist_method = "euclidean",
+          hclust_method = "ward.D")
+```
+
+## 4.4 Statistical approach
+
+```{r}
+wh_d <- dist(normalize(wh_matrix[, -c(1, 2, 4, 5)]), method = "euclidean")
+dend_expend(wh_d)[[3]]
+```
+
+```{r}
+wh_clust <- hclust(wh_d, method = "average")
+num_k <- find_k(wh_clust)
+plot(num_k)
+```
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          dist_method = "euclidean",
+          hclust_method = "average",
+          k_row = 3)
+```
+
+## 4.5 Seriation
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "OLO")
+```
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "GW")
+```
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "mean")
+```
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "none")
+```
+
+## 4.6 Working with colour palettes
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          seriate = "none",
+          colors = Blues)
+```
+
+## 4.7 The finishing touch
+
+```{r}
+heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]),
+          Colv=NA,
+          seriate = "none",
+          colors = Blues,
+          k_row = 5,
+          margins = c(NA,200,60,NA),
+          fontsize_row = 4,
+          fontsize_col = 5,
+          main="World Happiness Score and Variables by Country, 2018 \nDataTransformation using Normalise Method",
+          xlab = "World Happiness Indicators",
+          ylab = "World Countries"
+          )
+```

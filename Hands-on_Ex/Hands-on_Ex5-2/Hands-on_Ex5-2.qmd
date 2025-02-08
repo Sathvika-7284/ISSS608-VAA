@@ -1,0 +1,211 @@
+---
+title: "Hands on Exercise 5-2"
+author: "Sathvika Subramanian"
+date: "February 8, 2025"
+date-modified: "last-modified"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# 1. Visual Correlation Analysis
+
+
+# 2. Installing and Launching R Packages
+
+```{r}
+pacman::p_load(corrplot, ggstatsplot, tidyverse)
+```
+
+
+# 3. Importing and Preparing The Data Set
+
+## 3.1 Importing Data
+
+```{r}
+wine <- read_csv("data/wine_quality.csv")
+```
+
+
+# 4. Building Correlation Matrix: pairs() method
+
+## 4.1 Building a basic correlation matrix
+
+```{r}
+pairs(wine[,1:11])
+```
+
+```{r}
+pairs(wine[,2:12])
+```
+
+## 4.2 Drawing the lower corner
+
+```{r}
+pairs(wine[,2:12], upper.panel = NULL)
+```
+
+```{r}
+pairs(wine[,2:12], lower.panel = NULL)
+```
+
+## 4.3 Including with correlation coefficients
+
+```{r}
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor, ...) {
+usr <- par("usr")
+on.exit(par(usr))
+par(usr = c(0, 1, 0, 1))
+r <- abs(cor(x, y, use="complete.obs"))
+txt <- format(c(r, 0.123456789), digits=digits)[1]
+txt <- paste(prefix, txt, sep="")
+if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+text(0.5, 0.5, txt, cex = cex.cor * (1 + r) / 2)
+}
+
+pairs(wine[,2:12], 
+      upper.panel = panel.cor)
+```
+
+
+# 5. Visualising Correlation Matrix: ggcormat()
+
+## 5.1 The basic plot
+
+```{r}
+ggstatsplot::ggcorrmat(
+  data = wine,
+  cor.vars = 1:11)
+```
+
+```{r}
+ggstatsplot::ggcorrmat(
+  data =wine,
+  cor.vars = 1:11,
+  ggcorrplot.args = list(outline.color = "black",
+                         hc.order = TRUE,
+                         tl.cex = 10),
+  title    = "Correlogram for wine dataset",
+  subtitle = "Four pairs are no significant at p < 0.05"
+)
+```
+
+```{r}
+ggplot.component = list(
+  theme(text=element_text(size=5),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 8)))
+```
+
+
+# 6. Building multiple plots
+
+```{r}
+grouped_ggcorrmat(
+  data = wine,
+  cor.vars = 1:11,
+  grouping.var = type,
+  type = "robust",
+  p.adjust.method = "holm",
+  plotgrid.args = list(ncol = 2),
+  ggcorrplot.args = list(outline.color = "black",
+                         hc.order = TRUE,
+                         tl.cex = 10),
+  annotation.args = list(
+    tag_levels = "a",
+    title = "Correlogram for wine dataset",
+    subtitle = "The measures are: alcohol, sulphates, fixed acidity, citric acid, chlorides, residual sugar, density, free sulfur dioxide and volatile acidity",
+    caption = "Dataset: UCI Machine Learning Repository"
+  )
+)
+```
+
+
+# 7. Visualising Correlation Matrix using corrplot Package
+
+## 7.1 Getting started with corrplot
+
+```{r}
+wine.cor <- cor(wine[,1:11])
+```
+
+```{r}
+corrplot(wine.cor)
+```
+
+## 7.2 Working with visual geometrics
+
+```{r}
+corrplot(wine.cor,
+         method = "ellipse")
+```
+
+## 7.3 Working with layout
+
+```{r}
+corrplot(wine.cor,
+         method = "ellipse",
+         type = "lower")
+```
+
+```{r}
+corrplot(wine.cor,
+         method = "ellipse",
+         type = "lower",
+         diag = FALSE,
+         tl.col = "black")
+```
+
+## 7.4 Working with mixed layout
+
+```{r}
+corrplot.mixed(wine.cor,
+               lower = "ellipse",
+               upper = "number",
+               tl.pos = "lt",
+               diag = "l",
+               tl.col = "black")
+```
+
+## 7.5 Combining corrgram with the significant test
+
+```{r}
+wine.sig = cor.mtest(wine.cor, conf.level = .95)
+```
+
+```{r}
+corrplot(wine.cor,
+         method = "number",
+         type = "lower",
+         diag = FALSE,
+         tl.col = "black",
+         tl.srt = 45,
+         p.mat = wine.sig$p,
+         sig.level = .05)
+```
+
+## 7.6 Reorder a corrgram
+
+```{r}
+corrplot.mixed(wine.cor,
+               lower = "ellipse",
+               upper = "number",
+               tl.pos = "lt",
+               diag = "l",
+               order = "AOE",
+               tl.col = "black")
+```
+
+## 7.7 Reordering a correlation matrix using hclust
+
+```{r}
+corrplot(wine.cor,
+         method = "ellipse",
+         tl.pos = "lt",
+         tl.col = "black",
+         order = "hclust",
+         hclust.method = "ward.D",
+         addrect = 3)
+```

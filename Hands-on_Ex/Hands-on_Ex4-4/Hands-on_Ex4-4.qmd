@@ -27,7 +27,7 @@ covid19 <- read_csv("data/COVID-19_DKI_Jakarta.csv") %>%
 
 # 3. FunnelPlotR methods
 
-## 3.1  FunnelPlotR methods: The basic plot
+## 3.1 FunnelPlotR methods: The basic plot
 
 ```{r}
 funnel_plot(
