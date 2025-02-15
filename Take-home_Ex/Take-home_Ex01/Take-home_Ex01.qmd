@@ -10,3 +10,140 @@ execute:
   freeze: true
 ---
 
+# Ship Performance Data Analysis
+
+# 1. Introduction
+
+## 1.1 Background
+
+## 1.2 Objectives
+
+# 2. Getting Started
+
+## 2.1 Analytical Tools
+
+## 2.2 Data Sources
+
+# 3. Data Wrangling
+
+## 3.1 Importing Data
+
+```{r}
+pacman::p_load(tidyverse, haven, knitr,
+               patchwork, ggthemes, scales,
+               ggridges, ggpubr, gganimate,
+               ggdist, ggtext, ggalt,
+               cowplot, ggnewscale)
+```
+
+```{r}
+ship_data <- read_csv("data/Ship_Performance_Dataset.csv")
+```
+
+## Duplicates Check
+
+```{r}
+duplicate <- ship_data %>% 
+  group_by_all() %>% 
+  filter(n()>1) %>% 
+  ungroup()
+  
+duplicate
+```
+
+## Na values
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Date))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Ship_Type))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Route_Type))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Engine_Type))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Maintenance_Status))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Speed_Over_Ground_knots))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Engine_Power_kW))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Ship_Type))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Distance_Traveled_nm))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Draft_meters))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Weather_Condition))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Cargo_Weight_tons))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Operational_Cost_USD))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Revenue_per_Voyage_USD))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Turnaround_Time_hours))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Efficiency_nm_per_kWh))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Seasonal_Impact_Score))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Weekly_Voyage_Count))
+```
+
+```{r}
+# Checks for NA in each column
+sum(is.na(ship_data$Average_Load_Percentage))
+```
