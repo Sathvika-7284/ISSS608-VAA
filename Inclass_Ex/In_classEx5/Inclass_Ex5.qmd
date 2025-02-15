@@ -13,7 +13,7 @@ execute:
 Getting Started
 
 ```{r}
-pacman::p_load(tidyverse, readxl, SmartEDA, easystats, gtsummary)
+pacman::p_load(tidyverse, readxl, SmartEDA, easystats, gtsummary, ggstatsplot)
 ```
 
 Importing Data
@@ -151,4 +151,17 @@ tbl_regression(model1,
                intercept = TRUE) %>%
   add_glance_source_note(label = list(sigma ~ "\U03C3"),
                          include = c(r.squared, adj.r.squared, AIC, statistic, p.value, sigma))
+```
+
+```{r}
+p_model1 <- parameters(model1)
+```
+
+```{r}
+plot(parameters(model1))
+```
+
+```{r}
+ggcoefstats(model1,
+            output="plot")
 ```
