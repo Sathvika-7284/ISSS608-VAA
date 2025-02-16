@@ -250,15 +250,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">3.1 Importing Data</a></li>
   <li><a href="#duplicates-check" id="toc-duplicates-check" class="nav-link" data-scroll-target="#duplicates-check">3.2 Duplicates Check</a></li>
-  <li><a href="#na-values" id="toc-na-values" class="nav-link" data-scroll-target="#na-values">3.2 Na values</a></li>
-  <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview">3.3 Data Overview</a></li>
-  <li><a href="#check-data-structure" id="toc-check-data-structure" class="nav-link" data-scroll-target="#check-data-structure">3.4 Check Data Structure</a></li>
-  <li><a href="#remove-none-from-columns" id="toc-remove-none-from-columns" class="nav-link" data-scroll-target="#remove-none-from-columns">3.5 Remove None from columns</a></li>
-  <li><a href="#box-plots-for-checking-outliers" id="toc-box-plots-for-checking-outliers" class="nav-link" data-scroll-target="#box-plots-for-checking-outliers">3.6 Box plots for checking outliers</a></li>
-  <li><a href="#new-variables" id="toc-new-variables" class="nav-link" data-scroll-target="#new-variables">3.7 New variables</a></li>
-  <li><a href="#corr-plot-to-remove-highly-correlated-outputs" id="toc-corr-plot-to-remove-highly-correlated-outputs" class="nav-link" data-scroll-target="#corr-plot-to-remove-highly-correlated-outputs">3.8 Corr plot to remove highly correlated outputs</a></li>
+  <li><a href="#na-values" id="toc-na-values" class="nav-link" data-scroll-target="#na-values">3.3 Na values</a></li>
+  <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview">3.4 Data Overview</a></li>
+  <li><a href="#check-data-structure" id="toc-check-data-structure" class="nav-link" data-scroll-target="#check-data-structure">3.5 Check Data Structure</a></li>
+  <li><a href="#remove-none-from-columns" id="toc-remove-none-from-columns" class="nav-link" data-scroll-target="#remove-none-from-columns">3.6 Remove None from columns</a></li>
+  <li><a href="#box-plots-for-checking-outliers" id="toc-box-plots-for-checking-outliers" class="nav-link" data-scroll-target="#box-plots-for-checking-outliers">3.7 Box plots for checking outliers</a></li>
+  <li><a href="#new-variables" id="toc-new-variables" class="nav-link" data-scroll-target="#new-variables">3.8 New variables</a></li>
+  <li><a href="#plot-0---corr-plot-to-remove-highly-correlated-outputs" id="toc-plot-0---corr-plot-to-remove-highly-correlated-outputs" class="nav-link" data-scroll-target="#plot-0---corr-plot-to-remove-highly-correlated-outputs">3.9 Plot 0 - Corr plot to remove highly correlated outputs</a></li>
+  <li><a href="#remove-columns-not-used-for-this-analysis" id="toc-remove-columns-not-used-for-this-analysis" class="nav-link" data-scroll-target="#remove-columns-not-used-for-this-analysis">3.10 Remove columns not used for this analysis</a></li>
   </ul></li>
-  <li><a href="#exploratory-data-analysis---eda" id="toc-exploratory-data-analysis---eda" class="nav-link" data-scroll-target="#exploratory-data-analysis---eda">Exploratory Data Analysis - EDA</a>
+  <li><a href="#exploratory-data-analysis---eda" id="toc-exploratory-data-analysis---eda" class="nav-link" data-scroll-target="#exploratory-data-analysis---eda">4. Exploratory Data Analysis - EDA</a>
   <ul class="collapse">
   <li><a href="#plot-1---speed-over-ground-knots-versus-cargo-weight-tons" id="toc-plot-1---speed-over-ground-knots-versus-cargo-weight-tons" class="nav-link" data-scroll-target="#plot-1---speed-over-ground-knots-versus-cargo-weight-tons">Plot 1 - Speed over ground knots versus Cargo Weight tons</a></li>
   <li><a href="#plot-2---ship-performance-by-ship-type" id="toc-plot-2---ship-performance-by-ship-type" class="nav-link" data-scroll-target="#plot-2---ship-performance-by-ship-type">Plot 2 - Ship Performance by Ship Type</a></li>
@@ -266,6 +267,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#plot-4---efficiency-vs-ship_type" id="toc-plot-4---efficiency-vs-ship_type" class="nav-link" data-scroll-target="#plot-4---efficiency-vs-ship_type">Plot 4 - Efficiency vs ship_type</a></li>
   <li><a href="#plot-5---fuel-efficiency-by-engine-type-and-profit-margins-across-weather-conditions" id="toc-plot-5---fuel-efficiency-by-engine-type-and-profit-margins-across-weather-conditions" class="nav-link" data-scroll-target="#plot-5---fuel-efficiency-by-engine-type-and-profit-margins-across-weather-conditions">Plot 5 - Fuel Efficiency by Engine Type and Profit Margins Across Weather Conditions</a></li>
   </ul></li>
+  <li><a href="#conclusion-and-summary" id="toc-conclusion-and-summary" class="nav-link" data-scroll-target="#conclusion-and-summary">5. Conclusion and Summary</a></li>
+  <li><a href="#future-recommendation" id="toc-future-recommendation" class="nav-link" data-scroll-target="#future-recommendation">6. Future Recommendation</a></li>
   </ul>
 <div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/Sathvika-7284/ISSS608-VAA"><i class="bi bi-file-code"></i>GitHub Repo</a></li></ul></div></nav>
     </div>
@@ -321,20 +324,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">1.2 Objectives</h2>
+<p>In this exercise, the data is processed by using appropriate tidyverse family of packages and the statistical graphics are prepared using ggplot2 and its extensions to identify trends and relevant business insight regarding shipping performance.</p>
 </section>
 </section>
 <section id="getting-started" class="level1">
 <h1>2. Getting Started</h1>
 <section id="analytical-tools" class="level2">
 <h2 class="anchored" data-anchor-id="analytical-tools">2.1 Analytical Tools</h2>
-<p>The following code chunk uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, the libraries will be called into R.</p>
+<p>The following code chunk uses p_load() of pacman package to check if packages are installed in the computer. If they are, the libraries will be called into R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, ggridges, patchwork, ggstatsplot, GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, ggthemes, ggridges, patchwork, ggstatsplot, GGally, corrplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ul>
+<li>tidyverse: Core collection of R packages designed for data science. It is a set of packages that work in harmony because they share common data representations and ‘API’ design. This package is designed to make it easy to install and load multiple ‘tidyverse’ packages in a single step.</li>
+<li>ggthemes: to use additional themes for ggplot2</li>
+<li>ggridges: Ridgeline plots provide a convenient way of visualizing changes in distributions over time or space</li>
+<li>patchwork: ‘patchwork’ is a package that expands the composition of multiple plots to allow for arbitrarily complex composition of plots by, among others, providing mathematical operators for combining multiple plots.</li>
+<li>ggstatsplot: Extension of ‘ggplot2’, ‘ggstatsplot’ creates graphics with details from statistical tests included in the plots themselves. It provides an easier syntax to generate information-rich plots for statistical analysis of continuous or categorical data.</li>
+<li>GGally: ‘GGally’ extends ‘ggplot2’ by adding several functions to reduce the complexity of combining geometric objects with transformed data. Some of these functions include a pairwise plot matrix, a two group pairwise plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.</li>
+<li>corrplot:Provides a visual exploratory tool on correlation matrix that supports automatic variable reordering to help detect hidden patterns among variables.</li>
+</ul>
 </section>
 <section id="data-sources" class="level2">
 <h2 class="anchored" data-anchor-id="data-sources">2.2 Data Sources</h2>
-<p>Key operational metrics and characteristics of several ship types in the Gulf of Guinea are represented by the Ship Performance Dataset, a synthetic yet realistic data collection. This dataset is designed for professionals interested in studying clustering, prediction, and optimization issues in the maritime sector, as well as fans for maritime data analytics and machine learning practitioners. This dataset is from kaggle</p>
+<p>Key operational metrics and characteristics of several ship types in the Gulf of Guinea are represented by the Ship Performance Dataset, a synthetic yet realistic data collection. This dataset is designed for professionals interested in studying clustering, prediction, and optimization issues in the maritime sector, as well as fans for maritime data analytics and machine learning practitioners. This dataset is from kaggle.</p>
 </section>
 </section>
 <section id="data-wrangling" class="level1">
@@ -360,10 +373,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #   Seasonal_Impact_Score &lt;dbl&gt;, Weekly_Voyage_Count &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>No duplicates are present in the dataset</p>
+<p>No duplicates are present in the dataset.</p>
 </section>
 <section id="na-values" class="level2">
-<h2 class="anchored" data-anchor-id="na-values">3.2 Na values</h2>
+<h2 class="anchored" data-anchor-id="na-values">3.3 Na values</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Checks for NA in each column</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(ship_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -382,10 +395,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                       0                       0                       0 </code></pre>
 </div>
 </div>
-<p>No na values are present</p>
+<p>No na values are present.</p>
 </section>
 <section id="data-overview" class="level2">
-<h2 class="anchored" data-anchor-id="data-overview">3.3 Data Overview</h2>
+<h2 class="anchored" data-anchor-id="data-overview">3.4 Data Overview</h2>
 <p>Using the glimpse() function, we see that the dataset consists of 2736 rows rows and 18 columns. It also shows the column names, column type, and the first few entries of each column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">glimpse</span>(ship_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -414,7 +427,7 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </div>
 </section>
 <section id="check-data-structure" class="level2">
-<h2 class="anchored" data-anchor-id="check-data-structure">3.4 Check Data Structure</h2>
+<h2 class="anchored" data-anchor-id="check-data-structure">3.5 Check Data Structure</h2>
 <p>Using the str() function, we observe that some variables may need to be re-casted. In this case all the columns are in the right type and re-casting is not necessary</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">str</span>(ship_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -464,17 +477,19 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </div>
 </section>
 <section id="remove-none-from-columns" class="level2">
-<h2 class="anchored" data-anchor-id="remove-none-from-columns">3.5 Remove None from columns</h2>
+<h2 class="anchored" data-anchor-id="remove-none-from-columns">3.6 Remove None from columns</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>ship_data <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">filter</span>(Route_Type <span class="sc">!=</span> <span class="st">"None"</span>, Ship_Type <span class="sc">!=</span> <span class="st">"None"</span>, Engine_Type <span class="sc">!=</span> <span class="st">"None"</span>, Weather_Condition <span class="sc">!=</span> <span class="st">"None"</span>)  <span class="co"># Remove "None"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We will not be using none values in our analysis</p>
+<p>We will not be using none values in our analysis.</p>
 </section>
 <section id="box-plots-for-checking-outliers" class="level2">
-<h2 class="anchored" data-anchor-id="box-plots-for-checking-outliers">3.6 Box plots for checking outliers</h2>
+<h2 class="anchored" data-anchor-id="box-plots-for-checking-outliers">3.7 Box plots for checking outliers</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Numeric columsn for ggplot</span></span>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Numeric columns for ggplot</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>numeric_columns <span class="ot">&lt;-</span> <span class="fu">names</span>(ship_data)[<span class="fu">sapply</span>(ship_data, is.numeric)]</span>
 <span id="cb12-3"><a href="#cb12-3"></a></span>
 <span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Boxplots for all numeric columns</span></span>
@@ -486,6 +501,7 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb12-10"><a href="#cb12-10"></a>  </span>
 <span id="cb12-11"><a href="#cb12-11"></a>  <span class="fu">print</span>(plot)</span>
 <span id="cb12-12"><a href="#cb12-12"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -571,50 +587,51 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </div>
 </div>
 </div>
-<p>No outliers are found</p>
+<p>No outliers are found.</p>
 </section>
 <section id="new-variables" class="level2">
-<h2 class="anchored" data-anchor-id="new-variables">3.7 New variables</h2>
+<h2 class="anchored" data-anchor-id="new-variables">3.8 New variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Load necessary library</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># Ensure numeric values and calculate new columns</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>ship_data <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-7"><a href="#cb13-7"></a>    <span class="at">Profit =</span> Revenue_per_Voyage_USD <span class="sc">-</span> Operational_Cost_USD,  <span class="co"># Calculate profit</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>    <span class="at">Profit_Margin =</span> (Profit <span class="sc">/</span> Revenue_per_Voyage_USD) <span class="sc">*</span> <span class="dv">100</span>,  <span class="co"># Profit Margin in %</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># numeric values confirmed and new columns are calculated</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>ship_data <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="at">Profit =</span> Revenue_per_Voyage_USD <span class="sc">-</span> Operational_Cost_USD,  <span class="co"># Profit</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">Profit_Margin =</span> (Profit <span class="sc">/</span> Revenue_per_Voyage_USD) <span class="sc">*</span> <span class="dv">100</span>,  <span class="co"># Profit Margin in %</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p>Profit and Profit_Margin are calculated which would later be used for analysis in Business context.</p>
 </section>
-<section id="corr-plot-to-remove-highly-correlated-outputs" class="level2">
-<h2 class="anchored" data-anchor-id="corr-plot-to-remove-highly-correlated-outputs">3.8 Corr plot to remove highly correlated outputs</h2>
+<section id="plot-0---corr-plot-to-remove-highly-correlated-outputs" class="level2">
+<h2 class="anchored" data-anchor-id="plot-0---corr-plot-to-remove-highly-correlated-outputs">3.9 Plot 0 - Corr plot to remove highly correlated outputs</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Load necessary libraries</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="fu">library</span>(ggcorrplot)</span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb14-5"><a href="#cb14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co"># Select only numeric columns and ensure they are numeric</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a>df_numeric <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.numeric)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">as.data.frame</span>()</span>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(ggcorrplot)</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># Numeric columns selected</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>df_numeric <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_numeric, <span class="at">use =</span> <span class="st">"complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
 <span id="cb14-11"><a href="#cb14-11"></a></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="co"># Compute correlation matrix</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_numeric, <span class="at">use =</span> <span class="st">"complete.obs"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb14-14"><a href="#cb14-14"></a></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="co"># Generate basic correlation heatmap</span></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="fu">ggcorrplot</span>(</span>
-<span id="cb14-17"><a href="#cb14-17"></a>  cor_matrix, </span>
-<span id="cb14-18"><a href="#cb14-18"></a>  <span class="at">type =</span> <span class="st">"lower"</span>,  <span class="co"># Show only lower triangle to avoid redundancy</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a>  <span class="at">hc.order =</span> <span class="cn">TRUE</span>,  <span class="co"># Cluster similar variables together</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a>  <span class="at">lab =</span> <span class="cn">TRUE</span>,       <span class="co"># Show correlation values</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a>  <span class="at">lab_size =</span> <span class="dv">3</span>,     <span class="co"># Adjust label size</span></span>
-<span id="cb14-22"><a href="#cb14-22"></a>  <span class="at">outline.color =</span> <span class="st">"black"</span>,  <span class="co"># Box outline</span></span>
-<span id="cb14-23"><a href="#cb14-23"></a>  <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span>),  <span class="co"># Blue = Negative, White = Neutral, Red = Positive</span></span>
-<span id="cb14-24"><a href="#cb14-24"></a>  <span class="at">title =</span> <span class="st">"Basic Correlation Heatmap for Multicollinearity Detection"</span></span>
-<span id="cb14-25"><a href="#cb14-25"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co"># Basic correlation heatmap</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="fu">ggcorrplot</span>(</span>
+<span id="cb14-14"><a href="#cb14-14"></a>  cor_matrix, </span>
+<span id="cb14-15"><a href="#cb14-15"></a>  <span class="at">type =</span> <span class="st">"lower"</span>,  <span class="co"># Show only lower triangle to avoid redundancy</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a>  <span class="at">hc.order =</span> <span class="cn">TRUE</span>,  <span class="co"># Cluster similar variables together</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a>  <span class="at">lab =</span> <span class="cn">TRUE</span>,       <span class="co"># Show correlation values</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a>  <span class="at">lab_size =</span> <span class="dv">3</span>,     <span class="co"># Adjust label size</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a>  <span class="at">outline.color =</span> <span class="st">"black"</span>,  <span class="co"># Box outline</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a>  <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span>),  <span class="co"># Blue = Negative, White = Neutral, Red = Positive</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>  <span class="at">title =</span> <span class="st">"Basic Correlation Heatmap for Multicollinearity Detection"</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -623,42 +640,53 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </div>
 </div>
 </div>
+<p>Only profit and revenue_per_voyage_usd are highly correlated but profit is a new created value for this analysis thus no columns would be removed based on the correlation heatmap plot.</p>
+</section>
+<section id="remove-columns-not-used-for-this-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="remove-columns-not-used-for-this-analysis">3.10 Remove columns not used for this analysis</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>ship_data <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"Date"</span>, <span class="st">"Maintenance_Status"</span>, <span class="st">"Draft_meters"</span>, <span class="st">"Operational_Cost_USD"</span>, <span class="st">"Seasonal_Impact_Score"</span>, <span class="st">"Weekly_Voyage_Count"</span>, <span class="st">"Average_Load_Percentage"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="exploratory-data-analysis---eda" class="level1">
-<h1>Exploratory Data Analysis - EDA</h1>
+<h1>4. Exploratory Data Analysis - EDA</h1>
 <section id="plot-1---speed-over-ground-knots-versus-cargo-weight-tons" class="level2">
 <h2 class="anchored" data-anchor-id="plot-1---speed-over-ground-knots-versus-cargo-weight-tons">Plot 1 - Speed over ground knots versus Cargo Weight tons</h2>
-<p>histogram for s1 - distribution of speed_over_ground_knots column, s2 - Cargo Weight tons distribution and patchwork is used to patch both distribution in a scatter plot as s3.</p>
+<p>Histogram for s1 - distribution of speed_over_ground_knots column, s2 - Cargo Weight tons distribution and patchwork is used to patch both distribution in a scatter plot as s3.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>ship_data, </span>
-<span id="cb15-2"><a href="#cb15-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Speed_Over_Ground_knots)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
-<span id="cb15-4"><a href="#cb15-4"></a>                 <span class="at">color=</span><span class="st">"grey25"</span>, </span>
-<span id="cb15-5"><a href="#cb15-5"></a>                 <span class="at">fill=</span><span class="st">"grey90"</span>) <span class="sc">+</span> </span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Speed_Over_Ground_knots"</span>)</span>
-<span id="cb15-7"><a href="#cb15-7"></a></span>
-<span id="cb15-8"><a href="#cb15-8"></a>s2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>ship_data, </span>
-<span id="cb15-9"><a href="#cb15-9"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Cargo_Weight_tons)) <span class="sc">+</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
-<span id="cb15-11"><a href="#cb15-11"></a>                 <span class="at">color=</span><span class="st">"grey25"</span>, </span>
-<span id="cb15-12"><a href="#cb15-12"></a>                 <span class="at">fill=</span><span class="st">"grey90"</span>) <span class="sc">+</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Cargo Weight tons"</span>)</span>
-<span id="cb15-14"><a href="#cb15-14"></a></span>
-<span id="cb15-15"><a href="#cb15-15"></a>s3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>ship_data, </span>
-<span id="cb15-16"><a href="#cb15-16"></a>             <span class="fu">aes</span>(<span class="at">x=</span> Speed_Over_Ground_knots, </span>
-<span id="cb15-17"><a href="#cb15-17"></a>                 <span class="at">y=</span> Cargo_Weight_tons)) <span class="sc">+</span></span>
-<span id="cb15-18"><a href="#cb15-18"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb15-19"><a href="#cb15-19"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, </span>
-<span id="cb15-20"><a href="#cb15-20"></a>              <span class="at">linewidth=</span><span class="fl">0.7</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span>  </span>
-<span id="cb15-21"><a href="#cb15-21"></a>  <span class="fu">ggtitle</span>(<span class="st">"Speed over ground knots versus Cargo Weight tons"</span>)</span>
-<span id="cb15-22"><a href="#cb15-22"></a></span>
-<span id="cb15-23"><a href="#cb15-23"></a>((s1 <span class="sc">/</span> s2) <span class="sc">|</span> s3) <span class="sc">+</span> </span>
-<span id="cb15-24"><a href="#cb15-24"></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">'I'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>ship_data, </span>
+<span id="cb16-2"><a href="#cb16-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Speed_Over_Ground_knots)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb16-4"><a href="#cb16-4"></a>                 <span class="at">color=</span><span class="st">"grey25"</span>, </span>
+<span id="cb16-5"><a href="#cb16-5"></a>                 <span class="at">fill=</span><span class="st">"grey90"</span>) <span class="sc">+</span> </span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Speed_Over_Ground_knots"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a>s2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>ship_data, </span>
+<span id="cb16-9"><a href="#cb16-9"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Cargo_Weight_tons)) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb16-11"><a href="#cb16-11"></a>                 <span class="at">color=</span><span class="st">"grey25"</span>, </span>
+<span id="cb16-12"><a href="#cb16-12"></a>                 <span class="at">fill=</span><span class="st">"grey90"</span>) <span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a>  <span class="fu">ggtitle</span>(<span class="st">"Distribution of Cargo Weight tons"</span>)</span>
+<span id="cb16-14"><a href="#cb16-14"></a></span>
+<span id="cb16-15"><a href="#cb16-15"></a>s3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>ship_data, </span>
+<span id="cb16-16"><a href="#cb16-16"></a>             <span class="fu">aes</span>(<span class="at">x=</span> Speed_Over_Ground_knots, </span>
+<span id="cb16-17"><a href="#cb16-17"></a>                 <span class="at">y=</span> Cargo_Weight_tons)) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, </span>
+<span id="cb16-20"><a href="#cb16-20"></a>              <span class="at">linewidth=</span><span class="fl">0.7</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span>  </span>
+<span id="cb16-21"><a href="#cb16-21"></a>  <span class="fu">ggtitle</span>(<span class="st">"Speed over ground knots versus Cargo Weight tons"</span>)</span>
+<span id="cb16-22"><a href="#cb16-22"></a></span>
+<span id="cb16-23"><a href="#cb16-23"></a>((s1 <span class="sc">/</span> s2) <span class="sc">|</span> s3) <span class="sc">+</span> </span>
+<span id="cb16-24"><a href="#cb16-24"></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">'I'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -678,35 +706,38 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <h2 class="anchored" data-anchor-id="plot-2---ship-performance-by-ship-type">Plot 2 - Ship Performance by Ship Type</h2>
 <p>Multiple ship performance metrics for various ship types are visualized using this parallel coordinate display. A ship is represented by each line, and other ship classifications are distinguished by the color-coded facets. Each metric’s distribution is displayed in the boxplots overlay.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Relevant numeric columns</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>ship_data_selected <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">select</span>(Ship_Type, Speed_Over_Ground_knots, Engine_Power_kW, </span>
-<span id="cb16-4"><a href="#cb16-4"></a>         Distance_Traveled_nm, Turnaround_Time_hours, </span>
-<span id="cb16-5"><a href="#cb16-5"></a>         Efficiency_nm_per_kWh, Profit_Margin)</span>
-<span id="cb16-6"><a href="#cb16-6"></a></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co"># Formatted Parallel Coordinates Plot</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="fu">ggparcoord</span>(<span class="at">data =</span> ship_data_selected, </span>
-<span id="cb16-9"><a href="#cb16-9"></a>           <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>),  <span class="co"># Numeric columns</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a>           <span class="at">groupColumn =</span> <span class="dv">1</span>,  <span class="co"># Group by Ship Type</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a>           <span class="at">scale =</span> <span class="st">"uniminmax"</span>,  <span class="co"># Normalize values</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a>           <span class="at">alphaLines =</span> <span class="fl">0.1</span>,  <span class="co"># Reduce clutter</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a>           <span class="at">boxplot =</span> <span class="cn">TRUE</span>,  <span class="co"># Boxplots for distributions</span></span>
-<span id="cb16-14"><a href="#cb16-14"></a>           <span class="at">title =</span> <span class="st">"Parallel Coordinates Plot: Ship Performance Metrics by Ship Type"</span>) <span class="sc">+</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a>  </span>
-<span id="cb16-16"><a href="#cb16-16"></a>  <span class="co"># labels, titles, and axis formatted</span></span>
-<span id="cb16-17"><a href="#cb16-17"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Ship_Type, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span>  <span class="co"># Facet by ship type</span></span>
-<span id="cb16-18"><a href="#cb16-18"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb16-19"><a href="#cb16-19"></a>  <span class="fu">theme</span>(</span>
-<span id="cb16-20"><a href="#cb16-20"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),  <span class="co"># Center title</span></span>
-<span id="cb16-21"><a href="#cb16-21"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">10</span>),  <span class="co"># x-axis labels rotated</span></span>
-<span id="cb16-22"><a href="#cb16-22"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),  <span class="co"># y-axis text size</span></span>
-<span id="cb16-23"><a href="#cb16-23"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),  <span class="co"># Facet label formatting</span></span>
-<span id="cb16-24"><a href="#cb16-24"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>  <span class="co"># legend to bottom</span></span>
-<span id="cb16-25"><a href="#cb16-25"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Relevant numeric columns</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>ship_data_selected <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">select</span>(Ship_Type, Speed_Over_Ground_knots, Engine_Power_kW, </span>
+<span id="cb17-4"><a href="#cb17-4"></a>         Distance_Traveled_nm, Turnaround_Time_hours, </span>
+<span id="cb17-5"><a href="#cb17-5"></a>         Efficiency_nm_per_kWh, Profit_Margin)</span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Formatted Parallel Coordinates Plot</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="fu">ggparcoord</span>(<span class="at">data =</span> ship_data_selected, </span>
+<span id="cb17-9"><a href="#cb17-9"></a>           <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>),  <span class="co"># Numeric columns</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>           <span class="at">groupColumn =</span> <span class="dv">1</span>,  <span class="co"># Group by Ship Type</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>           <span class="at">scale =</span> <span class="st">"uniminmax"</span>,  <span class="co"># Normalize values</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>           <span class="at">alphaLines =</span> <span class="fl">0.1</span>,  <span class="co"># Reduce clutter</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>           <span class="at">boxplot =</span> <span class="cn">TRUE</span>,  <span class="co"># Boxplots for distributions</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a>           <span class="at">title =</span> <span class="st">"Parallel Coordinates Plot: Ship Performance Metrics by Ship Type"</span>) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>  </span>
+<span id="cb17-16"><a href="#cb17-16"></a>  <span class="co"># labels, titles, and axis formatted</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Ship_Type, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span>  <span class="co"># Facet by ship type</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-19"><a href="#cb17-19"></a>  <span class="fu">theme</span>(</span>
+<span id="cb17-20"><a href="#cb17-20"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),  <span class="co"># Center title</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">10</span>),  <span class="co"># x-axis labels rotated</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),  <span class="co"># y-axis text size</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a>    <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),  <span class="co"># Facet label formatting</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>  <span class="co"># legend to bottom</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -731,31 +762,34 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <h2 class="anchored" data-anchor-id="plot-3---revenue-distribution-by-ship-type-and-route">Plot 3 - Revenue Distribution by Ship Type and Route</h2>
 <p>X-axis → Revenue per Voyage (USD) → Shows the distribution of revenue values. Y-axis → Ship Type → Compares different ship categories. Facets → Route Type (Coastal, Long-haul, Short-haul, Transoceanic) → Breaks down revenue trends by shipping route. Color Gradient → Density Representation → Darker regions indicate where most revenue values are concentrated.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>Ship_RidgePlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_data, </span>
-<span id="cb17-2"><a href="#cb17-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Revenue_per_Voyage_USD,  <span class="co"># X-axis: Revenue distribution</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>                 <span class="at">y =</span> Ship_Type,  <span class="co"># Y-axis: Ship categories</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>                 <span class="at">fill =</span> <span class="fl">0.5</span> <span class="sc">-</span> <span class="fu">abs</span>(<span class="fl">0.5</span> <span class="sc">-</span> <span class="fu">stat</span>(ecdf)))) <span class="sc">+</span>  </span>
-<span id="cb17-5"><a href="#cb17-5"></a>  <span class="fu">stat_density_ridges</span>(<span class="at">geom =</span> <span class="st">"density_ridges_gradient"</span>, <span class="at">calc_ecdf =</span> <span class="cn">TRUE</span>) <span class="sc">+</span>  </span>
-<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">name =</span> <span class="st">"Tail probability"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span>  </span>
-<span id="cb17-7"><a href="#cb17-7"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Route_Type, <span class="at">scales =</span> <span class="st">"free_x"</span>) <span class="sc">+</span>  <span class="co"># Faceting by route</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Revenue Distribution by Ship Type and Route"</span>,</span>
-<span id="cb17-9"><a href="#cb17-9"></a>       <span class="at">subtitle =</span> <span class="st">"Density plots of revenue across different ship types and routes"</span>,</span>
-<span id="cb17-10"><a href="#cb17-10"></a>       <span class="at">x =</span> <span class="st">"Revenue per Voyage (USD)"</span>) <span class="sc">+</span>  </span>
-<span id="cb17-11"><a href="#cb17-11"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(ship_data<span class="sc">$</span>Revenue_per_Voyage_USD, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">+</span>  </span>
-<span id="cb17-12"><a href="#cb17-12"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>  </span>
-<span id="cb17-13"><a href="#cb17-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,  </span>
-<span id="cb17-14"><a href="#cb17-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),  </span>
-<span id="cb17-15"><a href="#cb17-15"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>), <span class="co"># X-axis values</span></span>
-<span id="cb17-16"><a href="#cb17-16"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>),  <span class="co">#Enable X-axis ticks</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb17-18"><a href="#cb17-18"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
-<span id="cb17-19"><a href="#cb17-19"></a></span>
-<span id="cb17-20"><a href="#cb17-20"></a><span class="co"># Display plot</span></span>
-<span id="cb17-21"><a href="#cb17-21"></a>Ship_RidgePlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>Ship_RidgePlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_data, </span>
+<span id="cb18-2"><a href="#cb18-2"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Revenue_per_Voyage_USD,  <span class="co"># X-axis: Revenue distribution</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>                 <span class="at">y =</span> Ship_Type,  <span class="co"># Y-axis: Ship categories</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>                 <span class="at">fill =</span> <span class="fl">0.5</span> <span class="sc">-</span> <span class="fu">abs</span>(<span class="fl">0.5</span> <span class="sc">-</span> <span class="fu">stat</span>(ecdf)))) <span class="sc">+</span>  </span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">stat_density_ridges</span>(<span class="at">geom =</span> <span class="st">"density_ridges_gradient"</span>, <span class="at">calc_ecdf =</span> <span class="cn">TRUE</span>) <span class="sc">+</span>  </span>
+<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">name =</span> <span class="st">"Tail probability"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span>  </span>
+<span id="cb18-7"><a href="#cb18-7"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Route_Type, <span class="at">scales =</span> <span class="st">"free_x"</span>) <span class="sc">+</span>  <span class="co"># Faceting by route</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Revenue Distribution by Ship Type and Route"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9"></a>       <span class="at">subtitle =</span> <span class="st">"Density plots of revenue across different ship types and routes"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10"></a>       <span class="at">x =</span> <span class="st">"Revenue per Voyage (USD)"</span>) <span class="sc">+</span>  </span>
+<span id="cb18-11"><a href="#cb18-11"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(ship_data<span class="sc">$</span>Revenue_per_Voyage_USD, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">+</span>  </span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>  </span>
+<span id="cb18-13"><a href="#cb18-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,  </span>
+<span id="cb18-14"><a href="#cb18-14"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb18-15"><a href="#cb18-15"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>), <span class="co"># X-axis values</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>),  <span class="co">#Enable X-axis ticks</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb18-18"><a href="#cb18-18"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
+<span id="cb18-19"><a href="#cb18-19"></a></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="co"># Display plot</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a>Ship_RidgePlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -778,18 +812,21 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <p>This ggbetweenstats plot compares fuel efficiency (Efficiency_nm_per_kWh) across different ship types:</p>
 <p>Violin + Boxplot Combination → Shows distribution and spread of efficiency data. Median Efficiency (μ_median) → Highlights central efficiency values per ship type. Kruskal-Wallis Test (χ² = 2.79, p = 0.42) → Checks if efficiency differences are statistically significant. Pairwise Dunn Test → Tests specific ship type comparisons.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Comparison plot</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">ggbetweenstats</span>(</span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="at">data =</span> ship_data,</span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="at">x =</span> Ship_Type,  <span class="co"># Categorical variable</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>  <span class="at">y =</span> Efficiency_nm_per_kWh,  <span class="co"># Numeric variable to compare</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a>  <span class="at">type =</span> <span class="st">"np"</span>,  <span class="co"># Non-parametric test</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Comparison plot</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="at">data =</span> ship_data,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="at">x =</span> Ship_Type,  <span class="co"># Categorical variable</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="at">y =</span> Efficiency_nm_per_kWh,  <span class="co"># Numeric variable to compare</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="at">type =</span> <span class="st">"np"</span>,  <span class="co"># Non-parametric test</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -809,56 +846,59 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <h2 class="anchored" data-anchor-id="plot-5---fuel-efficiency-by-engine-type-and-profit-margins-across-weather-conditions">Plot 5 - Fuel Efficiency by Engine Type and Profit Margins Across Weather Conditions</h2>
 <p>Boxplot of Fuel Efficiency by Engine Type (Left) Heatmap of Profit Margins Across Weather Conditions (Right) profit margins are binned to fit in the heatmap and a new sub dataset is created to use for plotting the heatmap</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Boxplot for Fuel Efficiency by Engine Type</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>EngineType_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_data, <span class="fu">aes</span>(<span class="at">x =</span> Engine_Type, <span class="at">y =</span> Efficiency_nm_per_kWh, <span class="at">fill =</span> Engine_Type)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.8</span>)) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Fuel Efficiency (nm per kWh)"</span>, </span>
-<span id="cb19-6"><a href="#cb19-6"></a>       <span class="at">x =</span> <span class="st">"Engine Type"</span>, </span>
-<span id="cb19-7"><a href="#cb19-7"></a>       <span class="at">title =</span> <span class="st">"Comparison of Fuel Efficiency Across Engine Types"</span>) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Diesel"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Heavy Fuel Oil (HFO)"</span> <span class="ot">=</span> <span class="st">"green"</span>, </span>
-<span id="cb19-9"><a href="#cb19-9"></a>                               <span class="st">"Steam Turbine"</span> <span class="ot">=</span> <span class="st">"orange"</span>)) <span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb19-11"><a href="#cb19-11"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-12"><a href="#cb19-12"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-13"><a href="#cb19-13"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb19-14"><a href="#cb19-14"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-15"><a href="#cb19-15"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-16"><a href="#cb19-16"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-17"><a href="#cb19-17"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
-<span id="cb19-18"><a href="#cb19-18"></a></span>
-<span id="cb19-19"><a href="#cb19-19"></a><span class="co"># Profit Margin binned for visualisation</span></span>
-<span id="cb19-20"><a href="#cb19-20"></a>ship_data <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
-<span id="cb19-21"><a href="#cb19-21"></a>  <span class="fu">mutate</span>(<span class="at">Profit_Binned =</span> <span class="fu">cut</span>(Profit_Margin, </span>
-<span id="cb19-22"><a href="#cb19-22"></a>                             <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="sc">-</span><span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="cn">Inf</span>), </span>
-<span id="cb19-23"><a href="#cb19-23"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Very Low"</span>, <span class="st">"Low"</span>, <span class="st">"Moderate"</span>, <span class="st">"High"</span>, <span class="st">"Very High"</span>)))</span>
-<span id="cb19-24"><a href="#cb19-24"></a></span>
-<span id="cb19-25"><a href="#cb19-25"></a><span class="co"># sub dataset to ensure all weather conditions are represented</span></span>
-<span id="cb19-26"><a href="#cb19-26"></a>df_complete <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
-<span id="cb19-27"><a href="#cb19-27"></a>  <span class="fu">complete</span>(Weather_Condition, Profit_Binned, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">Profit_Margin =</span> <span class="dv">0</span>))</span>
-<span id="cb19-28"><a href="#cb19-28"></a></span>
-<span id="cb19-29"><a href="#cb19-29"></a><span class="co"># Heatmap</span></span>
-<span id="cb19-30"><a href="#cb19-30"></a>Profit_Weather_heatmap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_complete, <span class="fu">aes</span>(<span class="at">x =</span> Weather_Condition, <span class="at">y =</span> Profit_Binned, <span class="at">fill =</span> Profit_Margin)) <span class="sc">+</span></span>
-<span id="cb19-31"><a href="#cb19-31"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb19-32"><a href="#cb19-32"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb19-33"><a href="#cb19-33"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Weather Condition"</span>,</span>
-<span id="cb19-34"><a href="#cb19-34"></a>       <span class="at">y =</span> <span class="st">"Profit Margin Category"</span>,</span>
-<span id="cb19-35"><a href="#cb19-35"></a>       <span class="at">fill =</span> <span class="st">"Profit Margin"</span>,</span>
-<span id="cb19-36"><a href="#cb19-36"></a>       <span class="at">subtitle =</span> <span class="st">"Heatmap of Profit Margins Across Different Weather Conditions"</span>) <span class="sc">+</span></span>
-<span id="cb19-37"><a href="#cb19-37"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb19-38"><a href="#cb19-38"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb19-39"><a href="#cb19-39"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-40"><a href="#cb19-40"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-41"><a href="#cb19-41"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
-<span id="cb19-42"><a href="#cb19-42"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-43"><a href="#cb19-43"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb19-44"><a href="#cb19-44"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
-<span id="cb19-45"><a href="#cb19-45"></a></span>
-<span id="cb19-46"><a href="#cb19-46"></a>EngineType_boxplot <span class="sc">+</span> Profit_Weather_heatmap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Boxplot for Fuel Efficiency by Engine Type</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>EngineType_boxplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_data, <span class="fu">aes</span>(<span class="at">x =</span> Engine_Type, <span class="at">y =</span> Efficiency_nm_per_kWh, <span class="at">fill =</span> Engine_Type)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.8</span>)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Fuel Efficiency (nm per kWh)"</span>, </span>
+<span id="cb20-6"><a href="#cb20-6"></a>       <span class="at">x =</span> <span class="st">"Engine Type"</span>, </span>
+<span id="cb20-7"><a href="#cb20-7"></a>       <span class="at">title =</span> <span class="st">"Comparison of Fuel Efficiency Across Engine Types"</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Diesel"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Heavy Fuel Oil (HFO)"</span> <span class="ot">=</span> <span class="st">"green"</span>, </span>
+<span id="cb20-9"><a href="#cb20-9"></a>                               <span class="st">"Steam Turbine"</span> <span class="ot">=</span> <span class="st">"orange"</span>)) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-12"><a href="#cb20-12"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-13"><a href="#cb20-13"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb20-14"><a href="#cb20-14"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-15"><a href="#cb20-15"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-16"><a href="#cb20-16"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-17"><a href="#cb20-17"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
+<span id="cb20-18"><a href="#cb20-18"></a></span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="co"># Profit Margin binned for visualisation</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a>ship_data <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a>  <span class="fu">mutate</span>(<span class="at">Profit_Binned =</span> <span class="fu">cut</span>(Profit_Margin, </span>
+<span id="cb20-22"><a href="#cb20-22"></a>                             <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="sc">-</span><span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="cn">Inf</span>), </span>
+<span id="cb20-23"><a href="#cb20-23"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Very Low"</span>, <span class="st">"Low"</span>, <span class="st">"Moderate"</span>, <span class="st">"High"</span>, <span class="st">"Very High"</span>)))</span>
+<span id="cb20-24"><a href="#cb20-24"></a></span>
+<span id="cb20-25"><a href="#cb20-25"></a><span class="co"># sub dataset to ensure all weather conditions are represented</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a>df_complete <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a>  <span class="fu">complete</span>(Weather_Condition, Profit_Binned, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">Profit_Margin =</span> <span class="dv">0</span>))</span>
+<span id="cb20-28"><a href="#cb20-28"></a></span>
+<span id="cb20-29"><a href="#cb20-29"></a><span class="co"># Heatmap</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a>Profit_Weather_heatmap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_complete, <span class="fu">aes</span>(<span class="at">x =</span> Weather_Condition, <span class="at">y =</span> Profit_Binned, <span class="at">fill =</span> Profit_Margin)) <span class="sc">+</span></span>
+<span id="cb20-31"><a href="#cb20-31"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb20-32"><a href="#cb20-32"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb20-33"><a href="#cb20-33"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Weather Condition"</span>,</span>
+<span id="cb20-34"><a href="#cb20-34"></a>       <span class="at">y =</span> <span class="st">"Profit Margin Category"</span>,</span>
+<span id="cb20-35"><a href="#cb20-35"></a>       <span class="at">fill =</span> <span class="st">"Profit Margin"</span>,</span>
+<span id="cb20-36"><a href="#cb20-36"></a>       <span class="at">subtitle =</span> <span class="st">"Heatmap of Profit Margins Across Different Weather Conditions"</span>) <span class="sc">+</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-38"><a href="#cb20-38"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb20-39"><a href="#cb20-39"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-40"><a href="#cb20-40"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-41"><a href="#cb20-41"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb20-42"><a href="#cb20-42"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-43"><a href="#cb20-43"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb20-44"><a href="#cb20-44"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
+<span id="cb20-45"><a href="#cb20-45"></a></span>
+<span id="cb20-46"><a href="#cb20-46"></a>EngineType_boxplot <span class="sc">+</span> Profit_Weather_heatmap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -876,9 +916,17 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <li><p>Bad Weather: A considerable number of low-profit trips. Most likely brought on by operational difficulties, delays, and fuel inefficiency.Arranging for high-efficiency ships to travel in bad weather. weather-based pricing models or fuel-efficient routing techniques may be implemented.</p></li>
 </ol>
 <p>Suggestion: To increase profitability, shipping as much as possible during periods of mild weather and increasing operating effectiveness in moderate weather by modifying ship assignments or routes.For travels in bad weather, arranging highly efficient ships or alternate routes to reduce delays.</p>
-
-
 </section>
+</section>
+<section id="conclusion-and-summary" class="level1">
+<h1>5. Conclusion and Summary</h1>
+<p>This ship performance analysis aims to provide insights into operational efficiency, cost management, and profitability across different ship types. Key performance metrics such as speed, turnaround time, fuel efficiency, and profit margins are examined to identify trends that can drive better fleet management decisions. Understanding how cargo weight, engine power, and distance traveled impact ship performance allows for optimizing route planning, fuel consumption, and overall cost efficiency. The analysis also explores the relationship between operational costs and efficiency, identifying high-cost, low-efficiency operations that may require intervention. The analysis highlights vessels that consistently perform better and those that require operational improvements. The findings can be used to enhance ship allocation strategies, reduce unnecessary costs, and maximize profitability.</p>
+</section>
+<section id="future-recommendation" class="level1">
+<h1>6. Future Recommendation</h1>
+<p>Future exploration of seasonal impacts, maintenance status, and predictive trends could provide more refined strategies for improving maritime logistics and operational planning.</p>
+
+
 </section>
 
 </main> <!-- /main -->
