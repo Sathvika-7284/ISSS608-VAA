@@ -202,15 +202,17 @@ s3 <- ggplot(data=ship_data,
   plot_annotation(tag_levels = 'I')
 ```
 
-Plot 1 - Insights 1) Ship Speed Distribution Between 10 and 25 knots, the speed dispersion is evenly distributed. The majority of ships operate within a restricted speed range since there are no severe outliers. This implies that operational speed control should be maintained throughout all journeys.
+Plot 1 - Insights
+
+1) Ship Speed Distribution Between 10 and 25 knots, the speed dispersion is evenly distributed. The majority of ships operate within a restricted speed range since there are no severe outliers. This implies that operational speed control should be maintained throughout all journeys.
 
 Business context: Heavy cargo loads, bad weather, or problems with engine efficiency could be the cause of a ship operating at less than 10 knots. Possible to identify slow voyages and examine maintenance records for ships that are not operating well.
 
-2)  Distribution of Cargo Weight (bottom-left) Cargo weights vary from zero to two thousand tons, indicating a wide variety of load capacities. The organization handles a range of cargoes rather than concentrating on a particular cargo size, as seen by the distribution's apparent uniformity.
+2) Distribution of Cargo Weight (bottom-left) Cargo weights vary from zero to two thousand tons, indicating a wide variety of load capacities. The organization handles a range of cargoes rather than concentrating on a particular cargo size, as seen by the distribution's apparent uniformity.
 
 Business Context: Underutilization of cargo capacity may be indicated if a ship regularly transports lower-than-average loads. Ship selection for various cargo kinds could be optimized by determining high-profit cargo weight ranges.
 
-3)  The Connection Between Cargo Weight and Speed There is no correlation between cargo weight and speed in the scatterplot. Since the linear trend line is nearly flat, ship speed is not greatly impacted by cargo weight.It's not always the case that ships with larger loads move more slowly.
+3) The Connection Between Cargo Weight and Speed - There is no correlation between cargo weight and speed in the scatterplot. Since the linear trend line is nearly flat, ship speed is not greatly impacted by cargo weight.It's not always the case that ships with larger loads move more slowly.
 
 Business Context: This defies the conventional wisdom that larger loads cause ships to move more slowly. It might suggest that ship engines are managing power effectively, however its just an assumption.
 
@@ -248,23 +250,17 @@ ggparcoord(data = ship_data_selected,
   )
 ```
 
-Plot 2 - Insights 1) Red bulk carriers High Profit Margin Variability: While some bulk carriers have low or negative profit margins, others display incredibly high profits. Moderate Efficiency and Speed: Although bulk carriers are not the fastest, they are comparatively stable due to their moderate engine power and Speed Over Ground (knots). High Turnaround Time: Bulk carriers have some of the longest turnaround times, which suggests prolonged port stays that may have an impact on operational effectiveness.
+Plot 2 - Insights 
 
-Business Suggestion: Boost port productivity to cut down on turnaround times.
+1) All ship types have substantially different profit margins, with tankers and bulk carriers exhibiting the largest disparity.
+2) While efficiency and speed over ground are comparatively constant across ships, efficiency varies more with fish carriers.
+3) The considerable variation in turnaround time among ship classes suggests operational irregularities in port handling.
+4) Tankers and bulk carriers have larger engines, which may account for their higher fuel consumption and financial impact.
 
-2)  Container Ships (Green) More stable profit margins: The profitability of container ships is more stable than that of bulk carriers. Faster Speed & Shorter Turnaround Time: Container ships are more efficient since they move more quickly and take less time to complete tasks. In contrast to tankers and bulk ships, their engine power is well-balanced for efficiency and speed.
-
-Business Suggestion: Considering that container shipping gives consistent income, increase investment. Maintain ideal speed to strike a balance between operating costs and fuel economy.
-
-3)  Fish Carriers (Blue) Moderate Efficiency, Low Speed: Fish carriers often have higher efficiency per kWh but lower speeds, indicating that they effectively use fuel. High Turnaround Time: Fish carriers spend a lot of time in port, just like bulk carriers, which may be hurting their bottom line. Profit margins differ greatly; some fish carriers make a lot of money, while others lose money.
-
-Business Suggestion: Reduce fuel and port expenses by optimizing fish carriers' route planning. Examine the reasons behind the success of some trips and the failure of others.
-
-4)  Tankers (purple) Most effective per kWh: Tankers have a high fuel efficiency rating, which makes their fuel consumption economical. In general, profit margins are steady. Tankers' profit margins are less variable than those of bulk and seafood carriers. Maximum Engine Power: Tankers need greater engine power, which could be a sign of more fuel-intensive operations.
-
-Business Context:For long-distance shipments, tankers are economical, but fuel expenses need to be controlled. To save expenses even more, route optimization or alternate fuel sources can be adopted
-
-Business Suggestion: Container ships are the most effective option for quick, urgent delivery, while tankers are dependable for fuel-dependent enterprises. Fish and bulk carriers need to increase profitability by cutting turnaround times. Reversal profits are impacted by time spent at ports, and efficiency and speed must be balanced. To ensure stability, investing more in container shipping, maximizing fuel efficiency by streamlining tanker operations, and improving cargo loading and unloading processes for bulk and seafood carriers will help.
+Suggestions
+1) Because tankers and bulk carriers exhibit the greatest variance, profitability methods must to be tailored to the specific ship class.
+2) The operational performance of fish carriers and container ships is more predictable due to their more steady parameters.
+3) All ship types can gain from faster turnaround times, which could boost profitability.
 
 ## Plot 3 - Revenue Distribution by Ship Type and Route
 
@@ -298,27 +294,24 @@ Ship_RidgePlot
 ```
 
 Plot 3 - Insights 
-1)Revenue Distribution Differs by Route Revenue peaks for transoceanic, long-haul, and coastal routes are higher (\~750,000 to 1,000,000 USD). The revenue distribution on short-haul routes is more variable, with lower peaks and a wider dispersion.
+1) Across all ship types, long-haul and transoceanic routes provide the most revenue per voyage.
+2) Container ships and bulk carriers do marginally better than others on coastal and short-haul routes, which have lower revenue distributions.
+3) The more consistent income distribution of tankers indicates more consistent revenue generating across various route types.
+4) Container ships exhibit greater income fluctuation, especially on long-haul routes, suggesting areas for profit maximization.
 
-Business Context: Due of their uneven revenue, short-haul routes could benefit from more dynamic pricing schemes or pricing optimization. Transoceanic and long-haul routes are dependable for long-term profitability since they continuously produce substantial revenue.
-
-2)  Ship Type Affects Trends in Revenue On all routes, tankers and container ships typically bring in more money per trip. Although their income peaks are often lower, fish carriers and bulk carriers perform consistently throughout all routes.
-
-Business Context: Priority should be given to tankers and container ships on high-revenue (long-haul, transoceanic) routes. In order to be competitive, bulk carriers might need to lower their operating expenses.
-
-3)Revenue Distribution Is More Even on Short-Haul Routes Because short-haul travel revenue is more dispersed, some journeys are quite profitable while others are not. The transoceanic route has steady earnings potential and the highest peak revenue concentrations.
-
-Business Context: Improved fleet and cargo management may be necessary for short-haul travel in order to preserve revenue stability. Premium cargo kinds should be favored for transoceanic voyages with high profitability.
-
-Suggestions: 1) Make Fleet Allocation Better long-haul and transoceanic routes can be assigned to high-revenue ship types, such as tankers and container ships. For short-haul routes where revenue variance is significant, strategically fish carriers and bulk carriers can be used.
-
-2)  Modify Pricing Structures for Short-Distance Travel Dynamic pricing techniques can be used to maintain revenue stability for short-distance travel.
+Suggestions
+1) For high-value goods, long-haul and transoceanic routes should be given priority since they yield the most revenue.
+2) For short-haul and coastal routes to be more profitable, especially for bulk carriers, efficiency improvements may be necessary.
+3) Tanker operations are a fantastic choice for consistent revenue creation because they are comparatively steady.
+4) Long-haul container ships should be optimized because they have a greater potential to increase revenue in this category.
 
 ## Plot 4 - Efficiency vs ship_type
 
 This ggbetweenstats plot compares fuel efficiency (Efficiency_nm_per_kWh) across different ship types:
 
-Violin + Boxplot Combination → Shows distribution and spread of efficiency data. Median Efficiency (μ_median) → Highlights central efficiency values per ship type. Kruskal-Wallis Test (χ² = 2.79, p = 0.42) → Checks if efficiency differences are statistically significant. Pairwise Dunn Test → Tests specific ship type comparisons.
+Violin + Boxplot Combination - Shows distribution and spread of efficiency data. 
+Median Efficiency (μ_median) → Highlights central efficiency values per ship type. 
+Kruskal-Wallis Test (χ² = 4.24, p = 0.24) - Checks if efficiency differences are statistically significant. Pairwise Dunn Test - Tests specific ship type comparisons.
 
 ```{r}
 #| code-fold: show
@@ -333,17 +326,23 @@ ggbetweenstats(
 )
 ```
 
-Plot 4 - Insights X-axis (Ship Type) → Categories of ships compared. Y-axis (Fuel Efficiency nm per kWh) → Measures how far ships travel per unit of fuel. Median Values (μ_median) → Container Ships have the highest median efficiency (0.79 nm per kWh). Bulk Carriers & Fish Carriers have similar efficiency (0.78 nm per kWh). Tankers have the lowest median efficiency (0.74 nm per kWh). Variability & Spread → Tankers have the widest spread, indicating greater inconsistency in fuel efficiency. Fish Carriers & Container Ships have less variability, meaning more stable efficiency
+Plot 4 - Insights 
 
-1)  Disparities in Fuel Efficiency Various Ship Types - Based on the median value For fuel-intensive routes, container ships should be given priority in order to lower operating expenses. Tankers must be optimized to increase efficiency, either by lowering the cargo load or by changing the speed settings.
+X-axis (Ship Type) - Categories of ships compared. 
+Y-axis (Fuel Efficiency nm per kWh) -  Measures how far ships travel per unit of fuel. 
+Median Values (μ_median) - Container Ships have the highest median efficiency (0.81 nm per kWh). 
+Tanker & Fish Carriers have similar efficiency (0.74 nm per kWh) which is the lowest_median efficiency
+Bulk Carriers have medium median efficiency (0.78 nm per kWh). Variability & Spread → Tankers have the widest spread, indicating greater inconsistency in fuel efficiency. Fish Carriers & Container Ships have less variability, meaning more stable efficiency
 
-2)  The most variable in efficiency are tankers. Additionally, bulk carriers exhibit some fluctuation, which may be due to outside variables (weather, cargo weight, engine condition). The fuel consumption of containers and fish carriers is more predictable due to their more steady efficiency. Business Insight: More research is required on tankers and bulk carriers to determine why certain trips are so inefficient. Ships that are consistently efficient (fish carriers, containers) can be assigned to expensive fuel routes.
+1) Bulk carriers and container ships have the highest median fuel efficiency.
+2) The efficiency of tankers and fish carriers is marginally lower, with the dispersion of fish carriers being more dispersed.
+3) The p-value from the Kruskal-Wallis test indicates that there is no statistically significant difference in efficiency between ship types as p values is more than 0.05
 
-3)  Kruskal-Wallis Test: No Significant Difference (p = 0.42) The test indicates no statistically significant difference in fuel efficiency between ship classes since p \> 0.05. This implies that other operational factors (such as cargo weight, weather, and engine health) may be the cause of changes in fuel efficiency.
+Suggestions
+1) Since all ship types operate at roughly the same efficiency levels, route choice and cargo weight will probably have a greater impact on fuel expenditures than ship type alone.
+2) On average, container ships use the least amount of gasoline, which makes them an economical option for enterprises that are sensitive to fuel use.
+3) The greatest variable efficiency is found in fish carriers, which may be caused by variations in cargo load, engine type, or weather conditions.
 
-Suggestions 1) Fuel Efficiency-Based Fleet Allocation Optimization Because container ships are more efficient, use them for longer trips. Tankers should be reevaluated for potential fuel efficiency gains (engine upgrades, speed modifications).
-
-2)  Examine Ships with High Variability. Examine the reasons behind the excessive inefficiency of certain tankers and bulk carriers. Take into account fuel optimization techniques and modifications to the route design.
 
 ## Plot 5 - Fuel Efficiency by Engine Type and Profit Margins Across Weather Conditions
 
@@ -400,28 +399,32 @@ Profit_Weather_heatmap <- ggplot(df_complete, aes(x = Weather_Condition, y = Pro
 EngineType_boxplot + Profit_Weather_heatmap
 ```
 
-Plot 5 - Insights BOXPLOT The distribution of fuel efficiency (nm per kWh) for various engine types. The typical efficiency for each engine type is displayed by the median line in each box. The amount of variation in fuel efficiency is indicated by the spread of the boxes (IQR).
+Plot 5 - Insights
 
-Business Context: 1) Diesel Motors: moderate fuel economy and steady spread and it is ideal for standard transportation requirements, striking a balance between price and functionality.Performance is constant throughout the travel.
+BOXPLOT 
+The distribution of fuel efficiency (nm per kWh) for various engine types. The typical efficiency for each engine type is displayed by the median line in each box. The amount of variation in fuel efficiency is indicated by the spread of the boxes (IQR).
 
-2)  Engines that run on heavy fuel oil (HFO): Diesel's median efficiency is comparable, but the spread is wider and has Increased variability which indicates that maintenance, load, or route may affect efficiency. For some circumstances, optimization may be required to increase efficiency.
+HEATMAP 
+It displays how varied weather conditions affect company margins. Higher percentages of ships with certain profit margins are shown by darker hues. There are fewer ships operating in lighter regions with particular profit margins.
 
-3)  Engines that use steam turbines: A greater degree of fluctuation, with some trips using less gasoline than others. This could be because of the impact of cargo weight, journey type, or engine power.Might need more upkeep or be better suited for certain trips than for everyday use.
+1) The fuel efficiency distributions of diesel, heavy fuel oil (HFO), and steam turbine engines are similar, with some variation in outliers. 
+2) The profit margins under various weather conditions vary, with "calm" conditions showing more evenly distributed profitability. 
+3) Moderate weather conditions have a higher proportion of low-profit voyages, indicating efficiency loss due to external factors like wind resistance or fuel overconsumption. 
+4) As expected, rough weather has a negative impact on profit margins, but there are still some profitable voyages.
 
-Suggestion: The most reliable and safest option for frequent travel is a diesel engine. HFO might need to increase efficiency (fuel-saving methods, route optimization). Steam turbines may require route-specific deployment due to their variable efficiency.
+Suggestions
+1) Profit swings are greatly influenced by the weather, particularly in moderate and rough conditions.
+2) Diesel and HFO engines perform similarly in fuel efficiency, so fuel selection may not be the primary determinant of efficiency.
+3) Profitability in rough weather can be route-dependent, implying that particular journeys are more adaptable to external conditions.
+4) Ships could be strategically deployed during favorable weather conditions to maximize profits and minimize efficiency losses.
 
-HEATMAP It displays how varied weather conditions affect company margins. Higher percentages of ships with certain profit margins are shown by darker hues. There are fewer ships operating in lighter regions with particular profit margins. Business Context: 1) Calm Weather: In calm conditions, the majority of ships retain moderate to high profit margins. Stable revenue is a result of fewer delays and less fuel loss. For optimal profitability, high-value cargo priority should be given during slow seasons.
 
-2)  Moderate weather: A greater range of profit margins, with certain trips falling into "Very Low" profit ranges. Because they use more fuel or move more slowly, some ships make less money.Planning other routes to avoid inefficiencies, or efficient ships in moderate weather.
+# 5. Summary
 
-3)  Bad Weather: A considerable number of low-profit trips. Most likely brought on by operational difficulties, delays, and fuel inefficiency.Arranging for high-efficiency ships to travel in bad weather. weather-based pricing models or fuel-efficient routing techniques may be implemented.
+Route-based optimization solutions are necessary since profit margins differ greatly among ship types, routes, and weather conditions.Although ship types do not significantly differ in fuel efficiency, container ships are typically the most fuel-efficient choice. The biggest revenue is generated by long-haul and transoceanic flights, indicating that fuel cost optimization should be prioritized for these routes.
+Profitability is greatly impacted by weather, thus in order to minimize losses, trip planning should take weather forecasts into consideration. Tankers and bulk carriers exhibit the greatest profit fluctuation, hence risk-mitigation techniques (such hedging fuel prices) have to be investigated.
 
-Suggestion: To increase profitability, shipping as much as possible during periods of mild weather and increasing operating effectiveness in moderate weather by modifying ship assignments or routes.For travels in bad weather, arranging highly efficient ships or alternate routes to reduce delays.
 
-# 5. Conclusion and Summary
+# 6. Conclusion and Future Recommendation
 
-This ship performance analysis aims to provide insights into operational efficiency, cost management, and profitability across different ship types. Key performance metrics such as speed, turnaround time, fuel efficiency, and profit margins are examined to identify trends that can drive better fleet management decisions. Understanding how cargo weight, engine power, and distance traveled impact ship performance allows for optimizing route planning, fuel consumption, and overall cost efficiency. The analysis also explores the relationship between operational costs and efficiency, identifying high-cost, low-efficiency operations that may require intervention. The analysis highlights vessels that consistently perform better and those that require operational improvements. The findings can be used to enhance ship allocation strategies, reduce unnecessary costs, and maximize profitability.
-
-# 6. Future Recommendation
-
-Future exploration of seasonal impacts, maintenance status, and predictive trends could provide more refined strategies for improving maritime logistics and operational planning.
+This ship performance analysis aims to provide insights into operational efficiency, cost management, and profitability across different ship types. Key performance metrics such as speed, turnaround time, fuel efficiency, and profit margins are examined to identify trends that can drive better fleet management decisions. Understanding how cargo weight, engine power, and distance traveled impact ship performance allows for optimizing route planning, fuel consumption, and overall cost efficiency. The analysis also explores the relationship between operational costs and efficiency, identifying high-cost, low-efficiency operations that may require intervention. The analysis highlights ships that consistently perform better and those that require operational improvements. The findings can be used to enhance ship allocation strategies, reduce unnecessary costs, and maximize profitability. Future exploration of seasonal impacts, maintenance status, and predictive trends could provide more refined strategies for improving maritime logistics and operational planning.
