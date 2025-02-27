@@ -12,20 +12,17 @@ execute:
 
 # 1. Visual Multivariate Analysis with Parallel Coordinates Plot
 
-
 # 2. Visual Multivariate Analysis with Parallel Coordinates Plot
 
 ```{r}
 pacman::p_load(GGally, parallelPlot, tidyverse)
 ```
 
-
 # 3. Data Preparation
 
 ```{r}
 wh <- read_csv("data/WHData-2018.csv")
 ```
-
 
 # 4. Plotting Static Parallel Coordinates Plot
 
@@ -88,7 +85,6 @@ ggparcoord(data = wh,
   facet_wrap(~ Region) + 
   theme(axis.text.x = element_text(angle = 30, hjust=1))
 ```
-
 
 # 5.Plotting Interactive Parallel Coordinates Plot: parallelPlot methods
 

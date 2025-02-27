@@ -39,7 +39,6 @@ realis2018_summarised <- summarise(realis2018_grouped,
                           `Median Transacted Price` = median(`Transacted Price ($)`, na.rm = TRUE))
 ```
 
-
 ## 3.3 Grouped summaries with the pipe
 
 ```{r}
@@ -157,7 +156,6 @@ treemap(realis2018_selected,
         title.legend = "Median Unit Price (S$ per sq. m)"
         )
 ```
-
 
 # 4. Designing Treemap using treemapify Package
 

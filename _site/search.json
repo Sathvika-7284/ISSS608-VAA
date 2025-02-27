@@ -1090,5 +1090,96 @@
     "title": "Take-home Exercise 1",
     "section": "3.10 Remove columns not used for this analysis",
     "text": "3.10 Remove columns not used for this analysis\n\nship_data &lt;- ship_data %&gt;%\n  select(-c(\"Date\", \"Maintenance_Status\", \"Draft_meters\", \"Operational_Cost_USD\", \"Seasonal_Impact_Score\", \"Weekly_Voyage_Count\", \"Average_Load_Percentage\"))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#importing-the-data",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#importing-the-data",
+    "title": "Hands on Exercise 7",
+    "section": "2.1 Importing the data",
+    "text": "2.1 Importing the data\n\nattacks &lt;- read_csv(\"data/eventlog.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#examining-the-data-structure",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#examining-the-data-structure",
+    "title": "Hands on Exercise 7",
+    "section": "2.2 Examining the data structure",
+    "text": "2.2 Examining the data structure\n\nkable(head(attacks))\n\n\n\n\ntimestamp\nsource_country\ntz\n\n\n\n\n2015-03-12 15:59:16\nCN\nAsia/Shanghai\n\n\n2015-03-12 16:00:48\nFR\nEurope/Paris\n\n\n2015-03-12 16:02:26\nCN\nAsia/Shanghai\n\n\n2015-03-12 16:02:38\nUS\nAmerica/Chicago\n\n\n2015-03-12 16:03:22\nCN\nAsia/Shanghai\n\n\n2015-03-12 16:03:45\nCN\nAsia/Shanghai"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#data-preparation",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#data-preparation",
+    "title": "Hands on Exercise 7",
+    "section": "2.3 Data Preparation",
+    "text": "2.3 Data Preparation\n\nStep 1: Deriving weekday and hour of day fields\n\n\nCode\nmake_hr_wkday &lt;- function(ts, sc, tz) {\n  real_times &lt;- ymd_hms(ts, \n                        tz = tz[1], \n                        quiet = TRUE)\n  dt &lt;- data.table(source_country = sc,\n                   wkday = weekdays(real_times),\n                   hour = hour(real_times))\n  return(dt)\n  }\n\n\n\n\nStep 2: Deriving the attacks tibble data frame\n\n\nCode\nwkday_levels &lt;- c('Saturday', 'Friday', \n                  'Thursday', 'Wednesday', \n                  'Tuesday', 'Monday', \n                  'Sunday')\n\nattacks &lt;- attacks %&gt;%\n  group_by(tz) %&gt;%\n  do(make_hr_wkday(.$timestamp, \n                   .$source_country, \n                   .$tz)) %&gt;% \n  ungroup() %&gt;% \n  mutate(wkday = factor(\n    wkday, levels = wkday_levels),\n    hour  = factor(\n      hour, levels = 0:23))\n\n\n\nkable(head(attacks))\n\n\n\n\ntz\nsource_country\nwkday\nhour\n\n\n\n\nAfrica/Cairo\nBG\nSaturday\n20\n\n\nAfrica/Cairo\nTW\nSunday\n6\n\n\nAfrica/Cairo\nTW\nSunday\n8\n\n\nAfrica/Cairo\nCN\nSunday\n11\n\n\nAfrica/Cairo\nUS\nSunday\n15\n\n\nAfrica/Cairo\nCA\nMonday\n11"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#building-the-calendar-heatmaps",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#building-the-calendar-heatmaps",
+    "title": "Hands on Exercise 7",
+    "section": "2.4 Building the Calendar Heatmaps",
+    "text": "2.4 Building the Calendar Heatmaps\n\n\nCode\ngrouped &lt;- attacks %&gt;% \n  count(wkday, hour) %&gt;% \n  ungroup() %&gt;%\n  na.omit()\n\nggplot(grouped, \n       aes(hour, \n           wkday, \n           fill = n)) + \ngeom_tile(color = \"white\", \n          size = 0.1) + \ntheme_tufte(base_family = \"Helvetica\") + \ncoord_equal() +\nscale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\nlabs(x = NULL, \n     y = NULL, \n     title = \"Attacks by weekday and time of day\") +\ntheme(axis.ticks = element_blank(),\n      plot.title = element_text(hjust = 0.5),\n      legend.title = element_text(size = 8),\n      legend.text = element_text(size = 6) )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#building-multiple-calendar-heatmaps",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#building-multiple-calendar-heatmaps",
+    "title": "Hands on Exercise 7",
+    "section": "2.5 Building Multiple Calendar Heatmaps",
+    "text": "2.5 Building Multiple Calendar Heatmaps\n\nattacks_by_country &lt;- count(\n  attacks, source_country) %&gt;%\n  mutate(percent = percent(n/sum(n))) %&gt;%\n  arrange(desc(n))\n\n\n\nCode\ntop4 &lt;- attacks_by_country$source_country[1:4]\ntop4_attacks &lt;- attacks %&gt;%\n  filter(source_country %in% top4) %&gt;%\n  count(source_country, wkday, hour) %&gt;%\n  ungroup() %&gt;%\n  mutate(source_country = factor(\n    source_country, levels = top4)) %&gt;%\n  na.omit()"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#plotting-multiple-calendar-heatmaps",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#plotting-multiple-calendar-heatmaps",
+    "title": "Hands on Exercise 7",
+    "section": "2.6 Plotting Multiple Calendar Heatmaps",
+    "text": "2.6 Plotting Multiple Calendar Heatmaps\n\n\nCode\nggplot(top4_attacks, \n       aes(hour, \n           wkday, \n           fill = n)) + \n  geom_tile(color = \"white\", \n          size = 0.1) + \n  theme_tufte(base_family = \"Helvetica\") + \n  coord_equal() +\n  scale_fill_gradient(name = \"# of attacks\",\n                    low = \"sky blue\", \n                    high = \"dark blue\") +\n  facet_wrap(~source_country, ncol = 2) +\n  labs(x = NULL, y = NULL, \n     title = \"Attacks on top 4 countries by weekday and time of day\") +\n  theme(axis.ticks = element_blank(),\n        axis.text.x = element_text(size = 7),\n        plot.title = element_text(hjust = 0.5),\n        legend.title = element_text(size = 8),\n        legend.text = element_text(size = 6) )"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-1-data-import",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-1-data-import",
+    "title": "Hands on Exercise 7",
+    "section": "3.1 Step 1: Data Import",
+    "text": "3.1 Step 1: Data Import\n\nair &lt;- read_excel(\"data/arrivals_by_air.xlsx\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-2-deriving-month-and-year-fields",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-2-deriving-month-and-year-fields",
+    "title": "Hands on Exercise 7",
+    "section": "3.2 Step 2: Deriving month and year fields",
+    "text": "3.2 Step 2: Deriving month and year fields\n\nair$month &lt;- factor(month(air$`Month-Year`), \n                    levels=1:12, \n                    labels=month.abb, \n                    ordered=TRUE) \nair$year &lt;- year(ymd(air$`Month-Year`))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-3-extracting-the-target-country",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-3-extracting-the-target-country",
+    "title": "Hands on Exercise 7",
+    "section": "3.3 Step 3: Extracting the target country",
+    "text": "3.3 Step 3: Extracting the target country\n\nVietnam &lt;- air %&gt;% \n  select(`Vietnam`, \n         month, \n         year) %&gt;%\n  filter(year &gt;= 2010)"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-4-computing-year-average-arrivals-by-month",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-4-computing-year-average-arrivals-by-month",
+    "title": "Hands on Exercise 7",
+    "section": "3.4 Step 4: Computing year average arrivals by month",
+    "text": "3.4 Step 4: Computing year average arrivals by month\n\nhline.data &lt;- Vietnam %&gt;% \n  group_by(month) %&gt;%\n  summarise(avgvalue = mean(`Vietnam`))"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-5-plotting-the-cycle-plot",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-5-plotting-the-cycle-plot",
+    "title": "Hands on Exercise 7",
+    "section": "3.5 Step 5: Plotting the cycle plot",
+    "text": "3.5 Step 5: Plotting the cycle plot\n\n\nCode\nggplot() + \n  geom_line(data=Vietnam,\n            aes(x=year, \n                y=`Vietnam`, \n                group=month), \n            colour=\"black\") +\n  geom_hline(aes(yintercept=avgvalue), \n             data=hline.data, \n             linetype=6, \n             colour=\"red\", \n             size=0.5) + \n  facet_grid(~month) +\n  labs(axis.text.x = element_blank(),\n       title = \"Visitor arrivals from Vietnam by air, Jan 2010-Dec 2019\") +\n  xlab(\"\") +\n  ylab(\"No. of Visitors\") +\n  theme_tufte(base_family = \"Helvetica\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-1-data-import-1",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-1-data-import-1",
+    "title": "Hands on Exercise 7",
+    "section": "4.1 Step 1: Data Import",
+    "text": "4.1 Step 1: Data Import\n\nrice &lt;- read_csv(\"data/rice.csv\")"
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-2-plotting-the-slopegraph",
+    "href": "Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html#step-2-plotting-the-slopegraph",
+    "title": "Hands on Exercise 7",
+    "section": "4.2 Step 2: Plotting the slopegraph",
+    "text": "4.2 Step 2: Plotting the slopegraph\n\n\nCode\nrice %&gt;% \n  mutate(Year = factor(Year)) %&gt;%\n  filter(Year %in% c(1961, 1980)) %&gt;%\n  newggslopegraph(Year, Yield, Country,\n                Title = \"Rice Yield of Top 11 Asian Counties\",\n                SubTitle = \"1961-1980\",\n                Caption = \"Prepared by: Sathvika Subramanian\")\n\n\n\n\n\n\n\n\n\n\n\nCode\nrice %&gt;% \n  mutate(Year = factor(Year)) %&gt;%\n  filter(Year %in% c(1961, 1980)) %&gt;%\n  newggslopegraph(Year, Production, Country,\n                Title = \"Rice Production of Top 11 Asian Counties\",\n                SubTitle = \"1961-1980\",\n                Caption = \"Prepared by: Sathvika Subramanian\")"
   }
 ]
