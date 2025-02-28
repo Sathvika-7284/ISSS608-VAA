@@ -127,7 +127,62 @@ top4_attacks <- attacks %>%
   na.omit()
 ```
 
-## 2.6 Plotting Multiple Calendar Heatmaps
+## 2.6 Building Multiple Calendar Heatmaps
+
+```{r}
+# Load data (modify the file path as needed)
+attacks <- read_csv("data/eventlog.csv")
+ 
+# Convert timestamp to date-time format if needed
+attacks <- attacks %>%
+  mutate(
+    date_time = as.POSIXct(timestamp, format = "%Y-%m-%d %H:%M:%S"),
+    wkday = factor(weekdays(date_time), 
+                   levels = c("Sunday", "Monday", "Tuesday", "Wednesday", 
+                              "Thursday", "Friday", "Saturday")),  # Order weekdays
+    hour = hour(date_time)  # Extract hour of the day
+  )
+ 
+# Identify the top 4 source countries with the highest number of attacks
+top_countries <- attacks %>%
+  count(source_country) %>%  # Use correct column name
+  top_n(4, n) %>%
+  pull(source_country)
+ 
+# Filter data for the top 4 source countries
+attacks_filtered <- attacks %>%
+  filter(source_country %in% top_countries)
+ 
+# Aggregate attack counts by weekday and hour for each source country
+grouped <- attacks_filtered %>%
+  count(source_country, wkday, hour) %>%
+  ungroup() %>%
+  na.omit()
+ 
+# Plot multiple heatmaps using facet_wrap()
+ggplot(grouped, aes(x = hour, y = wkday, fill = n)) + 
+  geom_tile(color = "white", size = 0.1) + 
+  facet_wrap(~ source_country, ncol = 2) +  # Create separate heatmaps for each country
+  coord_equal() +
+  scale_fill_gradient(name = "# of attacks",
+                      low = "sky blue", 
+                      high = "dark blue") +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "Attacks by Weekday and Time of Day") +
+  theme_tufte(base_family = "Helvetica") + 
+  theme(
+    axis.ticks = element_blank(),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+    legend.title = element_text(size = 8),
+    legend.text = element_text(size = 6),
+    strip.text = element_text(face = "bold", size = 12)
+  )
+```
+
+
+
+## 2.7 Plotting Multiple Calendar Heatmaps
 
 ```{r}
 #| code-fold: show
