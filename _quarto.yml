@@ -41,6 +41,8 @@ website:
            href: "Inclass_Ex/In_classEx4/Inclass_Ex4.html"
          - text: "In-class Exercise 5"
            href: "Inclass_Ex/In_classEx5/Inclass_Ex5.html"
+         - text: "In-class Exercise 7"
+           href: "Inclass_Ex/In_classEx7/Inclass_Ex7.html"
       - text: "Take-home Exercise"
         menu:
          - text: "Take-home Exercise 1"

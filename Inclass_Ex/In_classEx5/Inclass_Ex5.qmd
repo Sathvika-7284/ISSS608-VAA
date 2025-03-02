@@ -35,6 +35,7 @@ summary(car_resale)
 ```
 
 Data Overview
+
 ```{r}
 car_resale %>%
   ExpData(type = 1)
@@ -78,6 +79,7 @@ car_resale %>%
 ```
 
 Explore Numerical Viz()
+
 ```{r}
 car_resale %>%
   ExpNumViz(target= NULL,
@@ -91,7 +93,6 @@ car_resale %>%
             nlim=10,
             Page=c(2,2))
 ```
-
 
 Bar Plots for all Categorical variables
 
@@ -107,7 +108,6 @@ car_resale %>%
             Page = c(4,4),
             sample = 16)
 ```
-
 
 ```{r}
 model <- lm(Price ~ Age_08_04 + Mfg_Year + KM + Weight + Guarantee_Period, data = car_resale)
