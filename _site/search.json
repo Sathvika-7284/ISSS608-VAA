@@ -1454,5 +1454,75 @@
     "title": "In class Exercise 7",
     "section": "7.13 Visualising the forecasted values",
     "text": "7.13 Visualising the forecasted values\n\nASEAN_fc %&gt;%\n  autoplot(ASEAN)"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#background",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#background",
+    "title": "Take-home Exercise 2",
+    "section": "1.1 Background",
+    "text": "1.1 Background"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#objectives-and-tasks",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#objectives-and-tasks",
+    "title": "Take-home Exercise 2",
+    "section": "1.2 Objectives and Tasks",
+    "text": "1.2 Objectives and Tasks"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#setting-the-analytical-tools",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#setting-the-analytical-tools",
+    "title": "Take-home Exercise 2",
+    "section": "2.1 Setting the Analytical Tools",
+    "text": "2.1 Setting the Analytical Tools"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#data-source",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#data-source",
+    "title": "Take-home Exercise 2",
+    "section": "2.2 Data Source",
+    "text": "2.2 Data Source"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#importing-data",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#importing-data",
+    "title": "Take-home Exercise 2",
+    "section": "3.1 Importing Data",
+    "text": "3.1 Importing Data"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#filtering",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#filtering",
+    "title": "Take-home Exercise 2",
+    "section": "3.2 Filtering",
+    "text": "3.2 Filtering"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#data-preparation",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#data-preparation",
+    "title": "Take-home Exercise 2",
+    "section": "3.3 Data Preparation",
+    "text": "3.3 Data Preparation"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#chart-1",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#chart-1",
+    "title": "Take-home Exercise 2",
+    "section": "4.1 chart 1",
+    "text": "4.1 chart 1\n\n4.1.1 Original Visualisation\n\n\n4.1.2 Critique\n\n\n4.1.3 Sketch of Alternative Design\n\n\n4.1.4 Improved Visualisation"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#chart-2",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#chart-2",
+    "title": "Take-home Exercise 2",
+    "section": "4.2 chart 2",
+    "text": "4.2 chart 2\n\n4.2.1 Original Visualisation\n\n\n4.2.2 Critique\n\n\n4.2.3 Sketch of Alternative Design\n\n\n4.2.4 Improved Visualisation"
+  },
+  {
+    "objectID": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#chart-3",
+    "href": "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html#chart-3",
+    "title": "Take-home Exercise 2",
+    "section": "4.3 chart 3",
+    "text": "4.3 chart 3\n\n4.3.1 Original Visualisation\n\n\n4.3.2 Critique\n\n\n4.3.3 Sketch of Alternative Design\n\n\n4.3.4 Improved Visualisation"
   }
 ]

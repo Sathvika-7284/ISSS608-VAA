@@ -12,7 +12,6 @@ execute:
 
 # Ship Performance Data Analysis
 
-
 # 1. Introduction
 
 ## 1.1 Background
@@ -24,7 +23,6 @@ The purpose of this dataset is to offer a platform for investigating ship perfor
 ## 1.2 Objectives
 
 In this exercise, the data is processed by using appropriate tidyverse family of packages and the statistical graphics are prepared using ggplot2 and its extensions to identify trends and relevant business insight regarding shipping performance.
-
 
 # 2. Getting Started
 
@@ -39,15 +37,14 @@ pacman::p_load(tidyverse, ggthemes, ggridges, patchwork, ggstatsplot, GGally, co
 -   tidyverse: Core collection of R packages designed for data science. It is a set of packages that work in harmony because they share common data representations and 'API' design. This package is designed to make it easy to install and load multiple 'tidyverse' packages in a single step.
 -   ggthemes: to use additional themes for ggplot2
 -   ggridges: Ridgeline plots provide a convenient way of visualizing changes in distributions over time or space
--   patchwork: 'patchwork' is a package that expands the composition of multiple plots to allow for arbitrarily complex composition of plots by, among others, providing mathematical operators for combining multiple plots. 
--   ggstatsplot: Extension of 'ggplot2', 'ggstatsplot' creates graphics with details from statistical tests included in the plots themselves. It provides an easier syntax to generate information-rich plots for statistical analysis of continuous or categorical data. 
+-   patchwork: 'patchwork' is a package that expands the composition of multiple plots to allow for arbitrarily complex composition of plots by, among others, providing mathematical operators for combining multiple plots.
+-   ggstatsplot: Extension of 'ggplot2', 'ggstatsplot' creates graphics with details from statistical tests included in the plots themselves. It provides an easier syntax to generate information-rich plots for statistical analysis of continuous or categorical data.
 -   GGally: 'GGally' extends 'ggplot2' by adding several functions to reduce the complexity of combining geometric objects with transformed data. Some of these functions include a pairwise plot matrix, a two group pairwise plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.
 -   corrplot:Provides a visual exploratory tool on correlation matrix that supports automatic variable reordering to help detect hidden patterns among variables.
 
 ## 2.2 Data Sources
 
 Key operational metrics and characteristics of several ship types in the Gulf of Guinea are represented by the Ship Performance Dataset, a synthetic yet realistic data collection. This dataset is designed for professionals interested in studying clustering, prediction, and optimization issues in the maritime sector, as well as fans for maritime data analytics and machine learning practitioners. This dataset is from kaggle.
-
 
 # 3. Data Wrangling
 
@@ -62,6 +59,7 @@ ship_data <- read_csv("data/Ship_Performance_Dataset.csv")
 ```{r}
 ship_data[duplicated(ship_data), ]
 ```
+
 No duplicates are present in the dataset.
 
 ## 3.3 Na values
@@ -70,6 +68,7 @@ No duplicates are present in the dataset.
 # Checks for NA in each column
 colSums(is.na(ship_data))
 ```
+
 No na values are present.
 
 ## 3.4 Data Overview
@@ -94,6 +93,7 @@ str(ship_data)
 ship_data <- ship_data %>%
   filter(Route_Type != "None", Ship_Type != "None", Engine_Type != "None", Weather_Condition != "None")  # Remove "None"
 ```
+
 We will not be using none values in our analysis.
 
 ## 3.7 Box plots for checking outliers
@@ -114,6 +114,7 @@ for (i in numeric_columns) {
   print(plot)
 }
 ```
+
 No outliers are found.
 
 ## 3.8 New variables
@@ -128,6 +129,7 @@ ship_data <- ship_data %>%
     Profit_Margin = (Profit / Revenue_per_Voyage_USD) * 100,  # Profit Margin in %
   )
 ```
+
 Profit and Profit_Margin are calculated which would later be used for analysis in Business context.
 
 ## 3.9 Plot 0 - Corr plot to remove highly correlated outputs
@@ -157,6 +159,7 @@ ggcorrplot(
   title = "Basic Correlation Heatmap for Multicollinearity Detection"
 )
 ```
+
 Only profit and revenue_per_voyage_usd are highly correlated but profit is a new created value for this analysis thus no columns would be removed based on the correlation heatmap plot.
 
 ## 3.10 Remove columns not used for this analysis
@@ -165,7 +168,6 @@ Only profit and revenue_per_voyage_usd are highly correlated but profit is a new
 ship_data <- ship_data %>%
   select(-c("Date", "Maintenance_Status", "Draft_meters", "Operational_Cost_USD", "Seasonal_Impact_Score", "Weekly_Voyage_Count", "Average_Load_Percentage"))
 ```
-
 
 # 4. Exploratory Data Analysis - EDA
 
@@ -204,15 +206,15 @@ s3 <- ggplot(data=ship_data,
 
 Plot 1 - Insights
 
-1) Ship Speed Distribution Between 10 and 25 knots, the speed dispersion is evenly distributed. The majority of ships operate within a restricted speed range since there are no severe outliers. This implies that operational speed control should be maintained throughout all journeys.
+1)  Ship Speed Distribution Between 10 and 25 knots, the speed dispersion is evenly distributed. The majority of ships operate within a restricted speed range since there are no severe outliers. This implies that operational speed control should be maintained throughout all journeys.
 
 Business context: Heavy cargo loads, bad weather, or problems with engine efficiency could be the cause of a ship operating at less than 10 knots. Possible to identify slow voyages and examine maintenance records for ships that are not operating well.
 
-2) Distribution of Cargo Weight (bottom-left) Cargo weights vary from zero to two thousand tons, indicating a wide variety of load capacities. The organization handles a range of cargoes rather than concentrating on a particular cargo size, as seen by the distribution's apparent uniformity.
+2)  Distribution of Cargo Weight (bottom-left) Cargo weights vary from zero to two thousand tons, indicating a wide variety of load capacities. The organization handles a range of cargoes rather than concentrating on a particular cargo size, as seen by the distribution's apparent uniformity.
 
 Business Context: Underutilization of cargo capacity may be indicated if a ship regularly transports lower-than-average loads. Ship selection for various cargo kinds could be optimized by determining high-profit cargo weight ranges.
 
-3) The Connection Between Cargo Weight and Speed - There is no correlation between cargo weight and speed in the scatterplot. Since the linear trend line is nearly flat, ship speed is not greatly impacted by cargo weight.It's not always the case that ships with larger loads move more slowly.
+3)  The Connection Between Cargo Weight and Speed - There is no correlation between cargo weight and speed in the scatterplot. Since the linear trend line is nearly flat, ship speed is not greatly impacted by cargo weight.It's not always the case that ships with larger loads move more slowly.
 
 Business Context: This defies the conventional wisdom that larger loads cause ships to move more slowly. It might suggest that ship engines are managing power effectively, however its just an assumption.
 
@@ -250,17 +252,14 @@ ggparcoord(data = ship_data_selected,
   )
 ```
 
-Plot 2 - Insights 
+Plot 2 - Insights
 
-1) All ship types have substantially different profit margins, with tankers and bulk carriers exhibiting the largest disparity.
-2) While efficiency and speed over ground are comparatively constant across ships, efficiency varies more with fish carriers.
-3) The considerable variation in turnaround time among ship classes suggests operational irregularities in port handling.
-4) Tankers and bulk carriers have larger engines, which may account for their higher fuel consumption and financial impact.
+1)  All ship types have substantially different profit margins, with tankers and bulk carriers exhibiting the largest disparity.
+2)  While efficiency and speed over ground are comparatively constant across ships, efficiency varies more with fish carriers.
+3)  The considerable variation in turnaround time among ship classes suggests operational irregularities in port handling.
+4)  Tankers and bulk carriers have larger engines, which may account for their higher fuel consumption and financial impact.
 
-Suggestions
-1) Because tankers and bulk carriers exhibit the greatest variance, profitability methods must to be tailored to the specific ship class.
-2) The operational performance of fish carriers and container ships is more predictable due to their more steady parameters.
-3) All ship types can gain from faster turnaround times, which could boost profitability.
+Suggestions 1) Because tankers and bulk carriers exhibit the greatest variance, profitability methods must to be tailored to the specific ship class. 2) The operational performance of fish carriers and container ships is more predictable due to their more steady parameters. 3) All ship types can gain from faster turnaround times, which could boost profitability.
 
 ## Plot 3 - Revenue Distribution by Ship Type and Route
 
@@ -293,25 +292,15 @@ Ship_RidgePlot
 
 ```
 
-Plot 3 - Insights 
-1) Across all ship types, long-haul and transoceanic routes provide the most revenue per voyage.
-2) Container ships and bulk carriers do marginally better than others on coastal and short-haul routes, which have lower revenue distributions.
-3) The more consistent income distribution of tankers indicates more consistent revenue generating across various route types.
-4) Container ships exhibit greater income fluctuation, especially on long-haul routes, suggesting areas for profit maximization.
+Plot 3 - Insights 1) Across all ship types, long-haul and transoceanic routes provide the most revenue per voyage. 2) Container ships and bulk carriers do marginally better than others on coastal and short-haul routes, which have lower revenue distributions. 3) The more consistent income distribution of tankers indicates more consistent revenue generating across various route types. 4) Container ships exhibit greater income fluctuation, especially on long-haul routes, suggesting areas for profit maximization.
 
-Suggestions
-1) For high-value goods, long-haul and transoceanic routes should be given priority since they yield the most revenue.
-2) For short-haul and coastal routes to be more profitable, especially for bulk carriers, efficiency improvements may be necessary.
-3) Tanker operations are a fantastic choice for consistent revenue creation because they are comparatively steady.
-4) Long-haul container ships should be optimized because they have a greater potential to increase revenue in this category.
+Suggestions 1) For high-value goods, long-haul and transoceanic routes should be given priority since they yield the most revenue. 2) For short-haul and coastal routes to be more profitable, especially for bulk carriers, efficiency improvements may be necessary. 3) Tanker operations are a fantastic choice for consistent revenue creation because they are comparatively steady. 4) Long-haul container ships should be optimized because they have a greater potential to increase revenue in this category.
 
 ## Plot 4 - Efficiency vs ship_type
 
 This ggbetweenstats plot compares fuel efficiency (Efficiency_nm_per_kWh) across different ship types:
 
-Violin + Boxplot Combination - Shows distribution and spread of efficiency data. 
-Median Efficiency (μ_median) → Highlights central efficiency values per ship type. 
-Kruskal-Wallis Test (χ² = 4.24, p = 0.24) - Checks if efficiency differences are statistically significant. Pairwise Dunn Test - Tests specific ship type comparisons.
+Violin + Boxplot Combination - Shows distribution and spread of efficiency data. Median Efficiency (μ_median) → Highlights central efficiency values per ship type. Kruskal-Wallis Test (χ² = 4.24, p = 0.24) - Checks if efficiency differences are statistically significant. Pairwise Dunn Test - Tests specific ship type comparisons.
 
 ```{r}
 #| code-fold: show
@@ -326,23 +315,15 @@ ggbetweenstats(
 )
 ```
 
-Plot 4 - Insights 
+Plot 4 - Insights
 
-X-axis (Ship Type) - Categories of ships compared. 
-Y-axis (Fuel Efficiency nm per kWh) -  Measures how far ships travel per unit of fuel. 
-Median Values (μ_median) - Container Ships have the highest median efficiency (0.81 nm per kWh). 
-Tanker & Fish Carriers have similar efficiency (0.74 nm per kWh) which is the lowest_median efficiency
-Bulk Carriers have medium median efficiency (0.78 nm per kWh). Variability & Spread → Tankers have the widest spread, indicating greater inconsistency in fuel efficiency. Fish Carriers & Container Ships have less variability, meaning more stable efficiency
+X-axis (Ship Type) - Categories of ships compared. Y-axis (Fuel Efficiency nm per kWh) - Measures how far ships travel per unit of fuel. Median Values (μ_median) - Container Ships have the highest median efficiency (0.81 nm per kWh). Tanker & Fish Carriers have similar efficiency (0.74 nm per kWh) which is the lowest_median efficiency Bulk Carriers have medium median efficiency (0.78 nm per kWh). Variability & Spread → Tankers have the widest spread, indicating greater inconsistency in fuel efficiency. Fish Carriers & Container Ships have less variability, meaning more stable efficiency
 
-1) Bulk carriers and container ships have the highest median fuel efficiency.
-2) The efficiency of tankers and fish carriers is marginally lower, with the dispersion of fish carriers being more dispersed.
-3) The p-value from the Kruskal-Wallis test indicates that there is no statistically significant difference in efficiency between ship types as p values is more than 0.05
+1)  Bulk carriers and container ships have the highest median fuel efficiency.
+2)  The efficiency of tankers and fish carriers is marginally lower, with the dispersion of fish carriers being more dispersed.
+3)  The p-value from the Kruskal-Wallis test indicates that there is no statistically significant difference in efficiency between ship types as p values is more than 0.05
 
-Suggestions
-1) Since all ship types operate at roughly the same efficiency levels, route choice and cargo weight will probably have a greater impact on fuel expenditures than ship type alone.
-2) On average, container ships use the least amount of gasoline, which makes them an economical option for enterprises that are sensitive to fuel use.
-3) The greatest variable efficiency is found in fish carriers, which may be caused by variations in cargo load, engine type, or weather conditions.
-
+Suggestions 1) Since all ship types operate at roughly the same efficiency levels, route choice and cargo weight will probably have a greater impact on fuel expenditures than ship type alone. 2) On average, container ships use the least amount of gasoline, which makes them an economical option for enterprises that are sensitive to fuel use. 3) The greatest variable efficiency is found in fish carriers, which may be caused by variations in cargo load, engine type, or weather conditions.
 
 ## Plot 5 - Fuel Efficiency by Engine Type and Profit Margins Across Weather Conditions
 
@@ -401,29 +382,20 @@ EngineType_boxplot + Profit_Weather_heatmap
 
 Plot 5 - Insights
 
-BOXPLOT 
-The distribution of fuel efficiency (nm per kWh) for various engine types. The typical efficiency for each engine type is displayed by the median line in each box. The amount of variation in fuel efficiency is indicated by the spread of the boxes (IQR).
+BOXPLOT The distribution of fuel efficiency (nm per kWh) for various engine types. The typical efficiency for each engine type is displayed by the median line in each box. The amount of variation in fuel efficiency is indicated by the spread of the boxes (IQR).
 
-HEATMAP 
-It displays how varied weather conditions affect company margins. Higher percentages of ships with certain profit margins are shown by darker hues. There are fewer ships operating in lighter regions with particular profit margins.
+HEATMAP It displays how varied weather conditions affect company margins. Higher percentages of ships with certain profit margins are shown by darker hues. There are fewer ships operating in lighter regions with particular profit margins.
 
-1) The fuel efficiency distributions of diesel, heavy fuel oil (HFO), and steam turbine engines are similar, with some variation in outliers. 
-2) The profit margins under various weather conditions vary, with "calm" conditions showing more evenly distributed profitability. 
-3) Moderate weather conditions have a higher proportion of low-profit voyages, indicating efficiency loss due to external factors like wind resistance or fuel overconsumption. 
-4) As expected, rough weather has a negative impact on profit margins, but there are still some profitable voyages.
+1)  The fuel efficiency distributions of diesel, heavy fuel oil (HFO), and steam turbine engines are similar, with some variation in outliers.
+2)  The profit margins under various weather conditions vary, with "calm" conditions showing more evenly distributed profitability.
+3)  Moderate weather conditions have a higher proportion of low-profit voyages, indicating efficiency loss due to external factors like wind resistance or fuel overconsumption.
+4)  As expected, rough weather has a negative impact on profit margins, but there are still some profitable voyages.
 
-Suggestions
-1) Profit swings are greatly influenced by the weather, particularly in moderate and rough conditions.
-2) Diesel and HFO engines perform similarly in fuel efficiency, so fuel selection may not be the primary determinant of efficiency.
-3) Profitability in rough weather can be route-dependent, implying that particular journeys are more adaptable to external conditions.
-4) Ships could be strategically deployed during favorable weather conditions to maximize profits and minimize efficiency losses.
-
+Suggestions 1) Profit swings are greatly influenced by the weather, particularly in moderate and rough conditions. 2) Diesel and HFO engines perform similarly in fuel efficiency, so fuel selection may not be the primary determinant of efficiency. 3) Profitability in rough weather can be route-dependent, implying that particular journeys are more adaptable to external conditions. 4) Ships could be strategically deployed during favorable weather conditions to maximize profits and minimize efficiency losses.
 
 # 5. Summary
 
-Route-based optimization solutions are necessary since profit margins differ greatly among ship types, routes, and weather conditions.Although ship types do not significantly differ in fuel efficiency, container ships are typically the most fuel-efficient choice. The biggest revenue is generated by long-haul and transoceanic flights, indicating that fuel cost optimization should be prioritized for these routes.
-Profitability is greatly impacted by weather, thus in order to minimize losses, trip planning should take weather forecasts into consideration. Tankers and bulk carriers exhibit the greatest profit fluctuation, hence risk-mitigation techniques (such hedging fuel prices) have to be investigated.
-
+Route-based optimization solutions are necessary since profit margins differ greatly among ship types, routes, and weather conditions.Although ship types do not significantly differ in fuel efficiency, container ships are typically the most fuel-efficient choice. The biggest revenue is generated by long-haul and transoceanic flights, indicating that fuel cost optimization should be prioritized for these routes. Profitability is greatly impacted by weather, thus in order to minimize losses, trip planning should take weather forecasts into consideration. Tankers and bulk carriers exhibit the greatest profit fluctuation, hence risk-mitigation techniques (such hedging fuel prices) have to be investigated.
 
 # 6. Conclusion and Future Recommendation
 
