@@ -27,7 +27,6 @@ pacman::p_load(ggdist, ggridges, ggthemes,
 exam <- read_csv("data/Exam_data.csv")
 ```
 
-
 # 2. Visualising Distribution with Ridgeline Plot
 
 ## 2.1 Plotting ridgeline graph: ggridges method
@@ -126,7 +125,6 @@ ggplot(exam,
     labels = c("(0, 0.025]", "(0.025, 0.975]", "(0.975, 1]")) +
   theme_ridges()
 ```
-
 
 # 3. Visualising Distribution with Raincloud Plot
 

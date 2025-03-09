@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -217,43 +251,54 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a>
   <ul class="collapse">
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">1.1 Background</a></li>
-  <li><a href="#objectives-and-tasks" id="toc-objectives-and-tasks" class="nav-link" data-scroll-target="#objectives-and-tasks">1.2 Objectives and Tasks</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">1.2 Objectives</a></li>
   </ul></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">2. Getting Started</a>
   <ul class="collapse">
   <li><a href="#setting-the-analytical-tools" id="toc-setting-the-analytical-tools" class="nav-link" data-scroll-target="#setting-the-analytical-tools">2.1 Setting the Analytical Tools</a></li>
   <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">2.2 Data Source</a></li>
   </ul></li>
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">3. Data Wrangling</a>
+  <li><a href="#data-visualisation-makeover" id="toc-data-visualisation-makeover" class="nav-link" data-scroll-target="#data-visualisation-makeover">3. Data Visualisation Makeover</a>
   <ul class="collapse">
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">3.1 Importing Data</a></li>
-  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">3.2 Filtering</a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">3.3 Data Preparation</a></li>
+  <li><a href="#load-dataset" id="toc-load-dataset" class="nav-link" data-scroll-target="#load-dataset">3.1. Load Dataset</a></li>
+  <li><a href="#check-missing-values" id="toc-check-missing-values" class="nav-link" data-scroll-target="#check-missing-values">3.2 Check missing values</a></li>
+  <li><a href="#chart-1---merchandise-imports-and-exports-with-total-trade" id="toc-chart-1---merchandise-imports-and-exports-with-total-trade" class="nav-link" data-scroll-target="#chart-1---merchandise-imports-and-exports-with-total-trade">3.3 Chart 1 - Merchandise Imports and Exports with Total Trade</a>
+  <ul class="collapse">
+  <li><a href="#original-visualization" id="toc-original-visualization" class="nav-link" data-scroll-target="#original-visualization">3.1.1 Original Visualization</a></li>
+  <li><a href="#critique" id="toc-critique" class="nav-link" data-scroll-target="#critique">3.1.2 Critique</a></li>
+  <li><a href="#sketch-of-alternative-design" id="toc-sketch-of-alternative-design" class="nav-link" data-scroll-target="#sketch-of-alternative-design">3.1.3 Sketch of Alternative Design</a></li>
+  <li><a href="#improved-visualization" id="toc-improved-visualization" class="nav-link" data-scroll-target="#improved-visualization">3.1.4 Improved Visualization</a></li>
   </ul></li>
-  <li><a href="#data-visualisation-makeover" id="toc-data-visualisation-makeover" class="nav-link" data-scroll-target="#data-visualisation-makeover">4. Data Visualisation Makeover</a>
+  <li><a href="#chart-2---non-oil-merchandise-trade-by-major-commodity-sections-2024" id="toc-chart-2---non-oil-merchandise-trade-by-major-commodity-sections-2024" class="nav-link" data-scroll-target="#chart-2---non-oil-merchandise-trade-by-major-commodity-sections-2024">3.4 Chart 2 - Non-Oil Merchandise Trade by Major Commodity Sections, 2024</a>
   <ul class="collapse">
-  <li><a href="#chart-1" id="toc-chart-1" class="nav-link" data-scroll-target="#chart-1">4.1 chart 1</a>
-  <ul class="collapse">
-  <li><a href="#original-visualisation" id="toc-original-visualisation" class="nav-link" data-scroll-target="#original-visualisation">4.1.1 Original Visualisation</a></li>
-  <li><a href="#critique" id="toc-critique" class="nav-link" data-scroll-target="#critique">4.1.2 Critique</a></li>
-  <li><a href="#sketch-of-alternative-design" id="toc-sketch-of-alternative-design" class="nav-link" data-scroll-target="#sketch-of-alternative-design">4.1.3 Sketch of Alternative Design</a></li>
-  <li><a href="#improved-visualisation" id="toc-improved-visualisation" class="nav-link" data-scroll-target="#improved-visualisation">4.1.4 Improved Visualisation</a></li>
+  <li><a href="#original-visualization-1" id="toc-original-visualization-1" class="nav-link" data-scroll-target="#original-visualization-1">3.4.1 Original Visualization</a></li>
+  <li><a href="#critique-1" id="toc-critique-1" class="nav-link" data-scroll-target="#critique-1">3.4.2 Critique</a></li>
+  <li><a href="#sketch-of-alternative-design-1" id="toc-sketch-of-alternative-design-1" class="nav-link" data-scroll-target="#sketch-of-alternative-design-1">3.4.3 Sketch of Alternative Design</a></li>
+  <li><a href="#improved-visualization-1" id="toc-improved-visualization-1" class="nav-link" data-scroll-target="#improved-visualization-1">3.4.4 Improved Visualization</a></li>
   </ul></li>
-  <li><a href="#chart-2" id="toc-chart-2" class="nav-link" data-scroll-target="#chart-2">4.2 chart 2</a>
+  <li><a href="#chart-3---non-oil-domestic-exports-by-major-commodity-sections-2024" id="toc-chart-3---non-oil-domestic-exports-by-major-commodity-sections-2024" class="nav-link" data-scroll-target="#chart-3---non-oil-domestic-exports-by-major-commodity-sections-2024">3.5 Chart 3 - Non-Oil Domestic Exports by Major Commodity Sections, 2024</a>
   <ul class="collapse">
-  <li><a href="#original-visualisation-1" id="toc-original-visualisation-1" class="nav-link" data-scroll-target="#original-visualisation-1">4.2.1 Original Visualisation</a></li>
-  <li><a href="#critique-1" id="toc-critique-1" class="nav-link" data-scroll-target="#critique-1">4.2.2 Critique</a></li>
-  <li><a href="#sketch-of-alternative-design-1" id="toc-sketch-of-alternative-design-1" class="nav-link" data-scroll-target="#sketch-of-alternative-design-1">4.2.3 Sketch of Alternative Design</a></li>
-  <li><a href="#improved-visualisation-1" id="toc-improved-visualisation-1" class="nav-link" data-scroll-target="#improved-visualisation-1">4.2.4 Improved Visualisation</a></li>
-  </ul></li>
-  <li><a href="#chart-3" id="toc-chart-3" class="nav-link" data-scroll-target="#chart-3">4.3 chart 3</a>
-  <ul class="collapse">
-  <li><a href="#original-visualisation-2" id="toc-original-visualisation-2" class="nav-link" data-scroll-target="#original-visualisation-2">4.3.1 Original Visualisation</a></li>
-  <li><a href="#critique-2" id="toc-critique-2" class="nav-link" data-scroll-target="#critique-2">4.3.2 Critique</a></li>
-  <li><a href="#sketch-of-alternative-design-2" id="toc-sketch-of-alternative-design-2" class="nav-link" data-scroll-target="#sketch-of-alternative-design-2">4.3.3 Sketch of Alternative Design</a></li>
-  <li><a href="#improved-visualisation-2" id="toc-improved-visualisation-2" class="nav-link" data-scroll-target="#improved-visualisation-2">4.3.4 Improved Visualisation</a></li>
+  <li><a href="#original-visualization-2" id="toc-original-visualization-2" class="nav-link" data-scroll-target="#original-visualization-2">3.5.1 Original Visualization</a></li>
+  <li><a href="#critique-2" id="toc-critique-2" class="nav-link" data-scroll-target="#critique-2">3.5.2 Critique</a></li>
+  <li><a href="#sketch-of-alternative-design-2" id="toc-sketch-of-alternative-design-2" class="nav-link" data-scroll-target="#sketch-of-alternative-design-2">3.5.3 Sketch of Alternative Design</a></li>
+  <li><a href="#improved-visualization-2" id="toc-improved-visualization-2" class="nav-link" data-scroll-target="#improved-visualization-2">3.5.4 Improved Visualization</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#data-wrangling---part-4" id="toc-data-wrangling---part-4" class="nav-link" data-scroll-target="#data-wrangling---part-4">4. Data Wrangling - Part 4</a>
+  <ul class="collapse">
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">4.1 Importing Data</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">4.2 Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#check-missing-values-1" id="toc-check-missing-values-1" class="nav-link" data-scroll-target="#check-missing-values-1">4.2.1 Check missing values</a></li>
+  <li><a href="#columnname-change" id="toc-columnname-change" class="nav-link" data-scroll-target="#columnname-change">4.2.2 Columnname change</a></li>
+  <li><a href="#convert-to-long-format" id="toc-convert-to-long-format" class="nav-link" data-scroll-target="#convert-to-long-format">4.2.3 Convert to Long Format</a></li>
+  <li><a href="#converting-data-format" id="toc-converting-data-format" class="nav-link" data-scroll-target="#converting-data-format">4.2.4 Converting Data format</a></li>
+  <li><a href="#checking-missing-values-in-long-format" id="toc-checking-missing-values-in-long-format" class="nav-link" data-scroll-target="#checking-missing-values-in-long-format">4.2.5 Checking missing values in long format</a></li>
+  <li><a href="#dataset-merge" id="toc-dataset-merge" class="nav-link" data-scroll-target="#dataset-merge">4.2.6 Dataset Merge</a></li>
+  <li><a href="#check-duplicates-on-merged-dataset" id="toc-check-duplicates-on-merged-dataset" class="nav-link" data-scroll-target="#check-duplicates-on-merged-dataset">4.2.7 Check duplicates on merged dataset</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#part-4-time-series-visualisation" id="toc-part-4-time-series-visualisation" class="nav-link" data-scroll-target="#part-4-time-series-visualisation">5. Part 4: Time-series Visualisation</a></li>
   <li><a href="#summary-and-conclusion" id="toc-summary-and-conclusion" class="nav-link" data-scroll-target="#summary-and-conclusion">6. Summary and Conclusion</a></li>
   </ul>
 <div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/Sathvika-7284/ISSS608-VAA"><i class="bi bi-file-code"></i>GitHub Repo</a></li></ul></div></nav>
@@ -287,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 4, 2025</p>
+      <p class="date-modified">March 9, 2025</p>
     </div>
   </div>
     
@@ -305,79 +350,627 @@ ul.task-list li input[type="checkbox"] {
 <h1>1. Introduction</h1>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">1.1 Background</h2>
+<p>As a visual analytics novice, I am eager to apply newly acquired techniques to explore and analyze the changing trends and patterns of Singapore’s international trade.</p>
 </section>
-<section id="objectives-and-tasks" class="level2">
-<h2 class="anchored" data-anchor-id="objectives-and-tasks">1.2 Objectives and Tasks</h2>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">1.2 Objectives</h2>
+<p>The objectives of this assignment is to: 1) Select three Visualizations from the Department of Statistics Singapore - International trade website and comment on the pros and cons of the visualization 2) To provide a better Visualization based on the critique using appropriate ggplot2 packages 3) Analyse the data with either time-series analysis or time-series forecasting methods by compliment the analysis with appropriate data visualisation methods and R packages.</p>
 </section>
 </section>
 <section id="getting-started" class="level1">
 <h1>2. Getting Started</h1>
 <section id="setting-the-analytical-tools" class="level2">
 <h2 class="anchored" data-anchor-id="setting-the-analytical-tools">2.1 Setting the Analytical Tools</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readr, forecast, tseries, lubridate, fable, feasts, tsibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Tidyverse - Tidyverse is an R programming package that helps to transform and better present data. It assists with data import, tidying, manipulation, and data visualization.</li>
+<li>readr - The goal of ‘readr’ is to provide a fast and friendly way to read rectangular data (like ‘csv’, ‘tsv’, and ‘fwf’). It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes.</li>
+<li>forecast - Methods and tools for displaying and analysing univariate time series forecasts including exponential smoothing via state space models and automatic ARIMA modelling.</li>
+<li>tseries - Time series analysis and computational finance.</li>
+<li>lubridate - Functions to work with date-times and time-spans: fast and user friendly parsing of date-time data, extraction and updating of components of a date-time (years, months, days, hours, minutes, and seconds), algebraic manipulation on date-time and time-span objects.</li>
+<li>fable - Provides a collection of commonly used univariate and multivariate time series forecasting models including automatically selected exponential smoothing (ETS) and autoregressive integrated moving average (ARIMA) models.</li>
+<li>feasts - Provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data.</li>
+<li>tsibble - Provides a ‘tbl_ts’ class (the ‘tsibble’) for temporal data in an data- and model-oriented format. The ‘tsibble’ provides tools to easily manipulate and analyse temporal data, such as filling in time gaps and aggregating over calendar periods.</li>
+</ol>
 </section>
 <section id="data-source" class="level2">
 <h2 class="anchored" data-anchor-id="data-source">2.2 Data Source</h2>
-</section>
-</section>
-<section id="data-wrangling" class="level1">
-<h1>3. Data Wrangling</h1>
-<section id="importing-data" class="level2">
-<h2 class="anchored" data-anchor-id="importing-data">3.1 Importing Data</h2>
-</section>
-<section id="filtering" class="level2">
-<h2 class="anchored" data-anchor-id="filtering">3.2 Filtering</h2>
-</section>
-<section id="data-preparation" class="level2">
-<h2 class="anchored" data-anchor-id="data-preparation">3.3 Data Preparation</h2>
+<p>The data is Merchandise Trade by Region/Market from Department of Statistics Singapore, DOS website For this analysis, I am using four datasets - For Data Visualization Makeover I am using - Merchandise Trade By Commodity Section, (At Current Prices), Monthly csv and for Analysis I am using three datasets combined - Merchandise Trade By Region and Selected Market (Imports), Monthly Merchandise Trade By Region and Selected Market (Domestic Exports), Monthly Merchandise Trade By Region and Selected Market (Re-Exports), Monthly</p>
 </section>
 </section>
 <section id="data-visualisation-makeover" class="level1">
-<h1>4. Data Visualisation Makeover</h1>
-<section id="chart-1" class="level2">
-<h2 class="anchored" data-anchor-id="chart-1">4.1 chart 1</h2>
-<section id="original-visualisation" class="level3">
-<h3 class="anchored" data-anchor-id="original-visualisation">4.1.1 Original Visualisation</h3>
+<h1>3. Data Visualisation Makeover</h1>
+<section id="load-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-dataset">3.1. Load Dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>Current_Prices <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Current_Prices.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="check-missing-values">3.2 Check missing values</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Missing values check</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Current_Prices))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+<section id="chart-1---merchandise-imports-and-exports-with-total-trade" class="level2">
+<h2 class="anchored" data-anchor-id="chart-1---merchandise-imports-and-exports-with-total-trade">3.3 Chart 1 - Merchandise Imports and Exports with Total Trade</h2>
+<section id="original-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="original-visualization">3.1.1 Original Visualization</h3>
+<p><img src="images/Current_Prices.png" class="img-fluid"></p>
 </section>
 <section id="critique" class="level3">
-<h3 class="anchored" data-anchor-id="critique">4.1.2 Critique</h3>
+<h3 class="anchored" data-anchor-id="critique">3.1.2 Critique</h3>
+<section id="pros" class="level4">
+<h4 class="anchored" data-anchor-id="pros">Pros</h4>
+<ul>
+<li>Clear and Organized Layout: The data is well-structured, and the imports and exports for each year are shown in a way that makes them easy to see.</li>
+<li>Effective Use of Colors: It is simple to distinguish between time periods when different colors are used for each year.</li>
+<li>Comparison Made Easy: Exports and imports are shown side by side, making it easy to compare different years.</li>
+<li>Summarized Totals: Each year’s total merchandise trade is shown, which makes it simple to understand the general pattern.</li>
+<li>Growth Highlighted: To assist viewers grasp the general trend, the growth in trade (6.6% in 2024) is specifically noted.</li>
+<li>Text that is Legible and Easy to Read: The values are given in an understandable manner.</li>
+</ul>
+</section>
+<section id="cons" class="level4">
+<h4 class="anchored" data-anchor-id="cons">Cons</h4>
+<ul>
+<li>Absence of Context or Further Analysis: Although the visualization shows numbers, it omits important factors that contribute to the trends.</li>
+<li>No Percentage Change Per Year: Although 2024’s 6.6% increase is noted, comparable percentage changes for previous years are not included.</li>
+<li>Color Overlap Risk: People who are colorblind may find it challenging to distinguish between certain hues, such as tones of blue and purple.</li>
+<li>Total Trade Figures Do Not Have Data Labels It could be helpful to show these figures next to the bars for easy reference, even though the total is displayed on the right.</li>
+<li>Limited Interactivity: Adding interactive components (such as tooltips or drill-down insights) to a digital presentation would increase user engagement.</li>
+</ul>
+</section>
 </section>
 <section id="sketch-of-alternative-design" class="level3">
-<h3 class="anchored" data-anchor-id="sketch-of-alternative-design">4.1.3 Sketch of Alternative Design</h3>
+<h3 class="anchored" data-anchor-id="sketch-of-alternative-design">3.1.3 Sketch of Alternative Design</h3>
 </section>
-<section id="improved-visualisation" class="level3">
-<h3 class="anchored" data-anchor-id="improved-visualisation">4.1.4 Improved Visualisation</h3>
+<section id="improved-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="improved-visualization">3.1.4 Improved Visualization</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Converting column names to characters for proper handling</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">colnames</span>(Current_Prices) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">colnames</span>(Current_Prices))</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Identifing year columns that have a valid numeric format</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>year_columns <span class="ot">&lt;-</span> <span class="fu">names</span>(Current_Prices)[<span class="fu">sapply</span>(Current_Prices, is.numeric)]</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Ensuring the first column (Data Series) is included</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>year_columns <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Data Series"</span>, year_columns)</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co"># Reshaping data into long format</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>current_prices_long <span class="ot">&lt;-</span> Current_Prices <span class="sc">%&gt;%</span> </span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(year_columns)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>, <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>  <span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">str_extract</span>(Year, <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}"</span>), <span class="at">Value =</span> <span class="fu">as.numeric</span>(Value)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Year) <span class="sc">&amp;</span> Year <span class="sc">&gt;=</span> <span class="dv">2020</span> <span class="sc">&amp;</span> Year <span class="sc">&lt;=</span> <span class="dv">2024</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>  <span class="fu">group_by</span>(Year, <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>  <span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co"># Selecting relevant trade categories</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>selected_categories <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-22"><a href="#cb5-22"></a>  <span class="st">"Total Merchandise Imports, (At Current Prices)"</span>, </span>
+<span id="cb5-23"><a href="#cb5-23"></a>  <span class="st">"Total Merchandise Exports, (At Current Prices)"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24"></a>  <span class="st">"Total Merchandise Trade, (At Current Prices)"</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>)</span>
+<span id="cb5-26"><a href="#cb5-26"></a>current_prices_filtered <span class="ot">&lt;-</span> current_prices_long <span class="sc">%&gt;%</span> </span>
+<span id="cb5-27"><a href="#cb5-27"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="sc">%in%</span> selected_categories)</span>
+<span id="cb5-28"><a href="#cb5-28"></a></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co"># Calculating percentage change</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>current_prices_filtered <span class="ot">&lt;-</span> current_prices_filtered <span class="sc">%&gt;%</span> </span>
+<span id="cb5-31"><a href="#cb5-31"></a>  <span class="fu">arrange</span>(Year, <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-32"><a href="#cb5-32"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>  <span class="fu">mutate</span>(<span class="at">Percentage_Change =</span> (Total <span class="sc">-</span> <span class="fu">lag</span>(Total)) <span class="sc">/</span> <span class="fu">lag</span>(Total) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb5-35"><a href="#cb5-35"></a></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co"># Removing NA from Percentage Change for 2020 since its the first year in the visualisation</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a>current_prices_filtered <span class="ot">&lt;-</span> current_prices_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a>  <span class="fu">mutate</span>(<span class="at">Percentage_Change =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Percentage_Change), <span class="st">""</span>, <span class="fu">paste0</span>(<span class="fu">round</span>(Percentage_Change, <span class="dv">1</span>), <span class="st">"%"</span>)))</span>
+<span id="cb5-39"><a href="#cb5-39"></a></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="co"># Separating Total Trade for Line Chart</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a>total_trade <span class="ot">&lt;-</span> current_prices_filtered <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Total Merchandise Trade, (At Current Prices)"</span>)</span>
+<span id="cb5-42"><a href="#cb5-42"></a>imports_exports <span class="ot">&lt;-</span> current_prices_filtered <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="st">`</span><span class="at">Data Series</span><span class="st">`</span> <span class="sc">!=</span> <span class="st">"Total Merchandise Trade, (At Current Prices)"</span>)</span>
+<span id="cb5-43"><a href="#cb5-43"></a></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="co"># Adjusting position for overlapping labels</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a>offset <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="sc">*</span> <span class="fu">max</span>(imports_exports<span class="sc">$</span>Total)</span>
+<span id="cb5-46"><a href="#cb5-46"></a></span>
+<span id="cb5-47"><a href="#cb5-47"></a><span class="co"># Plotting the improved visualization</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a>  <span class="co"># Bar chart for Imports and Exports</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a>  <span class="fu">geom_bar</span>(<span class="at">data =</span> imports_exports, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total, <span class="at">fill =</span> <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>), </span>
+<span id="cb5-51"><a href="#cb5-51"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a>  <span class="co"># Value labels inside bars, slightly separated for clarity</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> imports_exports, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total <span class="sc">*</span> <span class="fl">0.7</span>, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(Total<span class="sc">/</span><span class="fl">1e9</span>, <span class="dv">1</span>), <span class="st">"B"</span>), <span class="at">group =</span> <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>), </span>
+<span id="cb5-54"><a href="#cb5-54"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a>  <span class="co"># Percentage labels outside bars</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> imports_exports, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total <span class="sc">+</span> offset, <span class="at">label =</span> Percentage_Change, <span class="at">group =</span> <span class="st">`</span><span class="at">Data Series</span><span class="st">`</span>), </span>
+<span id="cb5-57"><a href="#cb5-57"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a>  <span class="co"># Line chart for Total Merchandise Trade</span></span>
+<span id="cb5-59"><a href="#cb5-59"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> total_trade, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"grey50"</span>, <span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb5-60"><a href="#cb5-60"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> total_trade, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a>  <span class="co"># Value labels for Total Merchandise Trade</span></span>
+<span id="cb5-62"><a href="#cb5-62"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> total_trade, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total <span class="sc">-</span> offset, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(Total<span class="sc">/</span><span class="fl">1e9</span>, <span class="dv">1</span>), <span class="st">"B"</span>)), </span>
+<span id="cb5-63"><a href="#cb5-63"></a>            <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb5-64"><a href="#cb5-64"></a>  <span class="co"># Percentage labels for Total Merchandise Trade</span></span>
+<span id="cb5-65"><a href="#cb5-65"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> total_trade, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Total <span class="sc">+</span> offset <span class="sc">*</span> <span class="fl">1.5</span>, <span class="at">label =</span> Percentage_Change), </span>
+<span id="cb5-66"><a href="#cb5-66"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb5-67"><a href="#cb5-67"></a>  <span class="co"># Custom colors and legend improvements</span></span>
+<span id="cb5-68"><a href="#cb5-68"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#fc8d62"</span>, <span class="st">"#66c2a5"</span>), </span>
+<span id="cb5-69"><a href="#cb5-69"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Total Merchandise Exports (At Current Prices) - Includes percentage change"</span>,</span>
+<span id="cb5-70"><a href="#cb5-70"></a>                               <span class="st">"Total Merchandise Imports (At Current Prices) - Includes percentage change"</span>)) <span class="sc">+</span></span>
+<span id="cb5-71"><a href="#cb5-71"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Trade Type &amp; Details"</span>)) <span class="sc">+</span></span>
+<span id="cb5-72"><a href="#cb5-72"></a>  <span class="co"># Labels and theme</span></span>
+<span id="cb5-73"><a href="#cb5-73"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Merchandise Imports &amp; Exports with Total Trade Overlay (2020-2024)"</span>,</span>
+<span id="cb5-74"><a href="#cb5-74"></a>       <span class="at">subtitle =</span> <span class="st">"At Current Prices, Percentage Change Included"</span>,</span>
+<span id="cb5-75"><a href="#cb5-75"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb5-76"><a href="#cb5-76"></a>       <span class="at">y =</span> <span class="st">"Trade Value (Billion S$)"</span>) <span class="sc">+</span></span>
+<span id="cb5-77"><a href="#cb5-77"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The visualization provides a complete examination of Singapore’s goods Imports &amp; Exports from 2020 to 2024, exhibiting trade variations, percentage changes, and total goods trade patterns. The grouped bar chart highlights annual import and export data, while the dashed line chart overlays total trade performance, presenting a holistic view. Both imports and exports showed robust growth between 2020 and 2022, with imports increasing by 20.4% in 2021 and 20.1% in 2022 and exports increasing by 19.1% in 2021 and 15.6% in 2022. However, 2023 saw a decline in both imports (-13.4%) and exports (-10.1%), signaling a potential slowdown due to global economic uncertainties. Following a sharp decline of 11.7% in 2023, the total trade volume showed a modest recovery of 6.6% in 2024, indicating gradual market stabilization, after peaking at S$1.4 billion in 2022 (17.7% growth). The clear distinction between imports, exports, and total trade trends makes trade patterns easy to interpret, with white trade value labels inside the bars for quick readability and percentage change labels positioned above bars and the line chart for year-over-year comparisons. Overall, this visualization effectively captures trade dynamics, economic recovery trends, and external market impacts, showing a strong post-2020 rebound, a notable dip in 2023, and a steady yet cautious recovery in 2024, reflecting Singapore’s resilience in international trade.</p>
 </section>
 </section>
-<section id="chart-2" class="level2">
-<h2 class="anchored" data-anchor-id="chart-2">4.2 chart 2</h2>
-<section id="original-visualisation-1" class="level3">
-<h3 class="anchored" data-anchor-id="original-visualisation-1">4.2.1 Original Visualisation</h3>
+<section id="chart-2---non-oil-merchandise-trade-by-major-commodity-sections-2024" class="level2">
+<h2 class="anchored" data-anchor-id="chart-2---non-oil-merchandise-trade-by-major-commodity-sections-2024">3.4 Chart 2 - Non-Oil Merchandise Trade by Major Commodity Sections, 2024</h2>
+<section id="original-visualization-1" class="level3">
+<h3 class="anchored" data-anchor-id="original-visualization-1">3.4.1 Original Visualization</h3>
+<p><img src="images/Chart2.png" class="img-fluid"></p>
 </section>
 <section id="critique-1" class="level3">
-<h3 class="anchored" data-anchor-id="critique-1">4.2.2 Critique</h3>
+<h3 class="anchored" data-anchor-id="critique-1">3.4.2 Critique</h3>
+<section id="pros-1" class="level4">
+<h4 class="anchored" data-anchor-id="pros-1">Pros</h4>
+<ul>
+<li><p>Equitable Export and Import Representation: Exports and imports can be directly compared using the diverging bar chart format, which makes it simple to spot trade imbalances for every commodity category.</p></li>
+<li><p>Included in the Percentage Composition: Each category’s contribution to the overall non-oil merchandise trade is contextualized by the chart, which shows both absolute trade values and percentage shares.</p></li>
+<li><p>Unambiguous Commodity Dissection: The largest trade categories can be easily identified thanks to the chart’s descending order of first three commodity division.</p></li>
+<li><p>X-Axis Adjusted for Proportionality: The x-axis extends sufficiently to accommodate large trade categories like Machinery &amp; Transport Equipment, preventing distortion.</p></li>
+<li><p>Trade Type Color Coding: It is simple to differentiate between the two trade categories because imports and exports are colored differently (blue and orange, respectively).</p></li>
+<li><p>Label Positioning for Readability Properly: Legibility is improved by the export and import values being positioned clearly with their corresponding bars.</p></li>
+</ul>
+</section>
+<section id="cons-1" class="level4">
+<h4 class="anchored" data-anchor-id="cons-1">Cons</h4>
+<ul>
+<li><p>Smaller Categories Overcrowded: Smaller trade sectors (such as Beverages &amp; Tobacco, Animal &amp; Vegetable Oils) seem crowded and make comparisons challenging, even though the main categories are easily accessible.</p></li>
+<li><p>Comparing the whole trade value is challenging: The overall trade volume for each category isn’t explicitly displayed, even though the figures for individual imports and exports are obvious (stacked bars could have indicated total trade impact, for example).</p></li>
+<li><p>Enhancing the Contrast of Colors: A clearer contrast or shading could improve readability, especially for tiny bars, even though orange and blue distinguish imports and exports.</p></li>
+<li><p>On the scale, machinery and transport equipment are dominant: Because Machinery &amp; Transport Equipment accounts for 65% of exports and 65.2% of imports, its extraordinarily high trade value obscures and lessens the visual prominence of smaller categories.</p></li>
+</ul>
+</section>
 </section>
 <section id="sketch-of-alternative-design-1" class="level3">
-<h3 class="anchored" data-anchor-id="sketch-of-alternative-design-1">4.2.3 Sketch of Alternative Design</h3>
+<h3 class="anchored" data-anchor-id="sketch-of-alternative-design-1">3.4.3 Sketch of Alternative Design</h3>
 </section>
-<section id="improved-visualisation-1" class="level3">
-<h3 class="anchored" data-anchor-id="improved-visualisation-1">4.2.4 Improved Visualisation</h3>
+<section id="improved-visualization-1" class="level3">
+<h3 class="anchored" data-anchor-id="improved-visualization-1">3.4.4 Improved Visualization</h3>
+<p>Lets prep data to extract only non-oil columns of import and export</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Column names are treated as characters</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">colnames</span>(Current_Prices) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">colnames</span>(Current_Prices))</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Identifying columns for 2024 (all months)</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>columns_2024 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"2024"</span>, <span class="fu">colnames</span>(Current_Prices), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Selecting relevant rows for Non-Oil Imports (rows 19-27) and Non-Oil Exports (rows 33-41)</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>non_oil_imports <span class="ot">&lt;-</span> Current_Prices[<span class="dv">19</span><span class="sc">:</span><span class="dv">27</span>, <span class="fu">c</span>(<span class="st">"Data Series"</span>, columns_2024)]</span>
+<span id="cb6-9"><a href="#cb6-9"></a>non_oil_exports <span class="ot">&lt;-</span> Current_Prices[<span class="dv">33</span><span class="sc">:</span><span class="dv">41</span>, <span class="fu">c</span>(<span class="st">"Data Series"</span>, columns_2024)]</span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># Renaming the 'Data Series' column for clarity</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="fu">colnames</span>(non_oil_imports)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Commodity Section"</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="fu">colnames</span>(non_oil_exports)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Commodity Section"</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co"># Converting all columns except 'Commodity Section' to numeric</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>non_oil_imports[columns_2024] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(non_oil_imports[columns_2024], as.numeric)</span>
+<span id="cb6-17"><a href="#cb6-17"></a>non_oil_exports[columns_2024] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(non_oil_exports[columns_2024], as.numeric)</span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co"># Aggregating the sum for all months in 2024</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>non_oil_imports <span class="ot">&lt;-</span> non_oil_imports <span class="sc">%&gt;%</span> </span>
+<span id="cb6-21"><a href="#cb6-21"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Imports (S$)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_2024)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a>  <span class="fu">select</span>(<span class="st">"Commodity Section"</span>, <span class="st">"Imports (S$)"</span>)</span>
+<span id="cb6-23"><a href="#cb6-23"></a></span>
+<span id="cb6-24"><a href="#cb6-24"></a>non_oil_exports <span class="ot">&lt;-</span> non_oil_exports <span class="sc">%&gt;%</span> </span>
+<span id="cb6-25"><a href="#cb6-25"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_2024)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a>  <span class="fu">select</span>(<span class="st">"Commodity Section"</span>, <span class="st">"Exports (S$)"</span>)</span>
+<span id="cb6-27"><a href="#cb6-27"></a></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co"># Merging imports and exports data</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a>non_oil_trade <span class="ot">&lt;-</span> <span class="fu">merge</span>(non_oil_exports, non_oil_imports, <span class="at">by =</span> <span class="st">"Commodity Section"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that the data is prepared below is the code for the improved visualisation</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># Calculating percentage composition</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>total_exports <span class="ot">&lt;-</span> <span class="fu">sum</span>(non_oil_trade<span class="sc">$</span><span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>total_imports <span class="ot">&lt;-</span> <span class="fu">sum</span>(non_oil_trade<span class="sc">$</span><span class="st">`</span><span class="at">Imports (S$)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>non_oil_trade <span class="ot">&lt;-</span> non_oil_trade <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Export Share (%)</span><span class="st">`</span> <span class="ot">=</span> (<span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span> <span class="sc">/</span> total_exports) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb7-8"><a href="#cb7-8"></a>         <span class="st">`</span><span class="at">Import Share (%)</span><span class="st">`</span> <span class="ot">=</span> (<span class="st">`</span><span class="at">Imports (S$)</span><span class="st">`</span> <span class="sc">/</span> total_imports) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co"># Adjusting plot width for readability</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="fu">ggplot</span>(non_oil_trade, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(<span class="st">`</span><span class="at">Commodity Section</span><span class="st">`</span>, <span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span>))) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">"Exports"</span>), </span>
+<span id="cb7-13"><a href="#cb7-13"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="st">`</span><span class="at">Imports (S$)</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">"Imports"</span>), </span>
+<span id="cb7-15"><a href="#cb7-15"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span>, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"S$ "</span>, <span class="fu">formatC</span>(<span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"d"</span>, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">" ("</span>, <span class="fu">round</span>(<span class="st">`</span><span class="at">Export Share (%)</span><span class="st">`</span>, <span class="dv">1</span>), <span class="st">"%)"</span>)), </span>
+<span id="cb7-17"><a href="#cb7-17"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="st">`</span><span class="at">Imports (S$)</span><span class="st">`</span>, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"S$ "</span>, <span class="fu">formatC</span>(<span class="st">`</span><span class="at">Imports (S$)</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"d"</span>, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">" ("</span>, <span class="fu">round</span>(<span class="st">`</span><span class="at">Import Share (%)</span><span class="st">`</span>, <span class="dv">1</span>), <span class="st">"%)"</span>)), </span>
+<span id="cb7-19"><a href="#cb7-19"></a>            <span class="at">hjust =</span> <span class="fl">1.3</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fu">max</span>(non_oil_trade<span class="sc">$</span><span class="st">`</span><span class="at">Imports (S$)</span><span class="st">`</span>) <span class="sc">*</span> <span class="fl">2.5</span>, <span class="fu">max</span>(non_oil_trade<span class="sc">$</span><span class="st">`</span><span class="at">Exports (S$)</span><span class="st">`</span>) <span class="sc">*</span> <span class="fl">2.5</span>)) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Exports"</span> <span class="ot">=</span> <span class="st">"#FFA500"</span>, <span class="st">"Imports"</span> <span class="ot">=</span> <span class="st">"#4682B4"</span>)) <span class="sc">+</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Non-Oil Merchandise Trade by Major Commodity Sections, 2024"</span>,</span>
+<span id="cb7-23"><a href="#cb7-23"></a>       <span class="at">subtitle =</span> <span class="st">"Exports and Imports (S$) with Percentage Composition"</span>,</span>
+<span id="cb7-24"><a href="#cb7-24"></a>       <span class="at">x =</span> <span class="st">"Trade Value (S$)"</span>,</span>
+<span id="cb7-25"><a href="#cb7-25"></a>       <span class="at">y =</span> <span class="st">"Commodity Sections"</span>,</span>
+<span id="cb7-26"><a href="#cb7-26"></a>       <span class="at">fill =</span> <span class="st">"Trade Type"</span>) <span class="sc">+</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Machinery and Transport Equipment leads trade, making up 65.2% of imports (S$ 322.07 billion) and 65% of exports (S$ 363.22 billion), according to the Non-Oil Merchandise Trade by Major Commodity Sections report for 2024. This suggests a strong dependence on imported machinery, most likely for local industrial use or re-export, making it the most traded category. With 8.7% of imports and 12.4% of exports, Chemicals &amp; Chemical Products come in second, indicating that although Singapore imports chemicals for industrial use, it also exports a lot of goods related to chemical manufacturing. Similar to this, Miscellaneous Manufactured Articles make up 10.3% of exports and 9.7% of imports, indicating a reasonably balanced trade that may be fueled by industrial and consumer goods. Singapore imports more than it exports in other industries, such as manufactured goods (5.8% imports, 5% exports) and food and live animals (5.6% imports, 3.1% exports), indicating that domestic demand outpaces production in these areas. With contributions of less than 1% to global commerce, beverages and tobacco, crude materials (apart from fuels), and animal and vegetable oils, fats, and waxes all contribute very little to trade-driven economic activity.</p>
 </section>
 </section>
-<section id="chart-3" class="level2">
-<h2 class="anchored" data-anchor-id="chart-3">4.3 chart 3</h2>
-<section id="original-visualisation-2" class="level3">
-<h3 class="anchored" data-anchor-id="original-visualisation-2">4.3.1 Original Visualisation</h3>
+<section id="chart-3---non-oil-domestic-exports-by-major-commodity-sections-2024" class="level2">
+<h2 class="anchored" data-anchor-id="chart-3---non-oil-domestic-exports-by-major-commodity-sections-2024">3.5 Chart 3 - Non-Oil Domestic Exports by Major Commodity Sections, 2024</h2>
+<section id="original-visualization-2" class="level3">
+<h3 class="anchored" data-anchor-id="original-visualization-2">3.5.1 Original Visualization</h3>
+<p><img src="images/Chart 3.png" class="img-fluid"></p>
 </section>
 <section id="critique-2" class="level3">
-<h3 class="anchored" data-anchor-id="critique-2">4.3.2 Critique</h3>
+<h3 class="anchored" data-anchor-id="critique-2">3.5.2 Critique</h3>
+<section id="pros-2" class="level4">
+<h4 class="anchored" data-anchor-id="pros-2">Pros</h4>
+<ul>
+<li><p>Engaging Design: The chart’s ship-themed design makes it visually appealing while successfully communicating trade flow.</p></li>
+<li><p>The Top 3 Sectors Featured: It is simpler to identify important drivers because the top three categories—Machinery &amp; Transport Equipment, Chemicals &amp; Chemical Products, and Miscellaneous Manufactured Articles—are highlighted.</p></li>
+<li><p>Clear Total Value: A clear feeling of size is immediately provided by the conspicuous representation of the total non-oil domestic exports, which amount S$ 173.6 billion.</p></li>
+<li><p>Category Breakdown: Users may better grasp the contributions of various sectors thanks to the clear labeling of each key commodity area, which includes trade values and percentages.</p></li>
+<li><p>Color coding: Enhances differentiation by assigning distinct colors to each category.</p></li>
+</ul>
+</section>
+<section id="cons-2" class="level4">
+<h4 class="anchored" data-anchor-id="cons-2">Cons</h4>
+<ul>
+<li><p>Comparing export data across different categories is challenging due to the ship-based layout’s lack of a uniform axis.</p></li>
+<li><p>Space Restrictions: Some labels and values, especially for categories with lower export values, are small and challenging to read.</p></li>
+<li><p>No Clear Rankings: It is more difficult to rapidly determine the trade distribution in this chart since it does not explicitly rank the categories in descending order.</p></li>
+<li><p>More emphasis on design than Visualization as the space of birds and sea occupy more space and the percentages are indicated very small compared to the whole graph.</p></li>
+</ul>
+</section>
 </section>
 <section id="sketch-of-alternative-design-2" class="level3">
-<h3 class="anchored" data-anchor-id="sketch-of-alternative-design-2">4.3.3 Sketch of Alternative Design</h3>
+<h3 class="anchored" data-anchor-id="sketch-of-alternative-design-2">3.5.3 Sketch of Alternative Design</h3>
 </section>
-<section id="improved-visualisation-2" class="level3">
-<h3 class="anchored" data-anchor-id="improved-visualisation-2">4.3.4 Improved Visualisation</h3>
+<section id="improved-visualization-2" class="level3">
+<h3 class="anchored" data-anchor-id="improved-visualization-2">3.5.4 Improved Visualization</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Ensuring column names are treated as characters</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">colnames</span>(Current_Prices) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">colnames</span>(Current_Prices))</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Identifying 2024 columns</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>columns_2024 <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"2024"</span>, <span class="fu">colnames</span>(Current_Prices), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Selecting rows for Non-Oil Domestic Exports (rows 47-55)</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>domestic_exports <span class="ot">&lt;-</span> Current_Prices[<span class="dv">47</span><span class="sc">:</span><span class="dv">55</span>, <span class="fu">c</span>(<span class="st">"Data Series"</span>, columns_2024)]</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co"># Renaming column for clarity</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="fu">colnames</span>(domestic_exports)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Commodity Category"</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co"># Converting all columns except 'Commodity Category' to numeric</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>domestic_exports[columns_2024] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(domestic_exports[columns_2024], as.numeric)</span>
+<span id="cb8-15"><a href="#cb8-15"></a></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co"># Aggregating sum for all months in 2024</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>domestic_exports <span class="ot">&lt;-</span> domestic_exports <span class="sc">%&gt;%</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_2024)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Commodity Category</span><span class="st">`</span>, <span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span>)</span>
+<span id="cb8-20"><a href="#cb8-20"></a></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="co"># Calculating percentage composition</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>total_domestic_exports <span class="ot">&lt;-</span> <span class="fu">sum</span>(domestic_exports<span class="sc">$</span><span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-23"><a href="#cb8-23"></a>domestic_exports <span class="ot">&lt;-</span> domestic_exports <span class="sc">%&gt;%</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Domestic Export Share (%)</span><span class="st">`</span> <span class="ot">=</span> (<span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span> <span class="sc">/</span> total_domestic_exports) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb8-25"><a href="#cb8-25"></a></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="co"># Sorting data in descending order</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>domestic_exports <span class="ot">&lt;-</span> domestic_exports <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span>))</span>
+<span id="cb8-28"><a href="#cb8-28"></a></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="co"># Extending x-axis for clarity and use a color gradient for better contrast</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="fu">ggplot</span>(domestic_exports, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span>, <span class="at">y =</span> <span class="fu">reorder</span>(<span class="st">`</span><span class="at">Commodity Category</span><span class="st">`</span>, <span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span>), <span class="at">fill =</span> <span class="st">`</span><span class="at">Domestic Export Share (%)</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb8-32"><a href="#cb8-32"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"S$ "</span>, <span class="fu">formatC</span>(<span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span>, <span class="at">format =</span> <span class="st">"d"</span>, <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">" ("</span>, <span class="fu">round</span>(<span class="st">`</span><span class="at">Domestic Export Share (%)</span><span class="st">`</span>, <span class="dv">1</span>), <span class="st">"%)"</span>)), </span>
+<span id="cb8-33"><a href="#cb8-33"></a>            <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb8-34"><a href="#cb8-34"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(domestic_exports<span class="sc">$</span><span class="st">`</span><span class="at">Domestic Export Value (S$)</span><span class="st">`</span>) <span class="sc">*</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#2E86C1"</span>, <span class="at">high =</span> <span class="st">"#FF0000"</span>) <span class="sc">+</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Non-Oil Domestic Exports by Major Commodity Sections, 2024"</span>,</span>
+<span id="cb8-37"><a href="#cb8-37"></a>       <span class="at">subtitle =</span> <span class="st">"Export Value (S$) and Percentage Composition"</span>,</span>
+<span id="cb8-38"><a href="#cb8-38"></a>       <span class="at">x =</span> <span class="st">"Domestic Export Value (S$)"</span>,</span>
+<span id="cb8-39"><a href="#cb8-39"></a>       <span class="at">y =</span> <span class="st">"Commodity Category"</span>,</span>
+<span id="cb8-40"><a href="#cb8-40"></a>       <span class="at">fill =</span> <span class="st">"Export Share (%)"</span>) <span class="sc">+</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Machinery &amp; Transport Equipment dominates the Non-Oil Domestic Exports by Major Commodity Sections in 2024, accounting for 40.5% of all domestic exports (S$ 70.38 million). This implies that high-value manufacturing and reexports of machinery-related commodities play a significant part in Singapore’s economy, reflecting its status as a global center for trade in industrial and technology goods.</p>
+<p>Miscellaneous Manufactured Articles accounts for 16.5% (S$ 28.64 million), while Chemicals &amp; Chemical Products make up 25.6% (S$ 44.44 million). These industries show robust domestic production capacities in high-value manufactured goods and chemical processing, which are probably fueled by Singapore’s sophisticated industrial infrastructure and well-thought-out trade laws.</p>
+<p>In comparison to industrial exports, Singapore is less dependent on other sectors, as evidenced by the small contributions made by Food &amp; Live Animals (6.6%), Miscellaneous (Excluding Oil Bunkers) (6.1%), and Manufactured Goods (2.9%) to domestic exports. Animal &amp; Vegetable Oils, Fats &amp; Waxes (0.1%), Beverages &amp; Tobacco (0.1%), and Crude Materials (1.5%) make up small percentages of total exports, confirming that the majority of Singapore’s domestic exports are driven by industry and technology rather than natural resources.</p>
 </section>
 </section>
+</section>
+<section id="data-wrangling---part-4" class="level1">
+<h1>4. Data Wrangling - Part 4</h1>
+<section id="importing-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data">4.1 Importing Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>Imports <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Imports_Monthly.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>Exports <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Domestic_Exports_Monthly.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>ReExports <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/ReExports_Monthly.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">4.2 Data Preparation</h2>
+<section id="check-missing-values-1" class="level3">
+<h3 class="anchored" data-anchor-id="check-missing-values-1">4.2.1 Check missing values</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Missing values check</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Imports))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Exports))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(ReExports))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>There is no missing values in all the three datasets</p>
+</section>
+<section id="columnname-change" class="level3">
+<h3 class="anchored" data-anchor-id="columnname-change">4.2.2 Columnname change</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># First column changed to 'Market_Region' instead of Data Series for better context</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">colnames</span>(ReExports)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Market_Region"</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">colnames</span>(Exports)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Market_Region"</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="fu">colnames</span>(Imports)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Market_Region"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="convert-to-long-format" class="level3">
+<h3 class="anchored" data-anchor-id="convert-to-long-format">4.2.3 Convert to Long Format</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># From wide to long format conversion</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>ReExports_long <span class="ot">&lt;-</span> ReExports <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Market_Region,  <span class="co"># Market_Region column excluded</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>               <span class="at">names_to =</span> <span class="st">"Date"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5"></a>               <span class="at">values_to =</span> <span class="st">"ReExports"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6"></a></span>
+<span id="cb19-7"><a href="#cb19-7"></a>Exports_long <span class="ot">&lt;-</span> Exports <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Market_Region, </span>
+<span id="cb19-9"><a href="#cb19-9"></a>               <span class="at">names_to =</span> <span class="st">"Date"</span>,</span>
+<span id="cb19-10"><a href="#cb19-10"></a>               <span class="at">values_to =</span> <span class="st">"Domestic_Exports"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11"></a></span>
+<span id="cb19-12"><a href="#cb19-12"></a>Imports_long <span class="ot">&lt;-</span> Imports <span class="sc">%&gt;%</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Market_Region, </span>
+<span id="cb19-14"><a href="#cb19-14"></a>               <span class="at">names_to =</span> <span class="st">"Date"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15"></a>               <span class="at">values_to =</span> <span class="st">"Imports"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The new datasets now only have three columns Market_Region, Date and number values of export, imports or reexports.</p>
+</section>
+<section id="converting-data-format" class="level3">
+<h3 class="anchored" data-anchor-id="converting-data-format">4.2.4 Converting Data format</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Function to convert chr "YYYY Mon" to date "DD-MM-YYYY" of the new long format data</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>date_format <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb20-3"><a href="#cb20-3"></a>  df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb20-5"><a href="#cb20-5"></a>      <span class="at">Date =</span> <span class="fu">trimws</span>(Date),  <span class="co"># Removing any leading or trailing spaces</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>      <span class="at">Month_Abbrev =</span> <span class="fu">word</span>(Date, <span class="dv">2</span>),  <span class="co"># Extracting month abbreviation</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>      <span class="at">Year =</span> <span class="fu">word</span>(Date, <span class="dv">1</span>),  <span class="co"># Extracting year</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>      <span class="at">Month_Num =</span> <span class="fu">match</span>(Month_Abbrev, month.abb),  <span class="co"># To numeric month</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>      <span class="at">Date =</span> <span class="fu">as.Date</span>(<span class="fu">paste0</span>(<span class="st">"01-"</span>, Month_Num, <span class="st">"-"</span>, Year), <span class="at">format =</span> <span class="st">"%d-%m-%Y"</span>)  <span class="co"># To proper date, 01 added for date character</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>    <span class="fu">select</span>(<span class="sc">-</span>Month_Abbrev, <span class="sc">-</span>Month_Num, <span class="sc">-</span>Year)  <span class="co"># Removing helper columns</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>  </span>
+<span id="cb20-13"><a href="#cb20-13"></a>  <span class="fu">return</span>(df)</span>
+<span id="cb20-14"><a href="#cb20-14"></a>}</span>
+<span id="cb20-15"><a href="#cb20-15"></a></span>
+<span id="cb20-16"><a href="#cb20-16"></a>ReExports_long <span class="ot">&lt;-</span> <span class="fu">date_format</span>(ReExports_long)</span>
+<span id="cb20-17"><a href="#cb20-17"></a>Exports_long <span class="ot">&lt;-</span> <span class="fu">date_format</span>(Exports_long)</span>
+<span id="cb20-18"><a href="#cb20-18"></a>Imports_long <span class="ot">&lt;-</span> <span class="fu">date_format</span>(Imports_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">#ReExports_long$Date &lt;- format(ReExports_long$Date, "%m-%Y")</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co">#Exports_long$Date &lt;- format(Exports_long$Date, "%m-%Y")</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#Imports_long$Date &lt;- format(Imports_long$Date, "%m-%Y")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="checking-missing-values-in-long-format" class="level3">
+<h3 class="anchored" data-anchor-id="checking-missing-values-in-long-format">4.2.5 Checking missing values in long format</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Missing values check</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Imports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Exports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(ReExports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>There is are no missing values to handle in the long format datasets.</p>
+</section>
+<section id="dataset-merge" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-merge">4.2.6 Dataset Merge</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># All three datasets merged by Market_Region and Date</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>trade_data <span class="ot">&lt;-</span> <span class="fu">full_join</span>(ReExports_long, Exports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">full_join</span>(Imports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>))</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>trade_data4 <span class="ot">&lt;-</span> <span class="fu">full_join</span>(ReExports_long, Exports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">full_join</span>(Imports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>New merged data is the combination of all three long format datasets.</p>
+</section>
+<section id="check-duplicates-on-merged-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="check-duplicates-on-merged-dataset">4.2.7 Check duplicates on merged dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(trade_data4))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>There are no duplicates in the new merged dataset.</p>
+</section>
+</section>
+</section>
+<section id="part-4-time-series-visualisation" class="level1">
+<h1>5. Part 4: Time-series Visualisation</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Filtering for Total All Markets only</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>trade_data4 <span class="ot">&lt;-</span> trade_data4 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Market_Region <span class="sc">==</span> <span class="st">"Total All Markets"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3"></a></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="co"># Converting to tsibble</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>ts_tsibble <span class="ot">&lt;-</span> trade_data4 <span class="sc">%&gt;%</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">yearmonth</span>(<span class="st">`</span><span class="at">Date</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> <span class="st">`</span><span class="at">Date</span><span class="st">`</span>)</span>
+<span id="cb31-8"><a href="#cb31-8"></a></span>
+<span id="cb31-9"><a href="#cb31-9"></a><span class="co"># Visualising Time-series Data</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a><span class="co"># Converting from wide to long format</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a>ts_longer <span class="ot">&lt;-</span> trade_data4 <span class="sc">%&gt;%</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>),</span>
+<span id="cb31-13"><a href="#cb31-13"></a>               <span class="at">names_to =</span> <span class="st">"Trade_Type"</span>,</span>
+<span id="cb31-14"><a href="#cb31-14"></a>               <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-15"><a href="#cb31-15"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">yearmonth</span>(Date)) <span class="sc">%&gt;%</span>  <span class="co"># Date is in yearmonth format</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> Date, <span class="at">key =</span> Trade_Type)  <span class="co"># Converting to tsibble</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a></span>
+<span id="cb31-18"><a href="#cb31-18"></a><span class="co"># Plotting single time-series</span></span>
+<span id="cb31-19"><a href="#cb31-19"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb31-20"><a href="#cb31-20"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">==</span> <span class="st">"Imports"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-21"><a href="#cb31-21"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Value)) <span class="sc">+</span></span>
+<span id="cb31-22"><a href="#cb31-22"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb31-23"><a href="#cb31-23"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Imports Over Time"</span>, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Value"</span>) <span class="sc">+</span></span>
+<span id="cb31-24"><a href="#cb31-24"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Plotting multiple time-series</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">ggplot</span>(ts_longer, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Value, <span class="at">color =</span> Trade_Type)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Visual Analysis of Seasonality</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="co"># Seasonal plot</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Imports"</span>, <span class="st">"ReExports"</span>, <span class="st">"Domestic_Exports"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">gg_season</span>(Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Cycle plot</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Imports"</span>, <span class="st">"ReExports"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>  <span class="fu">gg_subseries</span>(Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Time Series Decomposition</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>ts_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">model</span>(<span class="at">stl =</span> <span class="fu">STL</span>(ReExports)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Visual STL Diagnostics</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="co"># Classical decomposition</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>ts_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">model</span>(<span class="fu">classical_decomposition</span>(ReExports, <span class="at">type =</span> <span class="st">"additive"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># Forecasting</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>ts_train <span class="ot">&lt;-</span> ts_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="fu">yearmonth</span>(<span class="st">"2024-01"</span>))</span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="co"># Fitting ETS model</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>fit_ets <span class="ot">&lt;-</span> ts_train <span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a href="#cb37-7"></a>  <span class="fu">model</span>(<span class="fu">ETS</span>(ReExports))</span>
+<span id="cb37-8"><a href="#cb37-8"></a></span>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="co"># Forecast</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a>forecast_ets <span class="ot">&lt;-</span> fit_ets <span class="sc">%&gt;%</span></span>
+<span id="cb37-11"><a href="#cb37-11"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb37-12"><a href="#cb37-12"></a></span>
+<span id="cb37-13"><a href="#cb37-13"></a><span class="co"># Plotting forecast</span></span>
+<span id="cb37-14"><a href="#cb37-14"></a>forecast_ets <span class="sc">%&gt;%</span></span>
+<span id="cb37-15"><a href="#cb37-15"></a>  <span class="fu">autoplot</span>(ts_tsibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="summary-and-conclusion" class="level1">
 <h1>6. Summary and Conclusion</h1>
