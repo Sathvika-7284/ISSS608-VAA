@@ -27,17 +27,16 @@ The objectives of this assignment is to: 1) Select three Visualizations from the
 ## 2.1 Setting the Analytical Tools
 
 ```{r}
-pacman::p_load(tidyverse, readr, forecast, tseries, lubridate, fable, feasts, tsibble)
+pacman::p_load(tidyverse, readr, forecast, lubridate, fable, feasts, tsibble)
 ```
 
 1)  Tidyverse - Tidyverse is an R programming package that helps to transform and better present data. It assists with data import, tidying, manipulation, and data visualization.
 2)  readr - The goal of 'readr' is to provide a fast and friendly way to read rectangular data (like 'csv', 'tsv', and 'fwf'). It is designed to flexibly parse many types of data found in the wild, while still cleanly failing when data unexpectedly changes.
 3)  forecast - Methods and tools for displaying and analysing univariate time series forecasts including exponential smoothing via state space models and automatic ARIMA modelling.
-4)  tseries - Time series analysis and computational finance.
-5)  lubridate - Functions to work with date-times and time-spans: fast and user friendly parsing of date-time data, extraction and updating of components of a date-time (years, months, days, hours, minutes, and seconds), algebraic manipulation on date-time and time-span objects.
-6)  fable - Provides a collection of commonly used univariate and multivariate time series forecasting models including automatically selected exponential smoothing (ETS) and autoregressive integrated moving average (ARIMA) models.
-7)  feasts - Provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data.
-8)  tsibble - Provides a 'tbl_ts' class (the 'tsibble') for temporal data in an data- and model-oriented format. The 'tsibble' provides tools to easily manipulate and analyse temporal data, such as filling in time gaps and aggregating over calendar periods.
+4)  lubridate - Functions to work with date-times and time-spans: fast and user friendly parsing of date-time data, extraction and updating of components of a date-time (years, months, days, hours, minutes, and seconds), algebraic manipulation on date-time and time-span objects.
+5)  fable - Provides a collection of commonly used univariate and multivariate time series forecasting models including automatically selected exponential smoothing (ETS) and autoregressive integrated moving average (ARIMA) models.
+6)  feasts - Provides a collection of features, decomposition methods, statistical summaries and graphics functions for the analysing tidy time series data.
+7)  tsibble - Provides a 'tbl_ts' class (the 'tsibble') for temporal data in an data- and model-oriented format. The 'tsibble' provides tools to easily manipulate and analyse temporal data, such as filling in time gaps and aggregating over calendar periods.
 
 ## 2.2 Data Source
 
@@ -88,10 +87,16 @@ sum(is.na(Current_Prices))
 ### 3.1.4 Improved Visualization
 
 ```{r}
+#| plot-height: 20
+#| plot-width: 60
+#| code-fold: true
+
+library(tidyverse)
+
 # Converting column names to characters for proper handling
 colnames(Current_Prices) <- as.character(colnames(Current_Prices))
 
-# Identifing year columns that have a valid numeric format
+# Identifying year columns that have a valid numeric format
 year_columns <- names(Current_Prices)[sapply(Current_Prices, is.numeric)]
 
 # Ensuring the first column (Data Series) is included
@@ -123,7 +128,7 @@ current_prices_filtered <- current_prices_filtered %>%
   mutate(Percentage_Change = (Total - lag(Total)) / lag(Total) * 100) %>%
   ungroup()
 
-# Removing NA from Percentage Change for 2020 since its the first year in the visualisation
+# Removing NA from Percentage Change for 2020 since it's the first year in the visualization
 current_prices_filtered <- current_prices_filtered %>%
   mutate(Percentage_Change = ifelse(is.na(Percentage_Change), "", paste0(round(Percentage_Change, 1), "%")))
 
@@ -155,7 +160,7 @@ ggplot() +
   geom_text(data = total_trade, aes(x = Year, y = Total + offset * 1.5, label = Percentage_Change), 
             vjust = -0.5, size = 5, color = "black", fontface = "bold") +
   # Custom colors and legend improvements
-  scale_fill_manual(values = c("#fc8d62", "#66c2a5"), 
+  scale_fill_manual(values = c("#E69F00", "#56B4E9"), 
                     labels = c("Total Merchandise Exports (At Current Prices) - Includes percentage change",
                                "Total Merchandise Imports (At Current Prices) - Includes percentage change")) +
   guides(fill = guide_legend(title = "Trade Type & Details")) +
@@ -164,7 +169,10 @@ ggplot() +
        subtitle = "At Current Prices, Percentage Change Included",
        x = "Year",
        y = "Trade Value (Billion S$)") +
-  theme_minimal()
+  theme_minimal() +
+  theme(plot.margin = margin(5, 5, 5, 5),
+        legend.position = "bottom", 
+        axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 The visualization provides a complete examination of Singapore's goods Imports & Exports from 2020 to 2024, exhibiting trade variations, percentage changes, and total goods trade patterns. The grouped bar chart highlights annual import and export data, while the dashed line chart overlays total trade performance, presenting a holistic view. Both imports and exports showed robust growth between 2020 and 2022, with imports increasing by 20.4% in 2021 and 20.1% in 2022 and exports increasing by 19.1% in 2021 and 15.6% in 2022. However, 2023 saw a decline in both imports (-13.4%) and exports (-10.1%), signaling a potential slowdown due to global economic uncertainties. Following a sharp decline of 11.7% in 2023, the total trade volume showed a modest recovery of 6.6% in 2024, indicating gradual market stabilization, after peaking at S\$1.4 billion in 2022 (17.7% growth). The clear distinction between imports, exports, and total trade trends makes trade patterns easy to interpret, with white trade value labels inside the bars for quick readability and percentage change labels positioned above bars and the line chart for year-over-year comparisons. Overall, this visualization effectively captures trade dynamics, economic recovery trends, and external market impacts, showing a strong post-2020 rebound, a notable dip in 2023, and a steady yet cautious recovery in 2024, reflecting Singapore’s resilience in international trade.
@@ -208,6 +216,8 @@ The visualization provides a complete examination of Singapore's goods Imports &
 Lets prep data to extract only non-oil columns of import and export
 
 ```{r}
+#| code-fold: true
+
 # Column names are treated as characters
 colnames(Current_Prices) <- as.character(colnames(Current_Prices))
 
@@ -278,7 +288,7 @@ Machinery and Transport Equipment leads trade, making up 65.2% of imports (S\$ 3
 
 ### 3.5.1 Original Visualization
 
-![](images/Chart 3.png)
+![](images/Chart%203.png)
 
 ### 3.5.2 Critique
 
@@ -309,6 +319,8 @@ Machinery and Transport Equipment leads trade, making up 65.2% of imports (S\$ 3
 ### 3.5.4 Improved Visualization
 
 ```{r}
+#| code-fold: true
+
 # Ensuring column names are treated as characters
 colnames(Current_Prices) <- as.character(colnames(Current_Prices))
 
@@ -400,6 +412,8 @@ colnames(Imports)[1] <- "Market_Region"
 ### 4.2.3 Convert to Long Format
 
 ```{r}
+#| code-fold: true
+
 # From wide to long format conversion
 ReExports_long <- ReExports %>%
   pivot_longer(cols = -Market_Region,  # Market_Region column excluded
@@ -422,6 +436,8 @@ The new datasets now only have three columns Market_Region, Date and number valu
 ### 4.2.4 Converting Data format
 
 ```{r}
+#| code-fold: true
+
 # Function to convert chr "YYYY Mon" to date "DD-MM-YYYY" of the new long format data
 date_format <- function(df) {
   df <- df %>%
@@ -465,9 +481,6 @@ There is are no missing values to handle in the long format datasets.
 # All three datasets merged by Market_Region and Date
 trade_data <- full_join(ReExports_long, Exports_long, by = c("Market_Region", "Date")) %>%
   full_join(Imports_long, by = c("Market_Region", "Date"))
-
-trade_data4 <- full_join(ReExports_long, Exports_long, by = c("Market_Region", "Date")) %>%
-  full_join(Imports_long, by = c("Market_Region", "Date"))
 ```
 
 New merged data is the combination of all three long format datasets.
@@ -475,7 +488,7 @@ New merged data is the combination of all three long format datasets.
 ### 4.2.7 Check duplicates on merged dataset
 
 ```{r}
-sum(duplicated(trade_data4))
+sum(duplicated(trade_data))
 ```
 
 There are no duplicates in the new merged dataset.
@@ -484,24 +497,26 @@ There are no duplicates in the new merged dataset.
 # 5. Part 4: Time-series Visualisation
 
 ```{r}
+#| code-fold: true
+
 # Filtering for Total All Markets only
-trade_data4 <- trade_data4 %>% filter(Market_Region == "Total All Markets")
+trade_data <- trade_data %>% filter(Market_Region == "Total All Markets")
 
 # Converting to tsibble
-ts_tsibble <- trade_data4 %>%
+ts_tsibble <- trade_data %>%
   mutate(Date = yearmonth(`Date`)) %>%
   as_tsibble(index = `Date`)
 
 # Visualising Time-series Data
 # Converting from wide to long format
-ts_longer <- trade_data4 %>%
+ts_longer <- trade_data %>%
   pivot_longer(cols = c(3:5),
                names_to = "Trade_Type",
                values_to = "Value") %>%
   mutate(Date = yearmonth(Date)) %>%  # Date is in yearmonth format
   as_tsibble(index = Date, key = Trade_Type)  # Converting to tsibble
 
-# Plotting single time-series
+# Plotting single time-series for Imports
 ts_longer %>%
   filter(Trade_Type == "Imports") %>%
   ggplot(aes(x = Date, y = Value)) +
@@ -509,7 +524,7 @@ ts_longer %>%
   labs(title = "Imports Over Time", x = "Date", y = "Value") +
   theme_minimal()
 
-# Plotting multiple time-series
+# Plotting multiple time-series for all trade types
 ggplot(ts_longer, aes(x = Date, y = Value, color = Trade_Type)) +
   geom_line(size = 0.5) +
   theme(legend.position = "bottom")
@@ -554,5 +569,36 @@ forecast_ets <- fit_ets %>%
 forecast_ets %>%
   autoplot(ts_tsibble)
 ```
+Import Over Time (Graph 1)
+The import trend over time is seen in this map, which shows an upward tendency with noticeable fluctuations.  Periods of high expansion, occasional drops, and recovery phases are indicative of shifts in policy, global trade disruptions, or economic cycles.  With some volatility in recent years, the long-term trend points to a consistent rise in imports.
+
+Multiple Trade Types Over Time (Graph 2)
+The comparison of imports, reexports, and domestic exports over time is displayed in this plot.  The amount of imports (green line) is higher than that of domestic exports (red) and reexports (blue).  All categories show increasing tendencies, although imports have grown at the fastest rate. The trends also suggest that trade volumes may be impacted by economic factors and seasonal cycles.
+
+Seasonal Plot (Graph 3)
+This visualization groups data by month to compare trade trends over time.  In order to assist viewers recognize seasonal trends, each color corresponds to a distinct year. The existence of a recurring annual pattern is confirmed by the cyclical behavior, where trade values tend to rise in some months (March for example) and fall in others.
+
+Subseries Plot (Graph 4)
+The monthly fluctuations over various years are highlighted in the subseries plot.  Each panel shows variations over time and relates to a particular month (January through December).  The average value for each month is shown by the blue horizontal line.  Seasonal trends and steady expansion in subsequent years are evident, with some months exhibiting stronger trading activity than others.
+
+STL Decomposition (Graph 5)
+The ReExports time series is divided into three parts via STL decomposition:
+1) Trend: Long-term growth is indicated by a steady increasing trend.
+2) Seasonality: The seasonal component exhibits a recurring pattern with predictable changes occurring at predetermined periods.
+3) Remainder (Residuals): This section records irregular changes and noise.  Unexpected external shocks, such as policy changes or economic crises, are indicated by certain increases.
+
+Classical Decomposition (Graph 6)
+This visualization divides ReExports into Trend, Seasonal, and Random components, much like the STL decomposition. The findings confirm that the data shows a long-term upward trend and strong seasonality, while the random component records unpredictable fluctuations.
+
+Forecasting ReExports (Graph 7)
+The ETS model's predicted values for ReExports throughout the upcoming year are displayed in this graph.  The degree of prediction uncertainty is shown by the darkened blue areas, which stand for the 80% and 95% confidence intervals. Although the prediction interval grows over time, indicating increased uncertainty, the projection indicates that ReExports will continue to rise.
+
 
 # 6. Summary and Conclusion
+
+Important insights about Singapore's patterns in merchandise trade are offered by the three visualizations.  The first graph displays annual trends in total trade, imports, and exports from 2020 to 2024.  In the second, non-oil merchandise trade is broken out by commodity, with the largest import and export categories being machinery and transport equipment.  The third reinforces the dominance of machinery and concentrates on local exports other than oil.  Improvements were made to the label's visibility, spacing, and clarity.  When combined, these graphics successfully depict sectoral contributions, trade patterns, and annual trends.
+
+Seasonal variations impact trade volumes, but the data reveals a consistent upward trend in imports, domestic exports, and reexports.  While exports and reexports have comparable but lesser growth rates, imports predominate.  Forecasting indicates continuous increase with some degree of uncertainty, whereas decomposition supports a strong trend and seasonal influences.
+
+In conclusion, trade is growing as a result of market demands and economic expansion.  Forecasting shows future growth but possible instability, and seasonal tendencies emphasize the necessity of strategic preparation.  To maximize trade strategies, stakeholders should take global trends, regulatory changes, and market conditions into consideration. 
+
