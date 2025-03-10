@@ -20,7 +20,13 @@ As a visual analytics novice, I am eager to apply newly acquired techniques to e
 
 ## 1.2 Objectives
 
-The objectives of this assignment is to: 1) Select three Visualizations from the Department of Statistics Singapore - International trade website and comment on the pros and cons of the visualization 2) To provide a better Visualization based on the critique using appropriate ggplot2 packages 3) Analyse the data with either time-series analysis or time-series forecasting methods by compliment the analysis with appropriate data visualisation methods and R packages.
+The objectives of this assignment is to:
+
+-   Select three Visualizations from the Department of Statistics Singapore - International trade website and comment on the pros and cons of the visualization.
+
+-   To provide a better Visualization based on the critique using appropriate ggplot2 packages.
+
+-   Analyse the data with either time-series analysis or time-series forecasting methods by compliment the analysis with appropriate data visualization methods and R packages.
 
 # 2. Getting Started
 
@@ -76,13 +82,14 @@ sum(is.na(Current_Prices))
 
 #### Cons
 
--   Absence of Context or Further Analysis: Although the visualization shows numbers, it omits important factors that contribute to the trends.
 -   No Percentage Change Per Year: Although 2024's 6.6% increase is noted, comparable percentage changes for previous years are not included.
 -   Color Overlap Risk: People who are colorblind may find it challenging to distinguish between certain hues, such as tones of blue and purple.
--   Total Trade Figures Do Not Have Data Labels It could be helpful to show these figures next to the bars for easy reference, even though the total is displayed on the right.
--   Limited Interactivity: Adding interactive components (such as tooltips or drill-down insights) to a digital presentation would increase user engagement.
+-   Percentages of exports and import between years can be included for comparison.
+-   Line chart can be used for total trade value and percentages instead of it being just a label next to the bar charts
 
 ### 3.1.3 Sketch of Alternative Design
+
+![](images/clipboard-2845970612.png)
 
 ### 3.1.4 Improved Visualization
 
@@ -203,13 +210,15 @@ The visualization provides a complete examination of Singapore's goods Imports &
 
 -   Smaller Categories Overcrowded: Smaller trade sectors (such as Beverages & Tobacco, Animal & Vegetable Oils) seem crowded and make comparisons challenging, even though the main categories are easily accessible.
 
--   Comparing the whole trade value is challenging: The overall trade volume for each category isn't explicitly displayed, even though the figures for individual imports and exports are obvious (stacked bars could have indicated total trade impact, for example).
+-   Subtitle can be written for better context of the graph
 
--   Enhancing the Contrast of Colors: A clearer contrast or shading could improve readability, especially for tiny bars, even though orange and blue distinguish imports and exports.
+-   Contrast of Import and Export: A clearer contrast of imports and exports can be compared by placing side by side instead of top and bottom
 
--   On the scale, machinery and transport equipment are dominant: Because Machinery & Transport Equipment accounts for 65% of exports and 65.2% of imports, its extraordinarily high trade value obscures and lessens the visual prominence of smaller categories.
+-   On the scale, machinery and transport equipment are dominant: Because Machinery & Transport Equipment accounts for 65% of exports and 65.2% of imports, however these percentage values are very small in the actual chart making it non-visible at start
 
 ### 3.4.3 Sketch of Alternative Design
+
+![](images/clipboard-270078131.png)
 
 ### 3.4.4 Improved Visualization
 
@@ -249,9 +258,11 @@ non_oil_exports <- non_oil_exports %>%
 non_oil_trade <- merge(non_oil_exports, non_oil_imports, by = "Commodity Section")
 ```
 
-Now that the data is prepared below is the code for the improved visualisation
+Now that the data is prepared below is the code for the improved visualization
 
 ```{r}
+#| code-fold: true
+
 library(tidyverse)
 
 # Calculating percentage composition
@@ -315,6 +326,8 @@ Machinery and Transport Equipment leads trade, making up 65.2% of imports (S\$ 3
 -   More emphasis on design than Visualization as the space of birds and sea occupy more space and the percentages are indicated very small compared to the whole graph.
 
 ### 3.5.3 Sketch of Alternative Design
+
+![](images/clipboard-3902022121.png)
 
 ### 3.5.4 Improved Visualization
 
@@ -458,12 +471,6 @@ Exports_long <- date_format(Exports_long)
 Imports_long <- date_format(Imports_long)
 ```
 
-```{r}
-#ReExports_long$Date <- format(ReExports_long$Date, "%m-%Y")
-#Exports_long$Date <- format(Exports_long$Date, "%m-%Y")
-#Imports_long$Date <- format(Imports_long$Date, "%m-%Y")
-```
-
 ### 4.2.5 Checking missing values in long format
 
 ```{r}
@@ -492,7 +499,6 @@ sum(duplicated(trade_data))
 ```
 
 There are no duplicates in the new merged dataset.
-
 
 # 5. Part 4: Time-series Visualisation
 
@@ -569,36 +575,25 @@ forecast_ets <- fit_ets %>%
 forecast_ets %>%
   autoplot(ts_tsibble)
 ```
-Import Over Time (Graph 1)
-The import trend over time is seen in this map, which shows an upward tendency with noticeable fluctuations.  Periods of high expansion, occasional drops, and recovery phases are indicative of shifts in policy, global trade disruptions, or economic cycles.  With some volatility in recent years, the long-term trend points to a consistent rise in imports.
 
-Multiple Trade Types Over Time (Graph 2)
-The comparison of imports, reexports, and domestic exports over time is displayed in this plot.  The amount of imports (green line) is higher than that of domestic exports (red) and reexports (blue).  All categories show increasing tendencies, although imports have grown at the fastest rate. The trends also suggest that trade volumes may be impacted by economic factors and seasonal cycles.
+Import Over Time (Graph 1) The import trend over time is seen in this map, which shows an upward tendency with noticeable fluctuations. Periods of high expansion, occasional drops, and recovery phases are indicative of shifts in policy, global trade disruptions, or economic cycles. With some volatility in recent years, the long-term trend points to a consistent rise in imports.
 
-Seasonal Plot (Graph 3)
-This visualization groups data by month to compare trade trends over time.  In order to assist viewers recognize seasonal trends, each color corresponds to a distinct year. The existence of a recurring annual pattern is confirmed by the cyclical behavior, where trade values tend to rise in some months (March for example) and fall in others.
+Multiple Trade Types Over Time (Graph 2) The comparison of imports, reexports, and domestic exports over time is displayed in this plot. The amount of imports (green line) is higher than that of domestic exports (red) and reexports (blue). All categories show increasing tendencies, although imports have grown at the fastest rate. The trends also suggest that trade volumes may be impacted by economic factors and seasonal cycles.
 
-Subseries Plot (Graph 4)
-The monthly fluctuations over various years are highlighted in the subseries plot.  Each panel shows variations over time and relates to a particular month (January through December).  The average value for each month is shown by the blue horizontal line.  Seasonal trends and steady expansion in subsequent years are evident, with some months exhibiting stronger trading activity than others.
+Seasonal Plot (Graph 3) This visualization groups data by month to compare trade trends over time. In order to assist viewers recognize seasonal trends, each color corresponds to a distinct year. The existence of a recurring annual pattern is confirmed by the cyclical behavior, where trade values tend to rise in some months (March for example) and fall in others.
 
-STL Decomposition (Graph 5)
-The ReExports time series is divided into three parts via STL decomposition:
-1) Trend: Long-term growth is indicated by a steady increasing trend.
-2) Seasonality: The seasonal component exhibits a recurring pattern with predictable changes occurring at predetermined periods.
-3) Remainder (Residuals): This section records irregular changes and noise.  Unexpected external shocks, such as policy changes or economic crises, are indicated by certain increases.
+Subseries Plot (Graph 4) The monthly fluctuations over various years are highlighted in the subseries plot. Each panel shows variations over time and relates to a particular month (January through December). The average value for each month is shown by the blue horizontal line. Seasonal trends and steady expansion in subsequent years are evident, with some months exhibiting stronger trading activity than others.
 
-Classical Decomposition (Graph 6)
-This visualization divides ReExports into Trend, Seasonal, and Random components, much like the STL decomposition. The findings confirm that the data shows a long-term upward trend and strong seasonality, while the random component records unpredictable fluctuations.
+STL Decomposition (Graph 5) The ReExports time series is divided into three parts via STL decomposition: 1) Trend: Long-term growth is indicated by a steady increasing trend. 2) Seasonality: The seasonal component exhibits a recurring pattern with predictable changes occurring at predetermined periods. 3) Remainder (Residuals): This section records irregular changes and noise. Unexpected external shocks, such as policy changes or economic crises, are indicated by certain increases.
 
-Forecasting ReExports (Graph 7)
-The ETS model's predicted values for ReExports throughout the upcoming year are displayed in this graph.  The degree of prediction uncertainty is shown by the darkened blue areas, which stand for the 80% and 95% confidence intervals. Although the prediction interval grows over time, indicating increased uncertainty, the projection indicates that ReExports will continue to rise.
+Classical Decomposition (Graph 6) This visualization divides ReExports into Trend, Seasonal, and Random components, much like the STL decomposition. The findings confirm that the data shows a long-term upward trend and strong seasonality, while the random component records unpredictable fluctuations.
 
+Forecasting ReExports (Graph 7) The ETS model's predicted values for ReExports throughout the upcoming year are displayed in this graph. The degree of prediction uncertainty is shown by the darkened blue areas, which stand for the 80% and 95% confidence intervals. Although the prediction interval grows over time, indicating increased uncertainty, the projection indicates that ReExports will continue to rise.
 
 # 6. Summary and Conclusion
 
-Important insights about Singapore's patterns in merchandise trade are offered by the three visualizations.  The first graph displays annual trends in total trade, imports, and exports from 2020 to 2024.  In the second, non-oil merchandise trade is broken out by commodity, with the largest import and export categories being machinery and transport equipment.  The third reinforces the dominance of machinery and concentrates on local exports other than oil.  Improvements were made to the label's visibility, spacing, and clarity.  When combined, these graphics successfully depict sectoral contributions, trade patterns, and annual trends.
+Important insights about Singapore's patterns in merchandise trade are offered by the three visualizations. The first graph displays annual trends in total trade, imports, and exports from 2020 to 2024. In the second, non-oil merchandise trade is broken out by commodity, with the largest import and export categories being machinery and transport equipment. The third reinforces the dominance of machinery and concentrates on local exports other than oil. Improvements were made to the label's visibility, spacing, and clarity. When combined, these graphics successfully depict sectoral contributions, trade patterns, and annual trends.
 
-Seasonal variations impact trade volumes, but the data reveals a consistent upward trend in imports, domestic exports, and reexports.  While exports and reexports have comparable but lesser growth rates, imports predominate.  Forecasting indicates continuous increase with some degree of uncertainty, whereas decomposition supports a strong trend and seasonal influences.
+Seasonal variations impact trade volumes, but the data reveals a consistent upward trend in imports, domestic exports, and reexports. While exports and reexports have comparable but lesser growth rates, imports predominate. Forecasting indicates continuous increase with some degree of uncertainty, whereas decomposition supports a strong trend and seasonal influences.
 
-In conclusion, trade is growing as a result of market demands and economic expansion.  Forecasting shows future growth but possible instability, and seasonal tendencies emphasize the necessity of strategic preparation.  To maximize trade strategies, stakeholders should take global trends, regulatory changes, and market conditions into consideration. 
-
+In conclusion, trade is growing as a result of market demands and economic expansion. Forecasting shows future growth but possible instability, and seasonal tendencies emphasize the necessity of strategic preparation. To maximize trade strategies, stakeholders should take global trends, regulatory changes, and market conditions into consideration.

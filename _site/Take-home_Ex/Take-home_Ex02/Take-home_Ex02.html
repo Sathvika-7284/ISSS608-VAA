@@ -354,7 +354,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">1.2 Objectives</h2>
-<p>The objectives of this assignment is to: 1) Select three Visualizations from the Department of Statistics Singapore - International trade website and comment on the pros and cons of the visualization 2) To provide a better Visualization based on the critique using appropriate ggplot2 packages 3) Analyse the data with either time-series analysis or time-series forecasting methods by compliment the analysis with appropriate data visualisation methods and R packages.</p>
+<p>The objectives of this assignment is to:</p>
+<ul>
+<li><p>Select three Visualizations from the Department of Statistics Singapore - International trade website and comment on the pros and cons of the visualization.</p></li>
+<li><p>To provide a better Visualization based on the critique using appropriate ggplot2 packages.</p></li>
+<li><p>Analyse the data with either time-series analysis or time-series forecasting methods by compliment the analysis with appropriate data visualization methods and R packages.</p></li>
+</ul>
 </section>
 </section>
 <section id="getting-started" class="level1">
@@ -419,16 +424,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="cons" class="level4">
 <h4 class="anchored" data-anchor-id="cons">Cons</h4>
 <ul>
-<li>Absence of Context or Further Analysis: Although the visualization shows numbers, it omits important factors that contribute to the trends.</li>
 <li>No Percentage Change Per Year: Although 2024’s 6.6% increase is noted, comparable percentage changes for previous years are not included.</li>
 <li>Color Overlap Risk: People who are colorblind may find it challenging to distinguish between certain hues, such as tones of blue and purple.</li>
-<li>Total Trade Figures Do Not Have Data Labels It could be helpful to show these figures next to the bars for easy reference, even though the total is displayed on the right.</li>
-<li>Limited Interactivity: Adding interactive components (such as tooltips or drill-down insights) to a digital presentation would increase user engagement.</li>
+<li>Percentages of exports and import between years can be included for comparison.</li>
+<li>Line chart can be used for total trade value and percentages instead of it being just a label next to the bar charts</li>
 </ul>
 </section>
 </section>
 <section id="sketch-of-alternative-design" class="level3">
 <h3 class="anchored" data-anchor-id="sketch-of-alternative-design">3.1.3 Sketch of Alternative Design</h3>
+<p><img src="images/clipboard-2845970612.png" class="img-fluid"></p>
 </section>
 <section id="improved-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="improved-visualization">3.1.4 Improved Visualization</h3>
@@ -552,14 +557,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="cons-1">Cons</h4>
 <ul>
 <li><p>Smaller Categories Overcrowded: Smaller trade sectors (such as Beverages &amp; Tobacco, Animal &amp; Vegetable Oils) seem crowded and make comparisons challenging, even though the main categories are easily accessible.</p></li>
-<li><p>Comparing the whole trade value is challenging: The overall trade volume for each category isn’t explicitly displayed, even though the figures for individual imports and exports are obvious (stacked bars could have indicated total trade impact, for example).</p></li>
-<li><p>Enhancing the Contrast of Colors: A clearer contrast or shading could improve readability, especially for tiny bars, even though orange and blue distinguish imports and exports.</p></li>
-<li><p>On the scale, machinery and transport equipment are dominant: Because Machinery &amp; Transport Equipment accounts for 65% of exports and 65.2% of imports, its extraordinarily high trade value obscures and lessens the visual prominence of smaller categories.</p></li>
+<li><p>Subtitle can be written for better context of the graph</p></li>
+<li><p>Contrast of Import and Export: A clearer contrast of imports and exports can be compared by placing side by side instead of top and bottom</p></li>
+<li><p>On the scale, machinery and transport equipment are dominant: Because Machinery &amp; Transport Equipment accounts for 65% of exports and 65.2% of imports, however these percentage values are very small in the actual chart making it non-visible at start</p></li>
 </ul>
 </section>
 </section>
 <section id="sketch-of-alternative-design-1" class="level3">
 <h3 class="anchored" data-anchor-id="sketch-of-alternative-design-1">3.4.3 Sketch of Alternative Design</h3>
+<p><img src="images/clipboard-270078131.png" class="img-fluid"></p>
 </section>
 <section id="improved-visualization-1" class="level3">
 <h3 class="anchored" data-anchor-id="improved-visualization-1">3.4.4 Improved Visualization</h3>
@@ -598,8 +604,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-29"><a href="#cb6-29"></a>non_oil_trade <span class="ot">&lt;-</span> <span class="fu">merge</span>(non_oil_exports, non_oil_imports, <span class="at">by =</span> <span class="st">"Commodity Section"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Now that the data is prepared below is the code for the improved visualisation</p>
+<p>Now that the data is prepared below is the code for the improved visualization</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co"># Calculating percentage composition</span></span>
@@ -628,6 +636,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-26"><a href="#cb7-26"></a>       <span class="at">fill =</span> <span class="st">"Trade Type"</span>) <span class="sc">+</span></span>
 <span id="cb7-27"><a href="#cb7-27"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb7-28"><a href="#cb7-28"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -669,6 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sketch-of-alternative-design-2" class="level3">
 <h3 class="anchored" data-anchor-id="sketch-of-alternative-design-2">3.5.3 Sketch of Alternative Design</h3>
+<p><img src="images/clipboard-3902022121.png" class="img-fluid"></p>
 </section>
 <section id="improved-visualization-2" class="level3">
 <h3 class="anchored" data-anchor-id="improved-visualization-2">3.5.4 Improved Visualization</h3>
@@ -825,25 +835,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-18"><a href="#cb20-18"></a>Imports_long <span class="ot">&lt;-</span> <span class="fu">date_format</span>(Imports_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">#ReExports_long$Date &lt;- format(ReExports_long$Date, "%m-%Y")</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co">#Exports_long$Date &lt;- format(Exports_long$Date, "%m-%Y")</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#Imports_long$Date &lt;- format(Imports_long$Date, "%m-%Y")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="checking-missing-values-in-long-format" class="level3">
 <h3 class="anchored" data-anchor-id="checking-missing-values-in-long-format">4.2.5 Checking missing values in long format</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Missing values check</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Imports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Missing values check</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Imports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Exports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(Exports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(ReExports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(ReExports_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -853,16 +858,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataset-merge" class="level3">
 <h3 class="anchored" data-anchor-id="dataset-merge">4.2.6 Dataset Merge</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># All three datasets merged by Market_Region and Date</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>trade_data <span class="ot">&lt;-</span> <span class="fu">full_join</span>(ReExports_long, Exports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">full_join</span>(Imports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># All three datasets merged by Market_Region and Date</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>trade_data <span class="ot">&lt;-</span> <span class="fu">full_join</span>(ReExports_long, Exports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">full_join</span>(Imports_long, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Market_Region"</span>, <span class="st">"Date"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>New merged data is the combination of all three long format datasets.</p>
 </section>
 <section id="check-duplicates-on-merged-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="check-duplicates-on-merged-dataset">4.2.7 Check duplicates on merged dataset</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(trade_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(trade_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -876,134 +881,134 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Filtering for Total All Markets only</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>trade_data <span class="ot">&lt;-</span> trade_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Market_Region <span class="sc">==</span> <span class="st">"Total All Markets"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3"></a></span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="co"># Converting to tsibble</span></span>
-<span id="cb31-5"><a href="#cb31-5"></a>ts_tsibble <span class="ot">&lt;-</span> trade_data <span class="sc">%&gt;%</span></span>
-<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">yearmonth</span>(<span class="st">`</span><span class="at">Date</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> <span class="st">`</span><span class="at">Date</span><span class="st">`</span>)</span>
-<span id="cb31-8"><a href="#cb31-8"></a></span>
-<span id="cb31-9"><a href="#cb31-9"></a><span class="co"># Visualising Time-series Data</span></span>
-<span id="cb31-10"><a href="#cb31-10"></a><span class="co"># Converting from wide to long format</span></span>
-<span id="cb31-11"><a href="#cb31-11"></a>ts_longer <span class="ot">&lt;-</span> trade_data <span class="sc">%&gt;%</span></span>
-<span id="cb31-12"><a href="#cb31-12"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>),</span>
-<span id="cb31-13"><a href="#cb31-13"></a>               <span class="at">names_to =</span> <span class="st">"Trade_Type"</span>,</span>
-<span id="cb31-14"><a href="#cb31-14"></a>               <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb31-15"><a href="#cb31-15"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">yearmonth</span>(Date)) <span class="sc">%&gt;%</span>  <span class="co"># Date is in yearmonth format</span></span>
-<span id="cb31-16"><a href="#cb31-16"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> Date, <span class="at">key =</span> Trade_Type)  <span class="co"># Converting to tsibble</span></span>
-<span id="cb31-17"><a href="#cb31-17"></a></span>
-<span id="cb31-18"><a href="#cb31-18"></a><span class="co"># Plotting single time-series for Imports</span></span>
-<span id="cb31-19"><a href="#cb31-19"></a>ts_longer <span class="sc">%&gt;%</span></span>
-<span id="cb31-20"><a href="#cb31-20"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">==</span> <span class="st">"Imports"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb31-21"><a href="#cb31-21"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Value)) <span class="sc">+</span></span>
-<span id="cb31-22"><a href="#cb31-22"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb31-23"><a href="#cb31-23"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Imports Over Time"</span>, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Value"</span>) <span class="sc">+</span></span>
-<span id="cb31-24"><a href="#cb31-24"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Filtering for Total All Markets only</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>trade_data <span class="ot">&lt;-</span> trade_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Market_Region <span class="sc">==</span> <span class="st">"Total All Markets"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3"></a></span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="co"># Converting to tsibble</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>ts_tsibble <span class="ot">&lt;-</span> trade_data <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">yearmonth</span>(<span class="st">`</span><span class="at">Date</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> <span class="st">`</span><span class="at">Date</span><span class="st">`</span>)</span>
+<span id="cb30-8"><a href="#cb30-8"></a></span>
+<span id="cb30-9"><a href="#cb30-9"></a><span class="co"># Visualising Time-series Data</span></span>
+<span id="cb30-10"><a href="#cb30-10"></a><span class="co"># Converting from wide to long format</span></span>
+<span id="cb30-11"><a href="#cb30-11"></a>ts_longer <span class="ot">&lt;-</span> trade_data <span class="sc">%&gt;%</span></span>
+<span id="cb30-12"><a href="#cb30-12"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>),</span>
+<span id="cb30-13"><a href="#cb30-13"></a>               <span class="at">names_to =</span> <span class="st">"Trade_Type"</span>,</span>
+<span id="cb30-14"><a href="#cb30-14"></a>               <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-15"><a href="#cb30-15"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">yearmonth</span>(Date)) <span class="sc">%&gt;%</span>  <span class="co"># Date is in yearmonth format</span></span>
+<span id="cb30-16"><a href="#cb30-16"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> Date, <span class="at">key =</span> Trade_Type)  <span class="co"># Converting to tsibble</span></span>
+<span id="cb30-17"><a href="#cb30-17"></a></span>
+<span id="cb30-18"><a href="#cb30-18"></a><span class="co"># Plotting single time-series for Imports</span></span>
+<span id="cb30-19"><a href="#cb30-19"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb30-20"><a href="#cb30-20"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">==</span> <span class="st">"Imports"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-21"><a href="#cb30-21"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Value)) <span class="sc">+</span></span>
+<span id="cb30-22"><a href="#cb30-22"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb30-23"><a href="#cb30-23"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Imports Over Time"</span>, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Value"</span>) <span class="sc">+</span></span>
+<span id="cb30-24"><a href="#cb30-24"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Plotting multiple time-series for all trade types</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">ggplot</span>(ts_longer, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Value, <span class="at">color =</span> Trade_Type)) <span class="sc">+</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Plotting multiple time-series for all trade types</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">ggplot</span>(ts_longer, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Value, <span class="at">color =</span> Trade_Type)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Visual Analysis of Seasonality</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="co"># Seasonal plot</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a>ts_longer <span class="sc">%&gt;%</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Imports"</span>, <span class="st">"ReExports"</span>, <span class="st">"Domestic_Exports"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">gg_season</span>(Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Visual Analysis of Seasonality</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="co"># Seasonal plot</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Imports"</span>, <span class="st">"ReExports"</span>, <span class="st">"Domestic_Exports"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>  <span class="fu">gg_season</span>(Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-18-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Cycle plot</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>ts_longer <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Imports"</span>, <span class="st">"ReExports"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb34-4"><a href="#cb34-4"></a>  <span class="fu">gg_subseries</span>(Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Cycle plot</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>ts_longer <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">filter</span>(Trade_Type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Imports"</span>, <span class="st">"ReExports"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">gg_subseries</span>(Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-18-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Time Series Decomposition</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a>ts_tsibble <span class="sc">%&gt;%</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">model</span>(<span class="at">stl =</span> <span class="fu">STL</span>(ReExports)) <span class="sc">%&gt;%</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Time Series Decomposition</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>ts_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">model</span>(<span class="at">stl =</span> <span class="fu">STL</span>(ReExports)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-5.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-18-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Visual STL Diagnostics</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="co"># Classical decomposition</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a>ts_tsibble <span class="sc">%&gt;%</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">model</span>(<span class="fu">classical_decomposition</span>(ReExports, <span class="at">type =</span> <span class="st">"additive"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Visual STL Diagnostics</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="co"># Classical decomposition</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>ts_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">model</span>(<span class="fu">classical_decomposition</span>(ReExports, <span class="at">type =</span> <span class="st">"additive"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">components</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-6.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-18-6.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># Forecasting</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>ts_train <span class="ot">&lt;-</span> ts_tsibble <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="fu">yearmonth</span>(<span class="st">"2024-01"</span>))</span>
-<span id="cb37-4"><a href="#cb37-4"></a></span>
-<span id="cb37-5"><a href="#cb37-5"></a><span class="co"># Fitting ETS model</span></span>
-<span id="cb37-6"><a href="#cb37-6"></a>fit_ets <span class="ot">&lt;-</span> ts_train <span class="sc">%&gt;%</span></span>
-<span id="cb37-7"><a href="#cb37-7"></a>  <span class="fu">model</span>(<span class="fu">ETS</span>(ReExports))</span>
-<span id="cb37-8"><a href="#cb37-8"></a></span>
-<span id="cb37-9"><a href="#cb37-9"></a><span class="co"># Forecast</span></span>
-<span id="cb37-10"><a href="#cb37-10"></a>forecast_ets <span class="ot">&lt;-</span> fit_ets <span class="sc">%&gt;%</span></span>
-<span id="cb37-11"><a href="#cb37-11"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
-<span id="cb37-12"><a href="#cb37-12"></a></span>
-<span id="cb37-13"><a href="#cb37-13"></a><span class="co"># Plotting forecast</span></span>
-<span id="cb37-14"><a href="#cb37-14"></a>forecast_ets <span class="sc">%&gt;%</span></span>
-<span id="cb37-15"><a href="#cb37-15"></a>  <span class="fu">autoplot</span>(ts_tsibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Forecasting</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>ts_train <span class="ot">&lt;-</span> ts_tsibble <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="fu">yearmonth</span>(<span class="st">"2024-01"</span>))</span>
+<span id="cb36-4"><a href="#cb36-4"></a></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="co"># Fitting ETS model</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>fit_ets <span class="ot">&lt;-</span> ts_train <span class="sc">%&gt;%</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a>  <span class="fu">model</span>(<span class="fu">ETS</span>(ReExports))</span>
+<span id="cb36-8"><a href="#cb36-8"></a></span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="co"># Forecast</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a>forecast_ets <span class="ot">&lt;-</span> fit_ets <span class="sc">%&gt;%</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
+<span id="cb36-12"><a href="#cb36-12"></a></span>
+<span id="cb36-13"><a href="#cb36-13"></a><span class="co"># Plotting forecast</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a>forecast_ets <span class="sc">%&gt;%</span></span>
+<span id="cb36-15"><a href="#cb36-15"></a>  <span class="fu">autoplot</span>(ts_tsibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-19-7.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex02_files/figure-html/unnamed-chunk-18-7.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
