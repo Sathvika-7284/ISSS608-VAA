@@ -94,8 +94,6 @@ sum(is.na(Current_Prices))
 ### 3.1.4 Improved Visualization
 
 ```{r}
-#| plot-height: 20
-#| plot-width: 60
 #| code-fold: true
 
 library(tidyverse)
@@ -218,7 +216,7 @@ The visualization provides a complete examination of Singapore's goods Imports &
 
 ### 3.4.3 Sketch of Alternative Design
 
-![](images/clipboard-270078131.png)
+![](images/clipboard-1780405589.png)
 
 ### 3.4.4 Improved Visualization
 
