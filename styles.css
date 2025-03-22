@@ -1,1 +1,5 @@
 /* css styles */
+.dropdown-menu {
+  max-height: 350px;  /* Set a max height */
+  overflow-y: auto;   /* Enable vertical scrolling */
+}
