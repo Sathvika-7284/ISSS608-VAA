@@ -24,7 +24,6 @@ pacman::p_load(tmap, tidyverse, sf)
 NGA_wp <- read_rds("data/rds/NGA_wp.rds")
 ```
 
-
 # 2. Basic Choropleth Mapping
 
 ## 2.1 Visualising distribution of non-functional water point
@@ -57,10 +56,9 @@ p2 <- tm_shape(NGA_wp) +
 tmap_arrange(p2, p1, nrow = 1)
 ```
 
-
 # 3. Choropleth Map for Rates
 
-## 3.1  Deriving Proportion of Functional Water Points and Non-Functional Water Points
+## 3.1 Deriving Proportion of Functional Water Points and Non-Functional Water Points
 
 ```{r}
 NGA_wp <- NGA_wp %>%
@@ -82,7 +80,6 @@ tm_shape(NGA_wp) +
   tm_layout(main.title = "Rate map of functional water point by LGAs",
             legend.outside = TRUE)
 ```
-
 
 # 4. Extreme Value Maps
 
@@ -188,7 +185,6 @@ get.var <- function(vname,df) {
   return(v)
 }
 ```
-
 
 ### 4.2.3 Test drive the newly created function
 
