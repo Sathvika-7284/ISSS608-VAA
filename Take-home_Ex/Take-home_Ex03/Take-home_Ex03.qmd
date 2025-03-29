@@ -1,0 +1,13 @@
+---
+title: "Take Home Exercise 3"
+author: "Sathvika Subramanian"
+date: "March 27, 2025"
+date-modified: "last-modified"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+
