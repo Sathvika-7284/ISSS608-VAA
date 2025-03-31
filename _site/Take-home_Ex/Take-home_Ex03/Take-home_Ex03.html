@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#time-series-forecasting" id="toc-time-series-forecasting" class="nav-link" data-scroll-target="#time-series-forecasting">4. Time Series Forecasting</a>
   <ul class="collapse">
   <li><a href="#seasonal-subseries-plots-all-variables" id="toc-seasonal-subseries-plots-all-variables" class="nav-link" data-scroll-target="#seasonal-subseries-plots-all-variables">Seasonal &amp; Subseries Plots (All variables)</a></li>
-  <li><a href="#decomposition-of-dengue-cases-acf-stl-classical" id="toc-decomposition-of-dengue-cases-acf-stl-classical" class="nav-link" data-scroll-target="#decomposition-of-dengue-cases-acf-stl-classical">Decomposition of Dengue Cases (ACF, STL, Classical)</a></li>
+  <li><a href="#time-series-decomposition-of-dengue-cases-acf-stl-classical" id="toc-time-series-decomposition-of-dengue-cases-acf-stl-classical" class="nav-link" data-scroll-target="#time-series-decomposition-of-dengue-cases-acf-stl-classical">Time Series Decomposition of Dengue Cases (ACF, STL, Classical)</a></li>
   <li><a href="#ets-forecasting-of-dengue-cases" id="toc-ets-forecasting-of-dengue-cases" class="nav-link" data-scroll-target="#ets-forecasting-of-dengue-cases">ETS Forecasting of Dengue Cases</a></li>
   <li><a href="#arima-forecasting-comparison-with-ets" id="toc-arima-forecasting-comparison-with-ets" class="nav-link" data-scroll-target="#arima-forecasting-comparison-with-ets">ARIMA Forecasting + Comparison with ETS</a></li>
   <li><a href="#forecast-plots-for-ets-vs-arima" id="toc-forecast-plots-for-ets-vs-arima" class="nav-link" data-scroll-target="#forecast-plots-for-ets-vs-arima">Forecast Plots for ETS vs ARIMA</a></li>
@@ -331,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 31, 2025</p>
+      <p class="date-modified">April 1, 2025</p>
     </div>
   </div>
     
@@ -428,6 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="filtering-only-changi-station-from-weather-data" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-only-changi-station-from-weather-data">Filtering only Changi Station from weather data</h2>
+<p>Narrowing down our analyse only on Changi station.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>weather_filtered_changi <span class="ot">&lt;-</span> weather <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Station <span class="sc">==</span> <span class="st">"Changi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -631,7 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-13"><a href="#cb21-13"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
 <span id="cb21-14"><a href="#cb21-14"></a>  )</span>
 <span id="cb21-15"><a href="#cb21-15"></a></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="co"># Creating tsibble</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a><span class="co"># Creating tsibble for time series dataframe</span></span>
 <span id="cb21-17"><a href="#cb21-17"></a>combined_tsibble <span class="ot">&lt;-</span> combined_data_agg <span class="sc">%&gt;%</span></span>
 <span id="cb21-18"><a href="#cb21-18"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -656,14 +657,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>AvgMeanTemp</p>
 <ul>
-<li><p>The time-series plot presents monthly trends for dengue cases, electricity usage, average mean temperature, and total daily rainfall from 2014 to early 2025.</p></li>
-<li><p>The temperature displays a clear seasonal cycle, rising and falling predictably each year, which is typical in tropical climates.</p></li>
-<li><p>Dengue cases show distinct spikes, especially around 2015, 2020, and 2023, suggesting outbreak periods that may be linked to environmental conditions.</p></li>
-<li><p>Electricity consumption remains relatively stable over time but drops sharply toward the end of the series, likely due to missing or incomplete data.</p></li>
-<li><p>Rainfall shows irregular patterns with several peaks, some of which align with dengue surges — hinting at a possible relationship between rainfall and mosquito breeding activity.</p>
-<p>This visual summary highlights temporal dynamics and potential interactions between weather, electricity usage, and dengue transmission.</p></li>
+<li><p>Exhibits a highly regular seasonal pattern, peaking mid-year and dipping towards the start and end of each calendar year.</p></li>
+<li><p>The temperature fluctuates between approximately 26°C and 29°C, characteristic of a tropical region.</p></li>
+<li><p>The seasonal pattern is stable and consistent, with no noticeable long-term trend (no significant warming or cooling across years).</p></li>
 </ul>
+<p>Implication: The strong seasonality and stationarity make AvgMeanTemp a suitable candidate for seasonal forecasting models or as a covariate in dengue prediction.</p>
+<p>Dengue Cases</p>
+<ul>
+<li><p>Demonstrates episodic spikes with significant outbreaks occurring around: Early 2015, Mid-2020 Mid-to-late 2023 (the most extreme spike)</p></li>
+<li><p>Post-outbreak, a rapid decline is observed each time, suggesting a return to baseline levels.</p></li>
+</ul>
+<p>Implication: Unlike temperature, dengue cases do not follow a consistent seasonal trend, but show irregular epidemic patterns. These may be triggered by environmental conditions, rainfall, or public health dynamics. Modeling dengue will require accounting for these non-seasonal, high-variance features, potentially using ARIMA, ETS, or hybrid models with external regressors.</p>
+<p>Electricity_KWh</p>
+<ul>
+<li><p>Shows mild seasonal variation and general stability until late 2023.</p></li>
+<li><p>A noticeable drop in electricity consumption begins in late 2023, reaching near-zero by 2025. The drop is likely due to missing or misreported data, not an actual collapse in consumption.</p></li>
+</ul>
+<p>Implication: Electricity data can provide indirect clues about population behavior or climatic demand (e.g., cooling).</p>
+<p>TotalDailyRain</p>
+<ul>
+<li><p>Displays high volatility and lacks a regular seasonal cycle.</p></li>
+<li><p>Significant rainfall peaks occur sporadically, notably: Late 2019 (preceding the 2020 dengue outbreak), Mid 2022</p></li>
+<li><p>Some alignment between rainfall surges and subsequent dengue outbreaks, potentially indicating a lagged causal relationship.</p></li>
+</ul>
+<p>Implication: Rainfall may act as a leading indicator for dengue via its influence on mosquito breeding conditions. Cross-correlation or lag analysis is recommended to quantify this relationship for modeling purposes.</p>
 <section id="seasonal-subseries-plots-all-variables" class="level2">
 <h2 class="anchored" data-anchor-id="seasonal-subseries-plots-all-variables">Seasonal &amp; Subseries Plots (All variables)</h2>
 <div class="cell">
@@ -697,19 +716,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Seasonal Plot Interpretation (Plot 1):</p>
+<p><strong>AvgMeanTemp (Temperature)</strong></p>
+<p>Seasonal Plot:</p>
 <ul>
-<li><p>This seasonal plot clearly highlights recurring monthly patterns for each variable. For average temperature, a consistent peak is observed mid-year (around May–July), indicating warmer months, while cooler months fall towards the end and beginning of each year.</p></li>
-<li><p>Dengue cases show noticeable spikes between June and August in certain years (especially 2020 and 2023), suggesting a possible seasonal outbreak period. Electricity consumption is relatively stable but slightly higher in mid-year months, possibly due to increased cooling demands. Rainfall shows irregular seasonal trends with sharp spikes in some years, suggesting monsoon or extreme weather events.</p></li>
+<li><p>Temperature follows a <strong>strong seasonal cycle</strong>, peaking between <strong>May–July</strong> and dipping during <strong>December–January</strong> every year.</p></li>
+<li><p>Curves are tightly clustered, suggesting <strong>high seasonal consistency</strong> across years.</p></li>
 </ul>
-<p>Cycle/Subseries Plot Interpretation (Plot 2):</p>
+<p>Subseries Plot:</p>
 <ul>
-<li><p>The cycle plots provide deeper insight into both seasonality and trends over time. For AvgMeanTemp, seasonal cycles are stable across years with minimal drift. However, dengue cases display irregular but strong peaks in specific years, especially around mid-year, hinting at sporadic outbreaks rather than a consistent seasonal pattern.</p></li>
-<li><p>Electricity consumption shows a mild seasonal component and a recent sudden drop (likely data issue or consumption shift). Rainfall patterns are highly variable with some strong outliers, indicating irregular monsoon impact or extreme events. These plots help isolate recurring patterns while exposing anomalies or one-time spikes.</p></li>
+<li><p>The <strong>blue monthly means</strong> stay mostly stable.</p></li>
+<li><p>Each year’s temperature follows a nearly identical profile → <strong>very reliable seasonal pattern</strong>.</p></li>
 </ul>
+<p><strong>Implication</strong>: This is a classic seasonal series — perfect candidate for models with additive/multiplicative seasonal components (e.g., ETS(M,A,M)).</p>
+<p><strong>Dengue Cases</strong></p>
+<p>Seasonal Plot:</p>
+<ul>
+<li><p>Some years (like <strong>2020</strong>) show <strong>large peaks mid-year</strong> (June–August), but the overall pattern is <strong>inconsistent across years</strong>.</p></li>
+<li><p>Most years stay flat or low — outbreaks are <strong>sporadic</strong>, not regular.</p></li>
+</ul>
+<p>Subseries Plot:</p>
+<ul>
+<li><p>Most months have low values, except <strong>occasional extreme outliers</strong> in mid-year months like June and July.</p></li>
+<li><p>Seasonality exists but is <strong>irregular and event-driven</strong> (e.g., epidemics)</p></li>
+</ul>
+<p><strong>Implication</strong>: Dengue is <strong>not purely seasonal</strong>. Use models that can handle irregular surges — ARIMA or hybrid models with regressors may be better suited.</p>
+<p><strong>Electricity_KWh</strong></p>
+<p>Seasonal Plot:</p>
+<ul>
+<li><p>Electricity usage is <strong>fairly stable</strong> month to month with <strong>slight increases mid-year</strong>, likely due to cooling demands in hotter months</p></li>
+<li><p>The 2024 line <strong>drops to zero after July</strong>, signaling <strong>missing data</strong>, not a real-world trend.</p></li>
+</ul>
+<p>Subseries Plot:</p>
+<ul>
+<li><p>Minor seasonal variation (slight rise in May–July), but not strong.</p></li>
+<li><p>The subseries emphasizes the sudden drop in 2024, reinforcing the likelihood of <strong>data gaps</strong>.</p></li>
+</ul>
+<p><strong>Implication</strong>: While not strongly seasonal, this variable may still track with temperature. Handle 2023+ data cautiously due to likely incompleteness.</p>
+<p><strong>TotalDailyRain</strong></p>
+<p>Seasonal Plot:</p>
+<ul>
+<li><p>No clear seasonality — rainfall is <strong>highly volatile</strong>, but some spikes tend to occur between <strong>May–September</strong>.</p></li>
+<li><p>Very high values in 2020 and 2023 suggest <strong>extreme rainfall events</strong>.</p></li>
+</ul>
+<p>Subseries Plot:</p>
+<ul>
+<li><p>A few months (e.g., May–July) show large variations across years</p></li>
+<li><p>No month consistently shows high rainfall across all years — seasonality is <strong>weak and inconsistent</strong>.</p></li>
+</ul>
+<p><strong>Implication</strong>: Rainfall doesn’t follow a regular cycle — best treated as a <strong>lagged external driver</strong> of dengue (e.g., via cross-correlation).</p>
 </section>
-<section id="decomposition-of-dengue-cases-acf-stl-classical" class="level2">
-<h2 class="anchored" data-anchor-id="decomposition-of-dengue-cases-acf-stl-classical">Decomposition of Dengue Cases (ACF, STL, Classical)</h2>
+<section id="time-series-decomposition-of-dengue-cases-acf-stl-classical" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-decomposition-of-dengue-cases-acf-stl-classical">Time Series Decomposition of Dengue Cases (ACF, STL, Classical)</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># ACF &amp; PACF for Dengue cases</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
@@ -776,8 +833,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Composite plot confirms:</p>
 <ol type="1">
 <li><p>Strong seasonality, with dengue peaks recurring yearly.</p></li>
-<li><p>ACF shows long autocorrelation tail (suggesting non-stationarity).</p></li>
-<li><p>PACF indicates 1–2 significant lags, which helps in ARIMA modeling later.</p></li>
+<li><p>ACF shows long autocorrelation tail (suggesting non-stationarity).The slow decay in the ACF is indicative of non-stationarity, suggesting the need for differencing before applying ARIMA models.</p></li>
+<li><p>PACF indicates 1–2 significant lags, which helps in ARIMA modeling later.The PACF plot exhibits a sharp drop after lag 1, suggesting an AR(1) structure, which is common in short-memory processes.</p></li>
 </ol>
 <p>STL Decomposition:</p>
 <ol type="1">
@@ -791,12 +848,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Shows strong seasonality and mid-2019 to 2021 surge in trend.</p></li>
 <li><p>Residuals are still present, which shows the importance of forecasting models to capture these dynamics.</p></li>
 </ol>
-<p>The analysis decomposed dengue time series into trend, seasonality, and irregular components using both STL and classical methods. The STL plot revealed a clear seasonal cycle where dengue cases peak mid-year, aligning with wetter months. ACF and PACF plots showed significant correlation with recent months, highlighting temporal dependency. These insights confirm that dengue has strong yearly patterns, a rising-falling long-term trend, and some random fluctuations. This justifies using seasonal ARIMA or ETS models for better forecasting of future dengue outbreaks.</p>
+<p>The analysis decomposed dengue time series into trend, seasonality, and irregular components using both STL and classical methods.STL is particularly helpful because it allows for changing seasonal patterns over time and handles outliers more gracefully compared to classical methods.The STL plot revealed a clear seasonal cycle where dengue cases peak mid-year, aligning with wetter months. ACF and PACF plots showed significant correlation with recent months, highlighting temporal dependency. These insights confirm that dengue has strong yearly patterns, a rising-falling long-term trend, and some random fluctuations. This justifies using seasonal ARIMA or ETS models for better forecasting of future dengue outbreaks.</p>
 </section>
 <section id="ets-forecasting-of-dengue-cases" class="level2">
 <h2 class="anchored" data-anchor-id="ets-forecasting-of-dengue-cases">ETS Forecasting of Dengue Cases</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Define training vs test set (last 12 months as test)</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Defining training vs test set (last 12 months as test)</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a>dengue_ts <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
 <span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">select</span>(Date, denguecases) <span class="sc">%&gt;%</span></span>
 <span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">mutate</span>(<span class="at">Type =</span> <span class="fu">if_else</span>(Date <span class="sc">&gt;=</span> <span class="fu">yearmonth</span>(<span class="st">"2024 Jan"</span>), <span class="st">"Test"</span>, <span class="st">"Train"</span>))</span>
@@ -804,11 +861,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-6"><a href="#cb30-6"></a>dengue_train <span class="ot">&lt;-</span> dengue_ts <span class="sc">%&gt;%</span></span>
 <span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">filter</span>(Type <span class="sc">==</span> <span class="st">"Train"</span>)</span>
 <span id="cb30-8"><a href="#cb30-8"></a></span>
-<span id="cb30-9"><a href="#cb30-9"></a><span class="co"># Fit ETS model</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a><span class="co"># Fitting ETS model</span></span>
 <span id="cb30-10"><a href="#cb30-10"></a>fit_ets <span class="ot">&lt;-</span> dengue_train <span class="sc">%&gt;%</span></span>
 <span id="cb30-11"><a href="#cb30-11"></a>  <span class="fu">model</span>(<span class="fu">ETS</span>(denguecases))</span>
 <span id="cb30-12"><a href="#cb30-12"></a></span>
-<span id="cb30-13"><a href="#cb30-13"></a><span class="co"># Check residuals</span></span>
+<span id="cb30-13"><a href="#cb30-13"></a><span class="co"># Checking residuals</span></span>
 <span id="cb30-14"><a href="#cb30-14"></a>fit_ets <span class="sc">%&gt;%</span> <span class="fu">gg_tsresiduals</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -840,7 +897,7 @@ Model: ETS(M,N,M)
 <span id="cb33-2"><a href="#cb33-2"></a>fc_ets <span class="ot">&lt;-</span> fit_ets <span class="sc">%&gt;%</span></span>
 <span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
 <span id="cb33-4"><a href="#cb33-4"></a></span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="co"># Plot with actual + forecasted + fitted</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="co"># Plotting with actual + forecasted + fitted</span></span>
 <span id="cb33-6"><a href="#cb33-6"></a>dengue_ts <span class="sc">%&gt;%</span></span>
 <span id="cb33-7"><a href="#cb33-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> denguecases)) <span class="sc">+</span></span>
 <span id="cb33-8"><a href="#cb33-8"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> Type), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
@@ -857,7 +914,24 @@ Model: ETS(M,N,M)
 </div>
 </div>
 </div>
-<p>In this analysis, an ETS(M,N,M) model was fitted to monthly dengue case data to forecast future values. The data set was split into training and test sets, with the last 12 months held out for validation. The model performed well, as shown by diagnostic plots where residuals displayed no major autocorrelation and were roughly normally distributed. The forecast aligned reasonably with the actual test data, and the fitted values closely tracked the training data. The ETS model successfully captured seasonal patterns in dengue cases and demonstrated good predictive ability with appropriate forecast uncertainty bands.</p>
+<p>ETS Modeling and Forecasting of Dengue Cases An Exponential Smoothing State Space (ETS) model was used to forecast monthly dengue cases, leveraging historical data up to December 2023.</p>
+<ul>
+<li><p>The data was split into training (pre-2024) and testing (2024 onward) sets to evaluate model accuracy.</p></li>
+<li><p>An ETS(M,N,M) model was automatically selected, indicating multiplicative error and seasonality with no trend component.</p></li>
+<li><p>Smoothing parameters suggest that the model gives higher weight to recent values and assumes stable seasonality over time.</p></li>
+</ul>
+<p>Residual diagnostics showed:</p>
+<ul>
+<li><p>No significant autocorrelation left in the residuals.</p></li>
+<li><p>Residuals are mostly centered around zero with moderate spread, validating model assumptions.</p></li>
+</ul>
+<p>Forecast accuracy:</p>
+<ul>
+<li><p>The 12-month forecast captured the seasonal dengue peaks.</p></li>
+<li><p>Actual test values for 2024 were largely within the prediction intervals (80% and 95%).</p></li>
+<li><p>Fitted values closely matched training data.</p></li>
+</ul>
+<p>These results confirm the ETS model’s ability to effectively capture dengue seasonality and provide reasonably accurate forecasts. This can be useful for early outbreak warnings and public health planning.</p>
 </section>
 <section id="arima-forecasting-comparison-with-ets" class="level2">
 <h2 class="anchored" data-anchor-id="arima-forecasting-comparison-with-ets">ARIMA Forecasting + Comparison with ETS</h2>
@@ -884,7 +958,7 @@ AIC=2329.9   AICc=2330.43   BIC=2343.84</code></pre>
 <span id="cb36-2"><a href="#cb36-2"></a>fc_arima <span class="ot">&lt;-</span> fit_arima <span class="sc">%&gt;%</span></span>
 <span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
 <span id="cb36-4"><a href="#cb36-4"></a></span>
-<span id="cb36-5"><a href="#cb36-5"></a><span class="co"># Compare ETS vs ARIMA model performance</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="co"># Comparing ETS vs ARIMA model performance</span></span>
 <span id="cb36-6"><a href="#cb36-6"></a><span class="fu">bind_rows</span>(</span>
 <span id="cb36-7"><a href="#cb36-7"></a>  fit_arima <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(),</span>
 <span id="cb36-8"><a href="#cb36-8"></a>  fit_ets <span class="sc">%&gt;%</span> <span class="fu">accuracy</span>(),</span>
@@ -902,12 +976,25 @@ AIC=2329.9   AICc=2330.43   BIC=2343.84</code></pre>
 4 ETS(denguecases)   Test     5137. 4740. 0.609 0.438</code></pre>
 </div>
 </div>
+<p>The ETS (Error-Trend-Seasonality) model was used to forecast dengue cases 12 months beyond the training period. The forecast closely followed historical seasonal trends, and most observed values during the test period fell within the model’s 80% and 95% prediction intervals. This suggests the model captures seasonality well and provides reasonable uncertainty estimates.</p>
+<p>However, some underestimation occurred during sharp spikes in dengue cases, a common challenge with smoother ETS models that assume regular seasonal structure.</p>
+<p>An ARIMA(2,0,0)(0,0,1)[12] model was also fitted, which includes:</p>
 <ul>
-<li><p>The ETS model was used to forecast dengue cases for 12 months beyond the training set. The predicted values follow the historical seasonal trends, with most actual observations falling within the forecast confidence intervals.</p></li>
-<li><p>This indicates the model is generally reliable, though some underestimation is observed during sudden spikes. The ARIMA model selected was ARIMA(2,0,0)(0,0,1)[12], indicating two autoregressive terms and a seasonal moving average term. The estimated coefficients are statistically significant.</p></li>
-<li><p>However, model fit statistics (AIC, BIC) are higher than ETS, suggesting a slightly inferior fit. Model accuracy metrics reveal that ETS slightly outperforms ARIMA on training data, indicating better in-sample fit. However, ARIMA provides slightly better performance on the test data. Both models show MASE &lt; 1, suggesting they are better than naïve forecasting. While both are viable, ARIMA may generalize better to unseen data in this case. Both ETS and ARIMA models successfully captured the seasonal trends in dengue cases.</p></li>
-<li><p>ETS offered a slightly better fit on historical data, while ARIMA showed improved performance in forecasting unseen values. These results suggest that model selection may depend on the intended use—ETS for interpretability and stability, ARIMA for generalization.</p></li>
+<li><p>Two autoregressive (AR) terms to capture short-term memory,</p></li>
+<li><p>A seasonal moving average (SMA) term at lag 12 to model annual seasonality,</p></li>
+<li><p>No differencing, indicating the data is already stationary.</p></li>
 </ul>
+<p>Although the AIC and BIC values for ARIMA were slightly higher than those of ETS, indicating a marginally worse fit to the training data, the ARIMA model performed better on the test set based on forecast accuracy metrics:</p>
+<ul>
+<li><p>Lower RMSE and RMSSE on test data,</p></li>
+<li><p>MASE &lt; 1 for both models, confirming both outperform a naïve seasonal benchmark.</p></li>
+</ul>
+<p>These results suggest:</p>
+<ul>
+<li><p>ETS is better at fitting past values (in-sample), and offers a more interpretable model structure.</p></li>
+<li><p>ARIMA generalizes better to unseen data (out-of-sample), making it more suitable for forecasting in real-world settings.</p></li>
+</ul>
+<p>Overall, both models effectively captured the strong seasonal structure of dengue outbreaks. ETS may be preferred when stability and interpretability are needed, whereas ARIMA may be more useful when forecasting accuracy is the top priority.</p>
 </section>
 <section id="forecast-plots-for-ets-vs-arima" class="level2">
 <h2 class="anchored" data-anchor-id="forecast-plots-for-ets-vs-arima">Forecast Plots for ETS vs ARIMA</h2>
@@ -928,14 +1015,21 @@ AIC=2329.9   AICc=2330.43   BIC=2343.84</code></pre>
 </div>
 </div>
 </div>
-<p>The plot compares two forecasting models — ETS and ARIMA — for predicting dengue cases over a 12-month horizon starting from January 2024. The actual historical trend shows clear seasonality and outbreak peaks in prior years. The ETS model (blue line) follows seasonal dynamics more closely, whereas the ARIMA model (red line) presents a smoother forecast, possibly due to its autoregressive nature. Both forecasts reflect a declining trend following a sudden drop in observed values. This side-by-side visualization is useful for evaluating model behavior and understanding which method aligns better with recent patterns.</p>
+<p>The forecast comparison plot overlays the predicted dengue cases from both ETS and ARIMA models for the test period (2024 onward):</p>
+<ul>
+<li><p>Historical trend (black line) shows clear annual peaks with recent decline into 2024.</p></li>
+<li><p>ETS forecast (blue) continues a smoothed seasonal trend, slightly overpredicting dengue in the latter months.</p></li>
+<li><p>ARIMA forecast (red) exhibits a flatter trajectory, indicating a more conservative response to the recent drop in cases.</p></li>
+<li><p>Both forecasts attempt to follow the general seasonal pattern, but diverge slightly in magnitude and turning points.</p></li>
+</ul>
+<p>The visual comparison between ETS and ARIMA forecasts shows both models track recent dengue patterns but with subtle differences. ETS maintains a smoother seasonal pattern, while ARIMA is more responsive to the recent downturn, producing lower forecasts in the early months of 2024. The divergence underscores how different model structures handle trend and seasonality. While ETS may better represent long-term seasonality, ARIMA may better reflect recent changes in dynamics. This reinforces the importance of selecting a model aligned with the forecasting goal—whether short-term responsiveness or long-term seasonal stability.</p>
 </section>
 <section id="decomposition-of-all-variables-trend-seasonality" class="level2">
 <h2 class="anchored" data-anchor-id="decomposition-of-all-variables-trend-seasonality">Decomposition of All Variables (Trend + Seasonality)</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Decompose AvgMeanTemp, Electricity_KWh, TotalDailyRain</span></span>
 <span id="cb39-2"><a href="#cb39-2"></a></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="co"># Convert to long format and decompose each using STL</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="co"># Converting to long format and decompose each using STL</span></span>
 <span id="cb39-4"><a href="#cb39-4"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
 <span id="cb39-5"><a href="#cb39-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(AvgMeanTemp, Electricity_KWh, TotalDailyRain),</span>
 <span id="cb39-6"><a href="#cb39-6"></a>               <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
@@ -952,26 +1046,28 @@ AIC=2329.9   AICc=2330.43   BIC=2343.84</code></pre>
 </div>
 </div>
 </div>
-<p>The STL decomposition plot breaks each variable into its core components: trend, seasonal variation, and residuals.</p>
-<p>Electricity_KWh (green): Shows a relatively stable long-term trend, peaking slightly before 2023, followed by a sharp drop. It also exhibits strong seasonal variation, indicating consistent consumption cycles.</p>
-<p>TotalDailyRain (blue): Displays significant seasonal spikes and troughs in the season_year component, indicating strong monthly rainfall patterns. The trend component gradually increases until 2022–23, then declines sharply.</p>
-<p>AvgMeanTemp (red): Appears more stable with minimal trend or seasonality. This suggests temperature varies less dramatically compared to rainfall or electricity usage.</p>
-<p>Overall, the decomposition helps isolate consistent repeating seasonal patterns and underlying long-term changes in climate and consumption. These insights are important for improving forecasting accuracy and understanding environmental correlations.</p>
+<p>The STL decomposition plot separates each variable into trend, seasonal, and remainder (residual) components, offering deeper insights into their temporal behavior.</p>
+<ul>
+<li><p>Electricity_KWh (green): Shows a steady upward trend until around 2022, followed by a sharp decline, possibly due to external disruptions (e.g., policy shifts, data gaps, or economic factors). The seasonal pattern is strong and consistent, reflecting cyclical consumption behaviors — likely tied to climate or activity cycles.</p></li>
+<li><p>TotalDailyRain (blue): Exhibits pronounced seasonal variation with clear annual peaks and troughs, aligning with expected monsoon or wet seasons. The trend rises steadily until about 2022–2023 before declining, potentially pointing to changing rainfall intensity or data completeness issues.</p></li>
+<li><p>AvgMeanTemp (red): Remains relatively flat across all components, with minimal visible trend or seasonal amplitude. This suggests temperature is more stable over time, or its variation is less influential compared to the other variables.</p></li>
+</ul>
+<p>Overall, the STL decomposition effectively isolates long-term trends from recurring seasonal patterns and residual noise. This helps in identifying stable patterns versus anomalies and informs the design of more robust forecasting models — especially when assessing dengue outbreaks in relation to climate and electricity factors.</p>
 </section>
 <section id="trend-exploration-between-variables" class="level2">
 <h2 class="anchored" data-anchor-id="trend-exploration-between-variables">Trend Exploration Between Variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Force it into a regular data frame to avoid tsibble-related metadata</span></span>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Forcing it into a regular data frame to avoid tsibble-related metadata</span></span>
 <span id="cb40-2"><a href="#cb40-2"></a>cor_data <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span>  <span class="co"># drops tsibble-specific indexing</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span>  <span class="co"># dropping tsibble-specific indexing</span></span>
 <span id="cb40-4"><a href="#cb40-4"></a>  <span class="fu">select</span>(denguecases, AvgMeanTemp, TotalDailyRain, Electricity_KWh) <span class="sc">%&gt;%</span></span>
 <span id="cb40-5"><a href="#cb40-5"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.numeric))  <span class="co"># force all to numeric</span></span>
 <span id="cb40-6"><a href="#cb40-6"></a></span>
-<span id="cb40-7"><a href="#cb40-7"></a><span class="co"># Now compute correlation matrix</span></span>
+<span id="cb40-7"><a href="#cb40-7"></a><span class="co"># Computing correlation matrix</span></span>
 <span id="cb40-8"><a href="#cb40-8"></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(cor_data, <span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb40-9"><a href="#cb40-9"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb40-10"><a href="#cb40-10"></a></span>
-<span id="cb40-11"><a href="#cb40-11"></a><span class="co"># View the result</span></span>
+<span id="cb40-11"><a href="#cb40-11"></a><span class="co"># Result</span></span>
 <span id="cb40-12"><a href="#cb40-12"></a>cor_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                denguecases AvgMeanTemp TotalDailyRain Electricity_KWh
@@ -981,17 +1077,20 @@ TotalDailyRain         0.11       -0.35           1.00            0.17
 Electricity_KWh        0.25        0.15           0.17            1.00</code></pre>
 </div>
 </div>
-<p>The correlation matrix shows the linear relationship between dengue cases and key climate and electricity variables:</p>
-<p>Dengue vs AvgMeanTemp: Weak positive correlation (0.13), suggesting higher temperatures slightly coincide with more dengue cases, though not strongly.</p>
-<p>Dengue vs TotalDailyRain: Weak positive (0.11), meaning rainfall may influence dengue spread, but the link is minimal.</p>
-<p>Dengue vs Electricity_KWh: Moderate positive (0.25), possibly reflecting increased energy usage during dengue season (e.g., for cooling or medical infrastructure).</p>
-<p>AvgMeanTemp vs TotalDailyRain: Notably negative (-0.35), indicating months with more rain tend to have lower average temperatures.</p>
-<p>Overall, no strong correlations are observed, but electricity usage appears to be a slightly stronger indicator of dengue activity than weather alone. These results support the need for multivariate models or lag analysis to uncover deeper relationships.</p>
+<p>The correlation matrix provides an overview of linear relationships between dengue cases, weather factors, and electricity usage.</p>
+<p>Dengue cases show a weak positive correlation with:</p>
+<ul>
+<li><p>Electricity consumption (0.25): This could reflect increased indoor activity or reporting during higher usage periods.</p></li>
+<li><p>Average temperature (0.13) and rainfall (0.11): Slight associations, possibly due to mosquito breeding environments but not strongly linear.</p></li>
+</ul>
+<p>Average temperature and total rainfall are negatively correlated (-0.35) — possibly reflecting seasonal climatic cycles (e.g., lower temperatures during rainy months).</p>
+<p>Electricity_KWh has small positive correlations with all other variables, hinting at indirect links to environmental and behavioral factors.</p>
+<p>Overall, no strong linear correlation exists, but weak signals support the idea of seasonal and environmental influence on dengue trends. These patterns align with earlier STL and decomposition findings, reinforcing the importance of incorporating seasonality and nonlinear dynamics in forecasting models.</p>
 </section>
 <section id="cross-correlation-ccf-to-explore-lag-effects" class="level2">
 <h2 class="anchored" data-anchor-id="cross-correlation-ccf-to-explore-lag-effects">Cross-correlation (CCF) to Explore Lag Effects</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Check if rainfall or temperature leads to changes in dengue cases</span></span>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># Checking if rainfall or temperature leads to changes in dengue cases</span></span>
 <span id="cb42-2"><a href="#cb42-2"></a></span>
 <span id="cb42-3"><a href="#cb42-3"></a>combined_tsibble <span class="sc">%&gt;%</span></span>
 <span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">CCF</span>(denguecases, TotalDailyRain) <span class="sc">%&gt;%</span></span>
@@ -1016,8 +1115,17 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 </div>
 </div>
 </div>
-<p>The cross-correlation between dengue cases and total rainfall shows significant positive correlations at lags of 3 to 8 months. This indicates that periods of heavy rainfall are often followed by increased dengue outbreaks after a delay of a few months, likely due to favorable breeding conditions for mosquitoes.</p>
-<p>The CCF between dengue cases and average temperature reveals weaker and mixed correlations. Moderate positive association at short lags (0–4 months) may reflect favorable temperatures for mosquito activity, while the negative values at longer lags suggest more complex dynamics or threshold effects in temperature influence.</p>
+<p>Dengue Cases vs.&nbsp;Total Rainfall - The CCF plot shows significant positive correlations at lags 5 to 10 months, peaking around lag 6–7.</p>
+<ul>
+<li><p>Interpretation: This suggests that rainfall leads dengue outbreaks by ~6–7 months. This makes biological sense — increased rain can enhance mosquito breeding grounds, which over time leads to higher dengue incidence.</p></li>
+<li><p>Implication: Rainfall is a useful early predictor for dengue case forecasting. Interventions (e.g., mosquito control) should ideally begin several months after heavy rains.</p></li>
+</ul>
+<p>Dengue Cases vs.&nbsp;Avg Temperature - The CCF plot shows weaker correlations but some positive values and negative spikes beyond lag 3.</p>
+<ul>
+<li><p>Interpretation: Temperature has a modest positive correlation shortly before or around the outbreak, possibly due to optimal mosquito survival conditions.</p></li>
+<li><p>The negative lags may reflect post-outbreak climatic cooling or statistical noise.</p></li>
+</ul>
+<p>Overall: Temperature may play a supportive but less dominant role compared to rainfall in triggering outbreaks</p>
 </section>
 <section id="build-forecasting-models-for-weather-electricity" class="level2">
 <h2 class="anchored" data-anchor-id="build-forecasting-models-for-weather-electricity">Build Forecasting Models for Weather &amp; Electricity</h2>
@@ -1028,7 +1136,7 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 <span id="cb44-4"><a href="#cb44-4"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb44-5"><a href="#cb44-5"></a><span class="fu">library</span>(fabletools)</span>
 <span id="cb44-6"><a href="#cb44-6"></a></span>
-<span id="cb44-7"><a href="#cb44-7"></a><span class="co"># Filter training data (before Jan 2024)</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="co"># Filtering training data (before Jan 2024)</span></span>
 <span id="cb44-8"><a href="#cb44-8"></a>train_data <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
 <span id="cb44-9"><a href="#cb44-9"></a>  <span class="fu">filter</span>(Date <span class="sc">&lt;</span> <span class="fu">yearmonth</span>(<span class="st">"2024 Jan"</span>))</span>
 <span id="cb44-10"><a href="#cb44-10"></a></span>
@@ -1042,15 +1150,15 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 <span id="cb44-18"><a href="#cb44-18"></a>fc_rain <span class="ot">&lt;-</span> model_rain <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
 <span id="cb44-19"><a href="#cb44-19"></a>fc_elec <span class="ot">&lt;-</span> model_elec <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
 <span id="cb44-20"><a href="#cb44-20"></a></span>
-<span id="cb44-21"><a href="#cb44-21"></a><span class="co"># Convert forecasts to tibbles, remove distribution column, and label them</span></span>
+<span id="cb44-21"><a href="#cb44-21"></a><span class="co"># Converting forecasts to tibbles, remove distribution column, and label them</span></span>
 <span id="cb44-22"><a href="#cb44-22"></a>fc_temp_df <span class="ot">&lt;-</span> fc_temp <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, .mean) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"AvgMeanTemp"</span>)</span>
 <span id="cb44-23"><a href="#cb44-23"></a>fc_rain_df <span class="ot">&lt;-</span> fc_rain <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, .mean) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"TotalDailyRain"</span>)</span>
 <span id="cb44-24"><a href="#cb44-24"></a>fc_elec_df <span class="ot">&lt;-</span> fc_elec <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, .mean) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"Electricity_KWh"</span>)</span>
 <span id="cb44-25"><a href="#cb44-25"></a></span>
-<span id="cb44-26"><a href="#cb44-26"></a><span class="co"># Combine into one tidy dataframe</span></span>
+<span id="cb44-26"><a href="#cb44-26"></a><span class="co"># Combining into one tidy dataframe</span></span>
 <span id="cb44-27"><a href="#cb44-27"></a>weather_fc <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(fc_temp_df, fc_rain_df, fc_elec_df)</span>
 <span id="cb44-28"><a href="#cb44-28"></a></span>
-<span id="cb44-29"><a href="#cb44-29"></a><span class="co"># Plot forecasted weather &amp; electricity</span></span>
+<span id="cb44-29"><a href="#cb44-29"></a><span class="co"># Plotting forecasted weather &amp; electricity</span></span>
 <span id="cb44-30"><a href="#cb44-30"></a>weather_fc <span class="sc">%&gt;%</span></span>
 <span id="cb44-31"><a href="#cb44-31"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> .mean, <span class="at">color =</span> Variable)) <span class="sc">+</span></span>
 <span id="cb44-32"><a href="#cb44-32"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
@@ -1069,23 +1177,20 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 </div>
 </div>
 </div>
-<p>The plot displays 12-month ahead forecasts (Jan–Dec 2024) for temperature, rainfall, and electricity consumption using ETS models.</p>
-<ul>
-<li><p>Temperature shows a clear seasonal pattern, rising toward mid-2024 (April–July) and declining afterward, matching historical seasonal trends.</p></li>
-<li><p>Rainfall is much more volatile, showing sharp fluctuations and a peak forecast around late 2024, suggesting possible rainy season or monsoon effects.</p></li>
-<li><p>Electricity consumption is relatively stable but peaks in mid-2024, which could relate to higher power use during warmer months due to cooling demands.</p></li>
-</ul>
-<p>These forecasts give a climate and resource management preview for the year ahead and can be helpful when planning dengue surveillance, since earlier plots showed that rainfall and temperature influence dengue cases with a lag.</p>
+<p>The plot presents 12-month ETS-based forecasts (Jan–Dec 2024) for three key variables: average temperature, total rainfall, and electricity consumption.</p>
+<p>AvgMeanTemp (Temperature) - Exhibits a strong and smooth seasonal pattern, peaking during April to July, then gradually declining. - This aligns well with historical climate patterns and confirms ETS’s suitability for temperature forecasting due to its consistent cyclical nature.</p>
+<p>TotalDailyRain (Rainfall) - Shows greater volatility and sharper fluctuations, with a peak forecast toward late 2024. - These spikes likely correspond to rainy or monsoon seasons, which are important precursors for mosquito breeding and, hence, dengue outbreaks.</p>
+<p>Electricity_KWh - Remains relatively stable, with a notable mid-year peak—likely due to increased cooling demand during hotter months. - This again reflects seasonal human behavior and infrastructure load, reinforcing patterns seen in past data.</p>
 </section>
 <section id="accuracy-comparison-for-weather-forecasts" class="level2">
 <h2 class="anchored" data-anchor-id="accuracy-comparison-for-weather-forecasts">Accuracy Comparison for Weather Forecasts</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># Get actual test data for Jan 2024 onwards</span></span>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># Getting actual test data for Jan 2024 onwards</span></span>
 <span id="cb45-2"><a href="#cb45-2"></a>test_data <span class="ot">&lt;-</span> combined_tsibble <span class="sc">%&gt;%</span></span>
 <span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">filter</span>(Date <span class="sc">&gt;=</span> <span class="fu">yearmonth</span>(<span class="st">"2024 Jan"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">select</span>(Date, AvgMeanTemp, TotalDailyRain, Electricity_KWh)</span>
 <span id="cb45-5"><a href="#cb45-5"></a></span>
-<span id="cb45-6"><a href="#cb45-6"></a><span class="co"># Compute forecast accuracy before converting to tibble</span></span>
+<span id="cb45-6"><a href="#cb45-6"></a><span class="co"># Computing forecast accuracy before converting to tibble</span></span>
 <span id="cb45-7"><a href="#cb45-7"></a></span>
 <span id="cb45-8"><a href="#cb45-8"></a><span class="co"># Temp forecast accuracy</span></span>
 <span id="cb45-9"><a href="#cb45-9"></a>acc_temp <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(fc_temp, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, AvgMeanTemp)) <span class="sc">%&gt;%</span></span>
@@ -1099,11 +1204,11 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 <span id="cb45-17"><a href="#cb45-17"></a>acc_elec <span class="ot">&lt;-</span> <span class="fu">accuracy</span>(fc_elec, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, Electricity_KWh)) <span class="sc">%&gt;%</span></span>
 <span id="cb45-18"><a href="#cb45-18"></a>  <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"Electricity_KWh"</span>)</span>
 <span id="cb45-19"><a href="#cb45-19"></a></span>
-<span id="cb45-20"><a href="#cb45-20"></a><span class="co"># Combine all into one summary table</span></span>
+<span id="cb45-20"><a href="#cb45-20"></a><span class="co"># Combining all into one summary table</span></span>
 <span id="cb45-21"><a href="#cb45-21"></a>weather_accuracy <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(acc_temp, acc_rain, acc_elec) <span class="sc">%&gt;%</span></span>
 <span id="cb45-22"><a href="#cb45-22"></a>  <span class="fu">select</span>(Variable, .model, .type, RMSE, MAE, MAPE)</span>
 <span id="cb45-23"><a href="#cb45-23"></a></span>
-<span id="cb45-24"><a href="#cb45-24"></a><span class="co"># View results</span></span>
+<span id="cb45-24"><a href="#cb45-24"></a><span class="co"># Results</span></span>
 <span id="cb45-25"><a href="#cb45-25"></a>weather_accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
@@ -1114,16 +1219,22 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 3 Electricity_KWh ETS(Electricity_KWh) Test  1895.    1436.    Inf   </code></pre>
 </div>
 </div>
-<p>The ETS model performed very well for forecasting average temperature, with low RMSE and MAPE below 2%, indicating accurate seasonal pattern capture. However, its performance for rainfall and electricity consumption was poor. Rainfall forecasting showed extremely high MAPE due to its erratic and spiky nature, while electricity forecasts suffered from abrupt drops in actual values during 2024, leading to high absolute errors. These results highlight the challenge of modeling highly volatile variables using simple exponential smoothing, and may require more robust or exogenous models (e.g., ARIMA with regressors).</p>
+<p>The ETS model performed exceptionally well for forecasting average temperature, with low RMSE and a MAPE below 2%. This indicates the model was able to capture the stable seasonal structure of temperature effectively, aligning well with earlier decomposition results that showed clear yearly cycles.</p>
+<p>In contrast, forecasting performance for rainfall and electricity consumption was noticeably weaker:</p>
+<ul>
+<li><p>Rainfall showed an extremely high MAPE, driven by its erratic and spiky behavior. ETS models, which assume smooth seasonality, struggle with this level of variability.</p></li>
+<li><p>Electricity consumption forecasting was also less accurate. The model’s error was largely influenced by no data from mid 2024, which the model could not anticipate due to its reliance on historical seasonal patterns.</p></li>
+</ul>
+<p>These findings underscore an important limitation of basic ETS models: while they excel in capturing regular, repeating seasonal patterns, they may fail to adapt to sudden structural changes or highly volatile series.</p>
 </section>
 <section id="forecast-comparison-arima-vs-ets-rainfall-electricity-only" class="level2">
 <h2 class="anchored" data-anchor-id="forecast-comparison-arima-vs-ets-rainfall-electricity-only">Forecast Comparison: ARIMA vs ETS (Rainfall &amp; Electricity Only)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># Fit ARIMA models on training data</span></span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># Fitting ARIMA models on training data</span></span>
 <span id="cb47-2"><a href="#cb47-2"></a>model_rain_arima <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="fu">ARIMA</span>(TotalDailyRain))</span>
 <span id="cb47-3"><a href="#cb47-3"></a>model_elec_arima <span class="ot">&lt;-</span> train_data <span class="sc">%&gt;%</span> <span class="fu">model</span>(<span class="fu">ARIMA</span>(Electricity_KWh))</span>
 <span id="cb47-4"><a href="#cb47-4"></a></span>
-<span id="cb47-5"><a href="#cb47-5"></a><span class="co"># Generate 12-month forecasts</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="co"># Generating 12-month forecasts</span></span>
 <span id="cb47-6"><a href="#cb47-6"></a>fc_rain_arima <span class="ot">&lt;-</span> model_rain_arima <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
 <span id="cb47-7"><a href="#cb47-7"></a>fc_elec_arima <span class="ot">&lt;-</span> model_elec_arima <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h =</span> <span class="st">"12 months"</span>)</span>
 <span id="cb47-8"><a href="#cb47-8"></a></span>
@@ -1138,11 +1249,11 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 <span id="cb47-17"><a href="#cb47-17"></a>  <span class="fu">accuracy</span>(fc_elec_arima, test_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(Date, Electricity_KWh)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="st">"Electricity_KWh"</span>, <span class="at">Model =</span> <span class="st">"ARIMA"</span>)</span>
 <span id="cb47-18"><a href="#cb47-18"></a>)</span>
 <span id="cb47-19"><a href="#cb47-19"></a></span>
-<span id="cb47-20"><a href="#cb47-20"></a><span class="co"># Combine accuracy metrics</span></span>
+<span id="cb47-20"><a href="#cb47-20"></a><span class="co"># Combining accuracy metrics</span></span>
 <span id="cb47-21"><a href="#cb47-21"></a>weather_compare <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(acc_rain_compare, acc_elec_compare) <span class="sc">%&gt;%</span></span>
 <span id="cb47-22"><a href="#cb47-22"></a>  <span class="fu">select</span>(Variable, Model, RMSE, MAE, MAPE)</span>
 <span id="cb47-23"><a href="#cb47-23"></a></span>
-<span id="cb47-24"><a href="#cb47-24"></a><span class="co"># Plot forecast accuracy comparison</span></span>
+<span id="cb47-24"><a href="#cb47-24"></a><span class="co"># Plotting forecast accuracy comparison</span></span>
 <span id="cb47-25"><a href="#cb47-25"></a>weather_compare <span class="sc">%&gt;%</span></span>
 <span id="cb47-26"><a href="#cb47-26"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(RMSE, MAE, MAPE), <span class="at">names_to =</span> <span class="st">"Metric"</span>, <span class="at">values_to =</span> <span class="st">"Value"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb47-27"><a href="#cb47-27"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Model, <span class="at">y =</span> Value, <span class="at">fill =</span> Model)) <span class="sc">+</span></span>
@@ -1163,7 +1274,13 @@ Electricity_KWh        0.25        0.15           0.17            1.00</code></p
 </div>
 </div>
 </div>
-<p>The bar plot compares the forecast performance of ETS and ARIMA models for rainfall and electricity consumption. For both variables, ARIMA slightly outperforms ETS across all three metrics: RMSE, MAE, and MAPE. This suggests that ARIMA may be more capable of capturing the underlying time series dynamics, especially where data is noisy or has irregular patterns. However, the differences are relatively small, so ETS may still be a practical choice when simplicity and interpretability are preferred. Overall, ARIMA offers more accurate predictions in this case for rainfall and electricity.</p>
+<p>The bar plot presents a side-by-side comparison of forecast accuracy between ETS and ARIMA models for rainfall and electricity consumption, evaluated using three common error metrics: RMSE, MAE, and MAPE.</p>
+<ul>
+<li><p>Across both variables, ARIMA consistently outperforms ETS, albeit slightly, on all three metrics.</p></li>
+<li><p>This suggests that ARIMA may better capture the underlying time series patterns, especially in datasets that exhibit noise, irregular fluctuations, or subtle autocorrelations.</p></li>
+<li><p>The performance gap, however, is not large, which means ETS remains a valid and practical alternative—particularly when simplicity, speed, or interpretability is more critical than slight improvements in accuracy.</p></li>
+</ul>
+<p>These results support the idea that ARIMA is more adaptable to non-linear patterns often found in climate-related and consumption variables, while ETS remains strong for seasonal data with stable trends. Model choice may ultimately depend on the complexity of the variable and the forecasting context.</p>
 
 
 </section>
