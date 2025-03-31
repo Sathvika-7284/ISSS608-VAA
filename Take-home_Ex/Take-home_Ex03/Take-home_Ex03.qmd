@@ -10,4 +10,670 @@ execute:
   freeze: true
 ---
 
+# 1. Getting Started
 
+```{r}
+pacman::p_load(tidyverse, readxl, lubridate, tsibble, feasts, fable, fabletools, data.table, ggthemes, scales, viridis, gridExtra, knitr, readxl)
+```
+
+# 2. Data Prepartion
+
+```{r}
+weather<- read_csv("data/combined_weather_data.csv")
+Monthly_dengue <- read_xlsx("data/Denguecases.xlsx", sheet = "Monthly")
+electricity_raw <- read_excel("data/electricityconsumption.xlsx", sheet = "T3.5", col_names = FALSE)
+```
+
+# 3. Data Prep for Weather Data
+
+## Renaming Variables
+
+```{r}
+#| eval: False
+colnames(weather) <- c("Station", "Year", "Month", "Day", 
+                            "DailyRainfall", "Highest30minRainfall.x","Highest60minRainfall.x","Highest120minRainfall.x",
+                          "MeanTemperature", 
+                            "MaxTemperature", "MinTemperature", 
+                            "MeanWindSpeed", "MaxWindSpeed", 
+                            "Highest30minRainfall.y","Highest60minRainfall.y","Highest120minRainfall.y")
+```
+
+## Merging Columns
+
+The columns **`Highest30minRainfall.x`**and **`Highest30minRainfall.y`** need to be merged into a single column. i.e. Whenever one of these columns has an `NA` value, the other column have a valid value, meaning that together they form the complete dataset.
+
+```{r}
+#| eval: False
+# Merge the columns and replace any remaining NA or "-" with 0
+weather <- weather %>%
+  mutate(
+    Highest30minRainfall = coalesce(`Highest30minRainfall.x`, `Highest30minRainfall.y`),
+    Highest60minRainfall = coalesce(`Highest60minRainfall.x`, `Highest60minRainfall.y`),
+    Highest120minRainfall = coalesce(`Highest120minRainfall.x`, `Highest120minRainfall.y`)
+  ) %>%
+  # Convert "-" to NA, then replace NA with 0
+  mutate(
+    Highest30minRainfall = as.numeric(Highest30minRainfall), 
+    Highest30minRainfall = ifelse(is.na(Highest30minRainfall), 0, Highest30minRainfall),
+    
+    Highest60minRainfall = as.numeric(Highest60minRainfall), 
+    Highest60minRainfall = ifelse(is.na(Highest60minRainfall), 0, Highest60minRainfall),
+    
+    Highest120minRainfall = as.numeric(Highest120minRainfall), 
+    Highest120minRainfall = ifelse(is.na(Highest120minRainfall), 0, Highest120minRainfall)
+  ) %>%
+  # Drop the original columns
+  select(-c(`Highest30minRainfall.x`, `Highest30minRainfall.y`, 
+            `Highest60minRainfall.x`, `Highest60minRainfall.y`, 
+            `Highest120minRainfall.x`, `Highest120minRainfall.y`))
+```
+
+## Converting data type to numeric
+
+```{r}
+#| eval: False
+# Convert columns 5 to 10 to numeric
+weather[, 5:10] <- lapply(weather[, 5:10], function(x) {
+  as.numeric(x)  # Convert to numeric
+})
+```
+
+## Handling Missing Values
+
+Filtering for rows without all three: mean, max or min temperature.
+
+```{r}
+#| eval: False
+weather <- weather %>%
+  mutate(
+    MeanTemperature = na_if(MeanTemperature, "-"),
+    MaxTemperature = na_if(MaxTemperature, "-"),
+    MinTemperature = na_if(MinTemperature, "-")
+  )
+```
+
+```{r}
+#| eval: False
+all_na_temp_check <- weather %>% filter(is.na(MeanTemperature) & is.na(MaxTemperature) & is.na(MinTemperature))
+print(all_na_temp_check)
+```
+
+110587 rows of data missing all three!! how do we handle this
+
+```{r}
+#| eval: False
+weather<- weather %>% filter(!is.na(MeanTemperature) & !is.na(MaxTemperature) & !is.na(MinTemperature))
+```
+
+## Filtering only Changi Station from weather data
+
+```{r}
+weather_filtered_changi <- weather %>% filter(Station == "Changi")
+```
+
+## Importing Dengue Data
+
+The dengue data sets were provided at the courtesy of the National Environment Agency (NEA), Singapore.
+
+The data set is also publicly available on [NEA website](https://www.nea.gov.sg/dengue-zika/dengue/dengue-cases) and [Ministry of Health website.](https://www.moh.gov.sg/others/resources-and-statistics/infectious-disease-statistics-2024-weekly-infectious-diseases-bulletin)
+
+```{r}
+Weekly_dengue <-read_xlsx("data/Denguecases.xlsx", "Weekly")
+
+Monthly_dengue <-read_xlsx("data/Denguecases.xlsx", "Monthly")
+```
+
+```{r}
+summary(Weekly_dengue)
+```
+
+```{r}
+summary(Monthly_dengue)
+```
+
+```{r}
+weather_filtered_changi <- weather_filtered_changi %>%
+  mutate(across(
+    c(`Mean Temperature (°C)`, `Maximum Temperature (°C)`, `Minimum Temperature (°C)`,
+      `Daily Rainfall Total (mm)`, `Highest 30 min Rainfall (mm)`, 
+      `Highest 60 min Rainfall (mm)`, `Highest 120 min Rainfall (mm)`),
+    ~ na_if(., "-")  # replace dash with NA
+  ))
+```
+
+```{r}
+weather_filtered_changi$Mean_Temperature_C <- as.numeric(weather_filtered_changi$`Mean Temperature (°C)`)
+weather_filtered_changi$Maximum_Temperature_C <- as.numeric(weather_filtered_changi$`Maximum Temperature (°C)`)
+weather_filtered_changi$Minimum_Temperature_C <- as.numeric(weather_filtered_changi$`Minimum Temperature (°C)`)
+weather_filtered_changi$Daily_Rainfall_Total <- as.numeric(weather_filtered_changi$`Daily Rainfall Total (mm)`)
+weather_filtered_changi$Highest_30min_Rainfall <- as.numeric(weather_filtered_changi$`Highest 30 min Rainfall (mm)`)
+weather_filtered_changi$Highest_60min_Rainfall <- as.numeric(weather_filtered_changi$`Highest 60 min Rainfall (mm)`)
+weather_filtered_changi$Highest_120min_Rainfall <- as.numeric(weather_filtered_changi$`Highest 120 min Rainfall (mm)`)
+
+weather_Monthly <- weather_filtered_changi %>%
+  group_by(Year, Month) %>%
+  summarize(
+    AvgMeanTemp = mean(Mean_Temperature_C, na.rm = TRUE),
+    MaxTemp = max(Maximum_Temperature_C, na.rm = TRUE),
+    MinTemp = min(Minimum_Temperature_C, na.rm = TRUE),
+    TotalDailyRain = sum(Daily_Rainfall_Total, na.rm = TRUE),
+    Total30MinRain = sum(Highest_30min_Rainfall, na.rm = TRUE),
+    Total60MinRain = sum(Highest_60min_Rainfall, na.rm = TRUE),
+    Total120MinRain = sum(Highest_120min_Rainfall, na.rm = TRUE),
+  .groups = "drop"
+  ) %>%
+mutate(MonthYear = paste0(Year, "-", sprintf("%02d", Month)))
+```
+
+```{r}
+Monthly_dengue_longer <- Monthly_dengue %>%
+  pivot_longer(
+    cols = 2:12,
+    names_to = "Year",
+    values_to = "denguecases"
+  ) %>%
+  filter(!str_detect(`Month/Year`, "Total")) %>%
+  rename(Month = `Month/Year`) %>%
+  mutate(
+    Year = as.numeric(Year),
+    Month = as.numeric(Month),
+    MonthYear = paste0(Year, "-", sprintf("%02d", Month))
+  )
+```
+
+## Electricity Data Preparing from T3.5 Sheet - Monthly Electricity Consumption by Planning Area & Dwelling Type, 2005 – 2024
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(readr)
+library(zoo)
+
+# Loading raw sheet
+electricity_raw <- read_excel("data/electricityconsumption.xlsx", sheet = "T3.5", col_names = FALSE)
+
+# Extracting year and month headers
+years_raw <- as.character(electricity_raw[4, ])
+months_raw <- as.character(electricity_raw[5, ])
+
+# Forward-filling year values
+years_filled <- na.locf(years_raw, na.rm = FALSE)
+months_filled <- months_raw
+
+# Building proper MonthYear labels
+month_year_labels <- ifelse(
+  is.na(years_filled) | is.na(months_filled) | str_detect(tolower(months_filled), "annual"),
+  NA,
+  paste0(years_filled, "-", sprintf("%02d", as.numeric(months_filled)))
+)
+month_year_labels[1] <- "Region"
+
+# Removing invalid columns
+valid_cols <- !is.na(month_year_labels)
+electricity_raw <- electricity_raw[, valid_cols]
+month_year_labels <- month_year_labels[valid_cols]
+
+# Assigning cleaned column names
+colnames(electricity_raw) <- month_year_labels
+
+# Extract actual data rows
+electricity_data <- electricity_raw[6:nrow(electricity_raw), ]
+
+# Filter for Changi only
+electricity_changi <- electricity_data %>%
+  filter(Region == "Changi") %>%
+  pivot_longer(
+    cols = -Region,
+    names_to = "MonthYear",
+    values_to = "Electricity_KWh"
+  ) %>%
+  mutate(
+    Electricity_KWh = if_else(Electricity_KWh %in% c("-", "s"), NA_character_, Electricity_KWh),
+    Electricity_KWh = parse_number(Electricity_KWh)
+  ) %>%
+  filter(!is.na(MonthYear) & !is.na(Electricity_KWh))
+```
+
+## Combining all Datasets
+
+```{r}
+combined_data <- Monthly_dengue_longer %>%
+  left_join(weather_Monthly, by = "MonthYear") %>%
+  left_join(electricity_changi, by = "MonthYear")
+```
+
+## Removing Duplicates columns
+
+```{r}
+combined_data <- combined_data %>%
+  select(-Year.y, -Month.y, -Region)
+```
+
+# 4. Time Series Forecasting
+
+```{r}
+# Converting MonthYear to proper date format
+combined_data <- combined_data %>%
+  mutate(Date = yearmonth(MonthYear))
+
+# Aggregating data by month
+combined_data_agg <- combined_data %>%
+  group_by(Date) %>%
+  summarise(
+    denguecases = sum(denguecases, na.rm = TRUE),
+    Electricity_KWh = sum(Electricity_KWh, na.rm = TRUE),
+    AvgMeanTemp = mean(AvgMeanTemp, na.rm = TRUE),
+    TotalDailyRain = sum(TotalDailyRain, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Creating tsibble
+combined_tsibble <- combined_data_agg %>%
+  as_tsibble(index = Date)
+```
+
+```{r}
+# Plotting multiple variables for overview
+combined_tsibble %>%
+  select(Date, denguecases, Electricity_KWh, AvgMeanTemp, TotalDailyRain) %>%
+  pivot_longer(cols = -Date, 
+               names_to = "Variable", 
+               values_to = "Value") %>%
+  ggplot(aes(x = Date, y = Value)) +
+  geom_line() +
+  facet_wrap(~ Variable, scales = "free_y", ncol = 1) +
+  labs(title = "Time Series of Dengue, Electricity, and Weather Variables",
+       x = "Date", y = "Value") +
+  theme_minimal()
+```
+
+-   The time-series plot presents monthly trends for dengue cases, electricity usage, average mean temperature, and total daily rainfall from 2014 to early 2025.
+
+-   The temperature displays a clear seasonal cycle, rising and falling predictably each year, which is typical in tropical climates.
+
+-   Dengue cases show distinct spikes, especially around 2015, 2020, and 2023, suggesting outbreak periods that may be linked to environmental conditions.
+
+-   Electricity consumption remains relatively stable over time but drops sharply toward the end of the series, likely due to missing or incomplete data.
+
+-   Rainfall shows irregular patterns with several peaks, some of which align with dengue surges — hinting at a possible relationship between rainfall and mosquito breeding activity.
+
+    This visual summary highlights temporal dynamics and potential interactions between weather, electricity usage, and dengue transmission.
+
+##  Seasonal & Subseries Plots (All variables)
+
+```{r}
+# Converting to long format for seasonal and subseries plots
+ts_longer <- combined_tsibble %>%
+  select(Date, denguecases, Electricity_KWh, AvgMeanTemp, TotalDailyRain) %>%
+  pivot_longer(cols = -Date, names_to = "Variable", values_to = "Value")
+
+# Seasonal plots
+ts_longer %>%
+  gg_season(Value) +
+  facet_wrap(~ Variable, scales = "free_y", ncol = 1) +
+  labs(title = "Seasonal Patterns of Dengue, Electricity & Weather")
+
+# Subseries (Cycle) plots
+ts_longer %>%
+  gg_subseries(Value) +
+  facet_wrap(~ Variable, scales = "free_y", ncol = 1) +
+  labs(title = "Cycle Subseries Plots: Trend + Seasonality")
+```
+
+Seasonal Plot Interpretation (Plot 1):
+
+-   This seasonal plot clearly highlights recurring monthly patterns for each variable. For average temperature, a consistent peak is observed mid-year (around May–July), indicating warmer months, while cooler months fall towards the end and beginning of each year.
+
+-   Dengue cases show noticeable spikes between June and August in certain years (especially 2020 and 2023), suggesting a possible seasonal outbreak period. Electricity consumption is relatively stable but slightly higher in mid-year months, possibly due to increased cooling demands. Rainfall shows irregular seasonal trends with sharp spikes in some years, suggesting monsoon or extreme weather events.
+
+Cycle/Subseries Plot Interpretation (Plot 2):
+
+-   The cycle plots provide deeper insight into both seasonality and trends over time. For AvgMeanTemp, seasonal cycles are stable across years with minimal drift. However, dengue cases display irregular but strong peaks in specific years, especially around mid-year, hinting at sporadic outbreaks rather than a consistent seasonal pattern.
+
+-   Electricity consumption shows a mild seasonal component and a recent sudden drop (likely data issue or consumption shift). Rainfall patterns are highly variable with some strong outliers, indicating irregular monsoon impact or extreme events. These plots help isolate recurring patterns while exposing anomalies or one-time spikes.
+
+## Decomposition of Dengue Cases (ACF, STL, Classical)
+
+```{r}
+# ACF & PACF for Dengue cases
+combined_tsibble %>%
+  ACF(denguecases) %>%
+  autoplot() +
+  labs(title = "ACF of Dengue Cases")
+
+combined_tsibble %>%
+  PACF(denguecases) %>%
+  autoplot() +
+  labs(title = "PACF of Dengue Cases")
+
+# Composite plot (Line, ACF, Seasonality)
+combined_tsibble %>%
+  gg_tsdisplay(denguecases, plot_type = "partial") +
+  labs(title = "Dengue Cases - Trend, ACF, and Seasonality")
+
+# STL Decomposition
+combined_tsibble %>%
+  model(STL(denguecases)) %>%
+  components() %>%
+  autoplot() +
+  labs(title = "STL Decomposition of Dengue Cases")
+
+# Classical Decomposition
+combined_tsibble %>%
+  model(classical_decomposition(denguecases, type = "additive")) %>%
+  components() %>%
+  autoplot() +
+  labs(title = "Classical Additive Decomposition of Dengue Cases")
+```
+
+The ACF plot shows strong autocorrelation for dengue cases up to around lag 3–4 months, meaning dengue cases today are influenced by cases from a few months ago. The PACF plot suggests that a 1-month lag has the most direct influence. This kind of pattern is common in seasonal diseases like dengue.
+
+Composite plot confirms:
+
+1.  Strong seasonality, with dengue peaks recurring yearly.
+
+2.   ACF shows long autocorrelation tail (suggesting non-stationarity).
+
+3.  PACF indicates 1–2 significant lags, which helps in ARIMA modeling later.
+
+STL Decomposition:
+
+1.  The trend line reveals rising dengue trends until around 2020, followed by a decline.
+
+2.  Seasonal component shows dengue spikes happen almost every year between June to October—coinciding with rainy seasons in tropical countries.
+
+3.  Remainder shows noise or irregularity not explained by trend or seasonality.
+
+Classical Decomposition:
+
+1.  Similar insights as STL, but less flexible.
+
+2.  Shows strong seasonality and mid-2019 to 2021 surge in trend.
+
+3.  Residuals are still present, which shows the importance of forecasting models to capture these dynamics.
+
+The analysis decomposed dengue time series into trend, seasonality, and irregular components using both STL and classical methods. The STL plot revealed a clear seasonal cycle where dengue cases peak mid-year, aligning with wetter months. ACF and PACF plots showed significant correlation with recent months, highlighting temporal dependency. These insights confirm that dengue has strong yearly patterns, a rising-falling long-term trend, and some random fluctuations. This justifies using seasonal ARIMA or ETS models for better forecasting of future dengue outbreaks.
+
+## ETS Forecasting of Dengue Cases
+
+```{r}
+# Define training vs test set (last 12 months as test)
+dengue_ts <- combined_tsibble %>%
+  select(Date, denguecases) %>%
+  mutate(Type = if_else(Date >= yearmonth("2024 Jan"), "Test", "Train"))
+
+dengue_train <- dengue_ts %>%
+  filter(Type == "Train")
+
+# Fit ETS model
+fit_ets <- dengue_train %>%
+  model(ETS(denguecases))
+
+# Check residuals
+fit_ets %>% gg_tsresiduals()
+fit_ets %>% report()
+
+# Forecast for 12 months
+fc_ets <- fit_ets %>%
+  forecast(h = "12 months")
+
+# Plot with actual + forecasted + fitted
+dengue_ts %>%
+  ggplot(aes(x = Date, y = denguecases)) +
+  geom_line(aes(color = Type), alpha = 0.8) +
+  autolayer(fc_ets, series = "Forecast", alpha = 0.6) +
+  geom_line(data = augment(fit_ets), aes(y = .fitted, color = "Fitted")) +
+  labs(title = "ETS Forecast vs Actual Dengue Cases",
+       y = "Dengue Cases", color = "") +
+  theme_minimal()
+```
+
+In this analysis, an ETS(M,N,M) model was fitted to monthly dengue case data to forecast future values. The data set was split into training and test sets, with the last 12 months held out for validation. The model performed well, as shown by diagnostic plots where residuals displayed no major autocorrelation and were roughly normally distributed. The forecast aligned reasonably with the actual test data, and the fitted values closely tracked the training data. The ETS model successfully captured seasonal patterns in dengue cases and demonstrated good predictive ability with appropriate forecast uncertainty bands.
+
+##  ARIMA Forecasting + Comparison with ETS
+
+```{r}
+# Fit ARIMA model
+fit_arima <- dengue_train %>%
+  model(ARIMA(denguecases))
+
+# Model report
+fit_arima %>% report()
+
+# Forecast 12 months
+fc_arima <- fit_arima %>%
+  forecast(h = "12 months")
+
+# Compare ETS vs ARIMA model performance
+bind_rows(
+  fit_arima %>% accuracy(),
+  fit_ets %>% accuracy(),
+  fc_arima %>% accuracy(dengue_ts),
+  fc_ets %>% accuracy(dengue_ts)
+) %>%
+  select(.model, .type, RMSE, MAE, MASE, RMSSE)
+```
+
+-   The ETS model was used to forecast dengue cases for 12 months beyond the training set. The predicted values follow the historical seasonal trends, with most actual observations falling within the forecast confidence intervals.
+
+-    This indicates the model is generally reliable, though some underestimation is observed during sudden spikes. The ARIMA model selected was ARIMA(2,0,0)(0,0,1)\[12\], indicating two autoregressive terms and a seasonal moving average term. The estimated coefficients are statistically significant.
+
+-   However, model fit statistics (AIC, BIC) are higher than ETS, suggesting a slightly inferior fit. Model accuracy metrics reveal that ETS slightly outperforms ARIMA on training data, indicating better in-sample fit. However, ARIMA provides slightly better performance on the test data. Both models show MASE \< 1, suggesting they are better than naïve forecasting. While both are viable, ARIMA may generalize better to unseen data in this case. Both ETS and ARIMA models successfully captured the seasonal trends in dengue cases.
+
+-   ETS offered a slightly better fit on historical data, while ARIMA showed improved performance in forecasting unseen values. These results suggest that model selection may depend on the intended use—ETS for interpretability and stability, ARIMA for generalization.
+
+## Forecast Plots for ETS vs ARIMA
+
+```{r}
+# Plotting Forecasts from Both Models for Comparison
+fc_ets %>%
+  autoplot(dengue_ts, level = NULL) +
+  autolayer(fc_arima, colour = "red", level = NULL) +
+  labs(title = "Forecast Comparison: ETS vs ARIMA",
+       y = "Dengue Cases", x = "Date") +
+  scale_color_manual(values = c("Forecast" = "blue", "ARIMA" = "red")) +
+  theme_minimal()
+```
+The plot compares two forecasting models — ETS and ARIMA — for predicting dengue cases over a 12-month horizon starting from January 2024. The actual historical trend shows clear seasonality and outbreak peaks in prior years. The ETS model (blue line) follows seasonal dynamics more closely, whereas the ARIMA model (red line) presents a smoother forecast, possibly due to its autoregressive nature. Both forecasts reflect a declining trend following a sudden drop in observed values. This side-by-side visualization is useful for evaluating model behavior and understanding which method aligns better with recent patterns.
+
+## Decomposition of All Variables (Trend + Seasonality)
+
+```{r}
+# Decompose AvgMeanTemp, Electricity_KWh, TotalDailyRain
+
+# Convert to long format and decompose each using STL
+combined_tsibble %>%
+  pivot_longer(cols = c(AvgMeanTemp, Electricity_KWh, TotalDailyRain),
+               names_to = "Variable", values_to = "Value") %>%
+  group_by(Variable) %>%
+  model(STL(Value)) %>%
+  components() %>%
+  autoplot() +
+  labs(title = "STL Decomposition of Weather and Electricity Variables")
+```
+The STL decomposition plot breaks each variable into its core components: trend, seasonal variation, and residuals.
+
+Electricity_KWh (green): Shows a relatively stable long-term trend, peaking slightly before 2023, followed by a sharp drop. It also exhibits strong seasonal variation, indicating consistent consumption cycles.
+
+TotalDailyRain (blue): Displays significant seasonal spikes and troughs in the season_year component, indicating strong monthly rainfall patterns. The trend component gradually increases until 2022–23, then declines sharply.
+
+AvgMeanTemp (red): Appears more stable with minimal trend or seasonality. This suggests temperature varies less dramatically compared to rainfall or electricity usage.
+
+Overall, the decomposition helps isolate consistent repeating seasonal patterns and underlying long-term changes in climate and consumption. These insights are important for improving forecasting accuracy and understanding environmental correlations.
+
+
+## Trend Exploration Between Variables
+
+```{r}
+# Force it into a regular data frame to avoid tsibble-related metadata
+cor_data <- combined_tsibble %>%
+  as_tibble() %>%  # drops tsibble-specific indexing
+  select(denguecases, AvgMeanTemp, TotalDailyRain, Electricity_KWh) %>%
+  mutate(across(everything(), as.numeric))  # force all to numeric
+
+# Now compute correlation matrix
+cor_matrix <- cor(cor_data, use = "complete.obs") %>%
+  round(2)
+
+# View the result
+cor_matrix
+```
+The correlation matrix shows the linear relationship between dengue cases and key climate and electricity variables:
+
+Dengue vs AvgMeanTemp: Weak positive correlation (0.13), suggesting higher temperatures slightly coincide with more dengue cases, though not strongly.
+
+Dengue vs TotalDailyRain: Weak positive (0.11), meaning rainfall may influence dengue spread, but the link is minimal.
+
+Dengue vs Electricity_KWh: Moderate positive (0.25), possibly reflecting increased energy usage during dengue season (e.g., for cooling or medical infrastructure).
+
+AvgMeanTemp vs TotalDailyRain: Notably negative (-0.35), indicating months with more rain tend to have lower average temperatures.
+
+Overall, no strong correlations are observed, but electricity usage appears to be a slightly stronger indicator of dengue activity than weather alone. These results support the need for multivariate models or lag analysis to uncover deeper relationships.
+
+
+## Cross-correlation (CCF) to Explore Lag Effects
+
+```{r}
+# Check if rainfall or temperature leads to changes in dengue cases
+
+combined_tsibble %>%
+  CCF(denguecases, TotalDailyRain) %>%
+  autoplot() +
+  labs(title = "CCF: Dengue Cases vs Total Rainfall")
+
+combined_tsibble %>%
+  CCF(denguecases, AvgMeanTemp) %>%
+  autoplot() +
+  labs(title = "CCF: Dengue Cases vs Avg Temp")
+```
+The cross-correlation between dengue cases and total rainfall shows significant positive correlations at lags of 3 to 8 months. This indicates that periods of heavy rainfall are often followed by increased dengue outbreaks after a delay of a few months, likely due to favorable breeding conditions for mosquitoes.
+
+The CCF between dengue cases and average temperature reveals weaker and mixed correlations. Moderate positive association at short lags (0–4 months) may reflect favorable temperatures for mosquito activity, while the negative values at longer lags suggest more complex dynamics or threshold effects in temperature influence.
+
+## Build Forecasting Models for Weather & Electricity
+
+```{r}
+library(tidyverse)
+library(tsibble)
+library(fable)
+library(lubridate)
+library(fabletools)
+
+# Filter training data (before Jan 2024)
+train_data <- combined_tsibble %>%
+  filter(Date < yearmonth("2024 Jan"))
+
+# Fit ETS models separately
+model_temp <- train_data %>% model(ETS(AvgMeanTemp))
+model_rain <- train_data %>% model(ETS(TotalDailyRain))
+model_elec <- train_data %>% model(ETS(Electricity_KWh))
+
+# Forecast individually for 12 months ahead
+fc_temp <- model_temp %>% forecast(h = "12 months")
+fc_rain <- model_rain %>% forecast(h = "12 months")
+fc_elec <- model_elec %>% forecast(h = "12 months")
+
+# Convert forecasts to tibbles, remove distribution column, and label them
+fc_temp_df <- fc_temp %>% as_tibble() %>% select(Date, .mean) %>% mutate(Variable = "AvgMeanTemp")
+fc_rain_df <- fc_rain %>% as_tibble() %>% select(Date, .mean) %>% mutate(Variable = "TotalDailyRain")
+fc_elec_df <- fc_elec %>% as_tibble() %>% select(Date, .mean) %>% mutate(Variable = "Electricity_KWh")
+
+# Combine into one tidy dataframe
+weather_fc <- bind_rows(fc_temp_df, fc_rain_df, fc_elec_df)
+
+# Plot forecasted weather & electricity
+weather_fc %>%
+  ggplot(aes(x = Date, y = .mean, color = Variable)) +
+  geom_line(size = 1) +
+  facet_wrap(~ Variable, scales = "free_y") +
+  labs(
+    title = "Forecasts: Weather & Electricity (Next 12 Months)",
+    y = "Forecasted Value",
+    x = "Date"
+  ) +
+  theme_minimal()
+```
+The plot displays 12-month ahead forecasts (Jan–Dec 2024) for temperature, rainfall, and electricity consumption using ETS models.
+
+- Temperature shows a clear seasonal pattern, rising toward mid-2024 (April–July) and declining afterward, matching historical seasonal trends.
+
+- Rainfall is much more volatile, showing sharp fluctuations and a peak forecast around late 2024, suggesting possible rainy season or monsoon effects.
+
+ - Electricity consumption is relatively stable but peaks in mid-2024, which could relate to higher power use during warmer months due to cooling demands.
+
+These forecasts give a climate and resource management preview for the year ahead and can be helpful when planning dengue surveillance, since earlier plots showed that rainfall and temperature influence dengue cases with a lag.
+
+
+## Accuracy Comparison for Weather Forecasts
+
+```{r}
+# Get actual test data for Jan 2024 onwards
+test_data <- combined_tsibble %>%
+  filter(Date >= yearmonth("2024 Jan")) %>%
+  select(Date, AvgMeanTemp, TotalDailyRain, Electricity_KWh)
+
+# Compute forecast accuracy before converting to tibble
+
+# Temp forecast accuracy
+acc_temp <- accuracy(fc_temp, test_data %>% select(Date, AvgMeanTemp)) %>%
+  mutate(Variable = "AvgMeanTemp")
+
+# Rain forecast accuracy
+acc_rain <- accuracy(fc_rain, test_data %>% select(Date, TotalDailyRain)) %>%
+  mutate(Variable = "TotalDailyRain")
+
+# Elec forecast accuracy
+acc_elec <- accuracy(fc_elec, test_data %>% select(Date, Electricity_KWh)) %>%
+  mutate(Variable = "Electricity_KWh")
+
+# Combine all into one summary table
+weather_accuracy <- bind_rows(acc_temp, acc_rain, acc_elec) %>%
+  select(Variable, .model, .type, RMSE, MAE, MAPE)
+
+# View results
+weather_accuracy
+```
+The ETS model performed very well for forecasting average temperature, with low RMSE and MAPE below 2%, indicating accurate seasonal pattern capture. However, its performance for rainfall and electricity consumption was poor. Rainfall forecasting showed extremely high MAPE due to its erratic and spiky nature, while electricity forecasts suffered from abrupt drops in actual values during 2024, leading to high absolute errors. These results highlight the challenge of modeling highly volatile variables using simple exponential smoothing, and may require more robust or exogenous models (e.g., ARIMA with regressors).
+
+
+## Forecast Comparison: ARIMA vs ETS (Rainfall & Electricity Only)
+
+```{r}
+# Fit ARIMA models on training data
+model_rain_arima <- train_data %>% model(ARIMA(TotalDailyRain))
+model_elec_arima <- train_data %>% model(ARIMA(Electricity_KWh))
+
+# Generate 12-month forecasts
+fc_rain_arima <- model_rain_arima %>% forecast(h = "12 months")
+fc_elec_arima <- model_elec_arima %>% forecast(h = "12 months")
+
+# Accuracy comparison on test data (Jan 2024 onwards)
+acc_rain_compare <- bind_rows(
+  accuracy(fc_rain, test_data %>% select(Date, TotalDailyRain)) %>% mutate(Variable = "TotalDailyRain", Model = "ETS"),
+  accuracy(fc_rain_arima, test_data %>% select(Date, TotalDailyRain)) %>% mutate(Variable = "TotalDailyRain", Model = "ARIMA")
+)
+
+acc_elec_compare <- bind_rows(
+  accuracy(fc_elec, test_data %>% select(Date, Electricity_KWh)) %>% mutate(Variable = "Electricity_KWh", Model = "ETS"),
+  accuracy(fc_elec_arima, test_data %>% select(Date, Electricity_KWh)) %>% mutate(Variable = "Electricity_KWh", Model = "ARIMA")
+)
+
+# Combine accuracy metrics
+weather_compare <- bind_rows(acc_rain_compare, acc_elec_compare) %>%
+  select(Variable, Model, RMSE, MAE, MAPE)
+
+# Plot forecast accuracy comparison
+weather_compare %>%
+  pivot_longer(cols = c(RMSE, MAE, MAPE), names_to = "Metric", values_to = "Value") %>%
+  ggplot(aes(x = Model, y = Value, fill = Model)) +
+  geom_col(position = "dodge") +
+  facet_grid(Metric ~ Variable, scales = "free_y") +
+  labs(
+    title = "ETS vs ARIMA Forecast Accuracy: Rainfall & Electricity",
+    y = "Error Metric Value",
+    x = "Model Type"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+The bar plot compares the forecast performance of ETS and ARIMA models for rainfall and electricity consumption. For both variables, ARIMA slightly outperforms ETS across all three metrics: RMSE, MAE, and MAPE. This suggests that ARIMA may be more capable of capturing the underlying time series dynamics, especially where data is noisy or has irregular patterns. However, the differences are relatively small, so ETS may still be a practical choice when simplicity and interpretability are preferred. Overall, ARIMA offers more accurate predictions in this case for rainfall and electricity.
