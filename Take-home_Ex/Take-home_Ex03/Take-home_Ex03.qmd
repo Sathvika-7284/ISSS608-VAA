@@ -677,19 +677,18 @@ combined_tsibble %>%
   autoplot() +
   labs(title = "CCF: Dengue Cases vs Avg Temp")
 ```
-Dengue Cases vs. Total Rainfall
-- The CCF plot shows significant positive correlations at lags 5 to 10 months, peaking around lag 6–7.
 
-- Interpretation: This suggests that rainfall leads dengue outbreaks by ~6–7 months. This makes biological sense — increased rain can enhance mosquito breeding grounds, which over time leads to higher dengue incidence.
+Dengue Cases vs. Total Rainfall - The CCF plot shows significant positive correlations at lags 5 to 10 months, peaking around lag 6–7.
 
-- Implication: Rainfall is a useful early predictor for dengue case forecasting. Interventions (e.g., mosquito control) should ideally begin several months after heavy rains.
+-   Interpretation: This suggests that rainfall leads dengue outbreaks by \~6–7 months. This makes biological sense — increased rain can enhance mosquito breeding grounds, which over time leads to higher dengue incidence.
 
-Dengue Cases vs. Avg Temperature
-- The CCF plot shows weaker correlations but some positive values and negative spikes beyond lag 3.
+-   Implication: Rainfall is a useful early predictor for dengue case forecasting. Interventions (e.g., mosquito control) should ideally begin several months after heavy rains.
 
-- Interpretation: Temperature has a modest positive correlation shortly before or around the outbreak, possibly due to optimal mosquito survival conditions.
+Dengue Cases vs. Avg Temperature - The CCF plot shows weaker correlations but some positive values and negative spikes beyond lag 3.
 
-- The negative lags may reflect post-outbreak climatic cooling or statistical noise.
+-   Interpretation: Temperature has a modest positive correlation shortly before or around the outbreak, possibly due to optimal mosquito survival conditions.
+
+-   The negative lags may reflect post-outbreak climatic cooling or statistical noise.
 
 Overall: Temperature may play a supportive but less dominant role compared to rainfall in triggering outbreaks
 
@@ -739,17 +738,11 @@ weather_fc %>%
 
 The plot presents 12-month ETS-based forecasts (Jan–Dec 2024) for three key variables: average temperature, total rainfall, and electricity consumption.
 
-AvgMeanTemp (Temperature)
-- Exhibits a strong and smooth seasonal pattern, peaking during April to July, then gradually declining.
-- This aligns well with historical climate patterns and confirms ETS’s suitability for temperature forecasting due to its consistent cyclical nature.
+AvgMeanTemp (Temperature) - Exhibits a strong and smooth seasonal pattern, peaking during April to July, then gradually declining. - This aligns well with historical climate patterns and confirms ETS’s suitability for temperature forecasting due to its consistent cyclical nature.
 
-TotalDailyRain (Rainfall)
-- Shows greater volatility and sharper fluctuations, with a peak forecast toward late 2024.
-- These spikes likely correspond to rainy or monsoon seasons, which are important precursors for mosquito breeding and, hence, dengue outbreaks.
+TotalDailyRain (Rainfall) - Shows greater volatility and sharper fluctuations, with a peak forecast toward late 2024. - These spikes likely correspond to rainy or monsoon seasons, which are important precursors for mosquito breeding and, hence, dengue outbreaks.
 
-Electricity_KWh
-- Remains relatively stable, with a notable mid-year peak—likely due to increased cooling demand during hotter months.
-- This again reflects seasonal human behavior and infrastructure load, reinforcing patterns seen in past data.
+Electricity_KWh - Remains relatively stable, with a notable mid-year peak—likely due to increased cooling demand during hotter months. - This again reflects seasonal human behavior and infrastructure load, reinforcing patterns seen in past data.
 
 ## Accuracy Comparison for Weather Forecasts
 
@@ -785,9 +778,9 @@ The ETS model performed exceptionally well for forecasting average temperature, 
 
 In contrast, forecasting performance for rainfall and electricity consumption was noticeably weaker:
 
-- Rainfall showed an extremely high MAPE, driven by its erratic and spiky behavior. ETS models, which assume smooth seasonality, struggle with this level of variability.
+-   Rainfall showed an extremely high MAPE, driven by its erratic and spiky behavior. ETS models, which assume smooth seasonality, struggle with this level of variability.
 
-- Electricity consumption forecasting was also less accurate. The model's error was largely influenced by no data from mid 2024, which the model could not anticipate due to its reliance on historical seasonal patterns.
+-   Electricity consumption forecasting was also less accurate. The model's error was largely influenced by no data from mid 2024, which the model could not anticipate due to its reliance on historical seasonal patterns.
 
 These findings underscore an important limitation of basic ETS models: while they excel in capturing regular, repeating seasonal patterns, they may fail to adapt to sudden structural changes or highly volatile series.
 
@@ -834,11 +827,10 @@ weather_compare %>%
 
 The bar plot presents a side-by-side comparison of forecast accuracy between ETS and ARIMA models for rainfall and electricity consumption, evaluated using three common error metrics: RMSE, MAE, and MAPE.
 
-- Across both variables, ARIMA consistently outperforms ETS, albeit slightly, on all three metrics.
+-   Across both variables, ARIMA consistently outperforms ETS, albeit slightly, on all three metrics.
 
-- This suggests that ARIMA may better capture the underlying time series patterns, especially in datasets that exhibit noise, irregular fluctuations, or subtle autocorrelations.
+-   This suggests that ARIMA may better capture the underlying time series patterns, especially in datasets that exhibit noise, irregular fluctuations, or subtle autocorrelations.
 
-- The performance gap, however, is not large, which means ETS remains a valid and practical alternative—particularly when simplicity, speed, or interpretability is more critical than slight improvements in accuracy.
+-   The performance gap, however, is not large, which means ETS remains a valid and practical alternative—particularly when simplicity, speed, or interpretability is more critical than slight improvements in accuracy.
 
 These results support the idea that ARIMA is more adaptable to non-linear patterns often found in climate-related and consumption variables, while ETS remains strong for seasonal data with stable trends. Model choice may ultimately depend on the complexity of the variable and the forecasting context.
-
