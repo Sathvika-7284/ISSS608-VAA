@@ -17,7 +17,7 @@ library(lubridate)
 library(plotly)
 library(readr)
 
-combined_data <- read_csv("data/combined_data.csv")
+combined_data <- read_csv("data/combined_data.csv", show_col_types = FALSE)
 
 ui <- fluidPage(
   theme = bslib::bs_theme(version = 5, bootswatch = "flatly"),
