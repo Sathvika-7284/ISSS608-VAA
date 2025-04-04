@@ -829,10 +829,12 @@ weather_compare %>%
 
 The bar plot presents a side-by-side comparison of forecast accuracy between ETS and ARIMA models for rainfall and electricity consumption, evaluated using three common error metrics: RMSE, MAE, and MAPE.
 
--   Across both variables, ARIMA consistently outperforms ETS, albeit slightly, on all three metrics.
+Across both variables—TotalDailyRain and Electricity_KWh—ETS consistently outperforms ARIMA on all three metrics.
 
--   This suggests that ARIMA may better capture the underlying time series patterns, especially in datasets that exhibit noise, irregular fluctuations, or subtle autocorrelations.
+This suggests that ETS may better capture the underlying time series patterns, particularly in datasets with strong seasonal components and smoother trends.
 
--   The performance gap, however, is not large, which means ETS remains a valid and practical alternative—particularly when simplicity, speed, or interpretability is more critical than slight improvements in accuracy.
+The lower errors from ETS indicate more accurate and stable forecasts, making it a more reliable choice in this context.
 
-These results support the idea that ARIMA is more adaptable to non-linear patterns often found in climate-related and consumption variables, while ETS remains strong for seasonal data with stable trends. Model choice may ultimately depend on the complexity of the variable and the forecasting context.
+While ARIMA remains a flexible model for handling noise and irregularities, in this case, ETS offers both superior accuracy and simplicity, especially for climate-related and consumption data that exhibit seasonality.
+
+These results support the idea that ETS is well-suited for structured, seasonal data, while ARIMA may still be useful for more irregular or highly autocorrelated series. The final model choice should consider both accuracy and the specific characteristics of the variable being forecasted.
