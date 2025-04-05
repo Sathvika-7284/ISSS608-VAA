@@ -63,10 +63,10 @@ website:
            href: "Take-home_Ex/Take-home_Ex03/Take-home_Ex03.html"
       - text: "Shiny App"
         menu: 
-        - text: EDA/CDA and Geospatial
-          href: shiny_R/Prototype.qmd
-        - text: Time Series Forecasting
-          href: shiny_R/Prototype1.html
+         - text: EDA/CDA and Geospatial
+           href: shiny_R/Prototype.qmd
+         - text: Time Series Forecasting
+           href: shiny_R/Prototype1.html
     right:
       - href: index.qmd
         text: Home
