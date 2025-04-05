@@ -589,7 +589,7 @@ Overall, both models effectively captured the strong seasonal structure of dengu
 fc_ets %>%
   autoplot(dengue_ts, level = NULL) +
   autolayer(fc_arima, colour = "red", level = NULL) +
-  labs(title = "Forecast Comparison: ETS vs ARIMA",
+  labs(title = "Forecast Comparison: ETS (blue) vs ARIMA (red)",
        y = "Dengue Cases", x = "Date") +
   scale_color_manual(values = c("Forecast" = "blue", "ARIMA" = "red")) +
   theme_minimal()

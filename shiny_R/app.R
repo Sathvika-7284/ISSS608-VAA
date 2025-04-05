@@ -151,7 +151,10 @@ server <- function(input, output, session) {
       pivot_longer(cols = -Date, names_to = "Variable", values_to = "Value") %>%
       gg_subseries(Value) +
       facet_wrap(~ Variable, scales = "free_y") +
-      theme_minimal()
+      theme_minimal() +
+      labs(
+        caption = "Blue bands indicate seasonal mean ± standard deviation intervals"
+      )
   })
   
   output$stl_weather_plot <- renderPlot({
@@ -194,11 +197,28 @@ server <- function(input, output, session) {
       model_ets <- train %>% model(ETS(!!sym(var)))
       fc <- forecast(model_ets, h = "12 months")
       fitted <- augment(model_ets)
-      ggplot(tsibble_filtered(), aes(x = Date, y = !!sym(var))) +
-        geom_line(color = "gray") +
-        autolayer(fc, series = "Forecast", alpha = 0.6) +
-        geom_line(data = fitted, aes(y = .fitted), color = "blue") +
-        labs(title = paste("ETS Forecast for", var)) +
+      
+      ggplot(tsibble_filtered(), aes(x = Date)) +
+        geom_line(aes(y = !!sym(var), color = "Actual")) +
+        geom_line(data = fitted, aes(y = .fitted, color = "Fitted")) +
+        autolayer(fc, aes(color = "Forecast", fill = "Forecast Interval"), alpha = 0.4) +
+        scale_color_manual(
+          name = "Series",
+          values = c(
+            "Actual" = "gray40",
+            "Fitted" = "blue",
+            "Forecast" = "blue"
+          )
+        ) +
+        scale_fill_manual(
+          name = "Confidence Interval",
+          values = c("Forecast Interval" = "lightblue")
+        ) +
+        labs(
+          title = paste("ETS Forecast for", var),
+          y = var,
+          x = "Date"
+        ) +
         theme_minimal()
     })
     output[[paste0("compare_", id)]] <- renderPlot({
@@ -209,7 +229,7 @@ server <- function(input, output, session) {
       fc_arima <- forecast(model_arima, h = "12 months")
       autoplot(fc_ets, tsibble_filtered(), level = NULL) +
         autolayer(fc_arima, colour = "red", level = NULL) +
-        labs(title = paste("Forecast Comparison: ETS vs ARIMA for", var)) +
+        labs(title = paste("Forecast Comparison: ETS (blue) vs ARIMA (red) for", var)) +
         theme_minimal()
     })
   }
